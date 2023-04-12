@@ -16,7 +16,7 @@ import { FiTrash2, FiEdit3, FiPlusCircle, FiSearch, FiPrinter, FiHash } from 're
 import { Link } from 'react-router-dom'
 import { useQuery } from 'react-query'
 import axios from '../../../utils/axios'
-import { swNormal, swConfirm } from '../../../utils/sw'
+import { swConfirm } from '../../../utils/sw'
 import { useMutation, QueryClient } from 'react-query'
 import QRCode from 'react-qr-code'
 import { baseUrlFrontEnd } from '../../../utils/strings'
@@ -26,14 +26,9 @@ import uuid from 'react-uuid';
 
 const Meja = () => {
 	const user = JSON.parse(localStorage.getItem('user'))
-	const [isShowModal, setIsShowModal] = useState(false)
 	const [qrCode, setQrCode] = useState({})
-	const [dataMeja, setDataMeja] = useState({})
-	const elementDropdownAksi = useRef()
 	const QRCodeRef = useRef()
 	const guest = uuid()
-	const btnDropdownAksi = useRef(null)
-	const [showDropdownAksi, setShowDropdownAksi] = useState({id: 0, status: false})
 	const breadcrumbs = [
 		{ link: '/', menu: 'Home' },
 		{ link: '/meja', menu: 'Meja' },
@@ -54,7 +49,6 @@ const Meja = () => {
 	const [totalRows, setTotalRows] = useState(0)
 
 	// react query
-	const queryClient = new QueryClient()
 	const {
 		isLoading, 
 		isError, 
@@ -121,6 +115,7 @@ const Meja = () => {
 	// refetch after searching
 	useEffect(() => {
 		refetch()
+		console.log(process.env)
 	}, [keyword, limit])
 
 	// pagination action
@@ -139,6 +134,7 @@ const Meja = () => {
 	const showQrCode = (item) => {
 		setQrCode({
 			resto: item.resto.nama_resto, 
+			slug: item.resto.slug,
 			noMeja: item.no_meja,
 			uuid: item.uuid, 
 			noTelp: item.resto.no_telepon, 
@@ -227,7 +223,7 @@ const Meja = () => {
 
 		    {/* print qr code */}
 		    <div className="hidden">
-		    	<QrCode ref={QRCodeRef} uuid={qrCode.uuid} user={guest} resto={qrCode.resto} noTelp={qrCode.noTelp} alamat={qrCode.alamat} noMeja={qrCode.noMeja}/>
+		    	<QrCode ref={QRCodeRef} uuid={qrCode.uuid} user={guest} resto={qrCode.resto} noTelp={qrCode.noTelp} alamat={qrCode.alamat} noMeja={qrCode.noMeja} slug={qrCode.slug}/>
 		    </div>
 
 			<input type="checkbox" id="modal-qr-code" className="modal-toggle" />
@@ -241,7 +237,8 @@ const Meja = () => {
 							<p className='uppercase text-md'>Self Ordering</p>
 							<p className='uppercase text md mt-1 mb-5'>No Meja : {qrCode.noMeja}</p>
 							<div className='p-3 border border-blue-500 rounded inline-block mb-2'>
-								<QRCode size={200} className="mx-auto" value={baseUrlFrontEnd + `home/${qrCode.uuid}/${guest}`}/>
+								{/* <QRCode size={200} className="mx-auto" value={baseUrlFrontEnd + `home/${qrCode.uuid}/${guest}`}/> */}
+								<QRCode size={200} className="mx-auto" value={process.env.REACT_APP_SIRESTO_MENU + `source=qrcode&branch=${qrCode.slug}&meja=E${qrCode.noMeja}`}/>
 							</div>
 							<p className='text-xs text-slate-400'>Scan QR Code dengan Smartphone anda, setelah itu <br/> akses link dari hasil QR Code Tersebut</p>
 						</div>

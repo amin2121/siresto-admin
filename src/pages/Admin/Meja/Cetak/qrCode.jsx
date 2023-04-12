@@ -1,21 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import QRCode from 'react-qr-code'
-import { useLocation } from 'react-router-dom'
-import { baseUrlFrontEnd } from '../../../../utils/strings'
+import Logo from '../../../../assets/images/logo/SiResto.png'
 
-export const QrCode = React.forwardRef(({ uuid, guest, resto, noTelp, alamat, noMeja }, ref) => {
-    // let { search } = useLocation()
-
-    // const query = new URLSearchParams(search)
-    // const uuid = query.get('code')
-    // const resto = query.get('_r')
-    // const noMeja = query.get('_n')
-
+export const QrCode = React.forwardRef(({ noTelp, alamat, noMeja, slug }, ref) => {
     return (
         <div className="text-black mt-5 px-4" ref={ref}>
             <div className="text-center text-[10px]">
                 <div className="flex justify-center items-center">
-                    {/*<img src={Logo} alt={Logo} className="w-14 h-14"/>*/}
+                    <img src={Logo} alt={Logo} className="w-14 h-14"/>
                 </div>
                 <div className="font-medium mt-4 mb-4">
                     <p>No Telepon : {noTelp}</p>
@@ -26,7 +18,7 @@ export const QrCode = React.forwardRef(({ uuid, guest, resto, noTelp, alamat, no
                     <p>No Meja : {noMeja}</p>
                 </div>
                 <div className="flex justify-center items-center mb-4">
-                    <QRCode size={120} value={baseUrlFrontEnd + `home/${uuid}/${guest}`}/>
+                    <QRCode size={120} value={process.env.REACT_APP_SIRESTO_MENU + `source=qrcode&branch=${slug}&meja=E${noMeja}`}/>
                 </div>
                 <div>
                     <p className="text-[8px]">Scan QR Code dengan Smartphone anda, setelah itu
