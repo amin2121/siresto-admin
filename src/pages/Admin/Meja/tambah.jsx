@@ -3,7 +3,6 @@ import React, {useState} from 'react';
 // component
 import HeaderContent from '../../../layouts/HeaderContent'
 import { Button } from '../../../components/Button'
-import AsyncCreatableSelect from 'react-select/async-creatable';
 import { Input, MessageError } from '../../../components/Input'
 
 // icons
@@ -11,7 +10,6 @@ import { FiSave, FiXCircle } from 'react-icons/fi'
 
 // library
 import axios from '../../../utils/axios'
-import { swNormal } from '../../../utils/sw'
 import { useMutation, QueryClient } from 'react-query'
 import { useNavigate } from 'react-router-dom'
 import { useForm, Controller } from "react-hook-form";

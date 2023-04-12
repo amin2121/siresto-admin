@@ -5,7 +5,6 @@ import { Button, ButtonIconOutline } from '../../../components/Button'
 import { Modal } from '../../../components/Modal'
 import HeaderContent from '../../../layouts/HeaderContent'
 import TableContent from '../../../layouts/TableContent'
-import Pagination from '../../../components/Pagination'
 import LoadingTable from '../../../components/LoadingTable'
 import Badge from '../../../components/Badge'
 
@@ -17,26 +16,18 @@ import { FiTrash2, FiEdit3, FiToggleRight, FiPlusCircle, FiSearch } from 'react-
 import { Link } from 'react-router-dom'
 import { useQuery } from 'react-query'
 import axios from '../../../utils/axios'
-import { swNormal, swConfirm } from '../../../utils/sw'
-import { useMutation, QueryClient, useQueryClient } from 'react-query'
+import { swConfirm } from '../../../utils/sw'
+import { useMutation, QueryClient } from 'react-query'
 import { useForm } from "react-hook-form";
 import { toastSuccess, toastError } from '../../../utils/toast'
 
 const Resto = () => {
 	const user = JSON.parse(localStorage.getItem('user'))
-	const [isShowModal, setIsShowModal] = useState(false)
-	const [statusResto, setStatusResto] = useState(0)
-	const [errMessage, setErrMessage] = useState('')
-	const [idResto, setIdResto] = useState(0)
-	const { register, handleSubmit, errors, reset, clearErrors, setValue } = useForm();
+	const { register, handleSubmit, setValue } = useForm();
 	const breadcrumbs = [
 		{ link: '/', menu: 'Home' },
 		{ link: '/resto', menu: 'Resto' },
 	]
-
-	const [showDropdownAksi, setShowDropdownAksi] = useState({id: 0, status: false})
-	const elementDropdownAksi = useRef()
-	const btnDropdownAksi = useRef(null)
 
 	// pagination
 	const [page, setPage] = useState(1)
@@ -47,7 +38,6 @@ const Resto = () => {
 	const [limit, setLimit] = useState(10)
 	const [keyword, setKeyword] = useState('')
 	const [totalRows, setTotalRows] = useState(0)
-	const queryClient = new QueryClient()
 
 	const {
 		isLoading, 

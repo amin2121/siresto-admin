@@ -107,12 +107,12 @@ const Tambah = () => {
 					          <span className="label-text">Nama Pemilik</span>
 					        </label>
 				      		<div className="relative col-span-12 md:col-span-4">
-										<Input type="text" placeholder="Nama Pemilik" name="nama_pemilik" control={control} required error={errors.nama_pemilik ? true : false}/>
-										{errors.nama_pemilik && <MessageError>Nama Pemilik Tidak Boleh Kosong</MessageError>}
+								<Input type="text" placeholder="Nama Pemilik" name="nama_pemilik" control={control} required error={errors.nama_pemilik ? true : false}/>
+								{errors.nama_pemilik && <MessageError>Nama Pemilik Tidak Boleh Kosong</MessageError>}
 				      		</div>
-								</div>
+						</div>
 
-								<div className="grid grid-cols-8 gap-1 md:gap-4 mb-4">
+						<div className="grid grid-cols-8 gap-1 md:gap-4 mb-4">
 				      		<label className="label col-span-12 md:col-span-2">
 					          <span className="label-text">Nama Resto</span>
 					        </label>
@@ -120,9 +120,9 @@ const Tambah = () => {
 				      			<Input type="text" placeholder="Nama Resto" name="nama_resto" control={control} required error={errors.nama_resto ? true : false}/>
 				      			{errors?.nama_resto && <MessageError>Nama Resto Tidak Boleh Kosong</MessageError>}
 				      		</div>
-								</div>
+						</div>
 
-								<div className="grid grid-cols-8 gap-1 md:gap-4 mb-4">
+						<div className="grid grid-cols-8 gap-1 md:gap-4 mb-4">
 				      		<label className="label col-span-12 md:col-span-2">
 					          <span className="label-text">Kategori Bisnis</span>
 					        </label>
@@ -137,9 +137,9 @@ const Tambah = () => {
 							    />
 							    {errors?.id_kategori_bisnis && <MessageError>Kategori Bisnis Tidak Boleh Kosong</MessageError>}
 				      		</div>
-								</div>
+						</div>
 
-								<div className="grid grid-cols-8 gap-1 md:gap-4 mb-4">
+						<div className="grid grid-cols-8 gap-1 md:gap-4 mb-4">
 				      		<label className="label col-span-12 md:col-span-2">
 					          <span className="label-text">Nomor Telepon</span>
 					        </label>
@@ -147,9 +147,9 @@ const Tambah = () => {
 				      			<Input type="number" placeholder="Nomor Telepon" name="nomor_telepon" control={control} required error={errors.nomor_telepon ? true : false}/>
 				      			{errors?.nomor_telepon && <MessageError>Nomor Telepon Tidak Boleh Kosong</MessageError>}
 				      		</div>
-								</div>
+						</div>
 
-								<div className="grid grid-cols-8 gap-1 md:gap-4 mb-4">
+						<div className="grid grid-cols-8 gap-1 md:gap-4 mb-4">
 				      		<label className="label col-span-12 md:col-span-2">
 					          <span className="label-text">Provinsi</span>
 					        </label>
@@ -157,9 +157,9 @@ const Tambah = () => {
 				      			<Input type="text" placeholder="Provinsi" name="provinsi" control={control} required error={errors.provinsi ? true : false}/>
 				      			{errors?.provinsi && <MessageError>Provinsi Tidak Boleh Kosong</MessageError>}
 				      		</div>
-								</div>
+						</div>
 
-								<div className="grid grid-cols-8 gap-1 md:gap-4 mb-4">
+						<div className="grid grid-cols-8 gap-1 md:gap-4 mb-4">
 				      		<label className="label col-span-12 md:col-span-2">
 					          <span className="label-text">Kota Asal</span>
 					        </label>
@@ -167,14 +167,14 @@ const Tambah = () => {
 				      			<Input type="text" placeholder="Kota Asal" name="kota" control={control} required error={errors.kota ? true : false}/>
 				      			{errors?.kota && <MessageError>Kota Tidak Boleh Kosong</MessageError>}
 				      		</div>
-								</div>
+						</div>
 						
-								<div className="grid grid-cols-8 md:gap-4 mt-8 mb-8">
+						<div className="grid grid-cols-8 md:gap-4 mt-8 mb-8">
 				      		<div className="relative col-span-12 gap-x-2 md:col-span-4 md:col-start-3">
-				      			<Button className="text-xs" color="secondary" type="submit" startIcon={<BsFillSave2Fill size={16}/>} loading={isAction} title="Simpan" />
+				      			<Button className="text-xs bg-custom-blue border-custom-blue" type="submit" startIcon={<BsFillSave2Fill size={16}/>} loading={isAction} title="Simpan" />
 						        <Button className="text-xs" color="ghost" type="button" startIcon={<TiTimes size={16}/>} loading={false} title="Kembali" onClick={() => navigate('/resto')}/>
 				      		</div>
-								</div>
+						</div>
 
 			    	</form>
 

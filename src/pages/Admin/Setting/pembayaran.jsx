@@ -2,11 +2,8 @@ import React, { useState, useEffect, useRef } from 'react'
 import './setting.css'
 
 // components
-import Pagination from '../../../components/Pagination'
 import HeaderContent from '../../../layouts/HeaderContent'
 import LoadingPage from '../../../components/LoadingPage'
-import TableContent from '../../../layouts/TableContent'
-import LoadingTable from '../../../components/LoadingTable'
 import { Button } from '../../../components/Button'
 import { InputGroup, InputGroupCurrency } from '../../../components/Input'
 
@@ -16,19 +13,16 @@ import { BiGitBranch } from 'react-icons/bi'
 import { FiSave } from 'react-icons/fi'
 
 // libraries
-import { Link } from 'react-router-dom'
 import { useQuery } from 'react-query'
 import axios from '../../../utils/axios'
-import { useForm, Controller } from "react-hook-form";
-import { swNormal, swConfirm } from '../../../utils/sw'
-import { rupiah, timestampToDate, capitalize, rupiahToNumber } from '../../../utils/strings'
-import { useMutation, QueryClient, useQueryClient } from 'react-query'
+import { useForm } from "react-hook-form";
+import { rupiahToNumber } from '../../../utils/strings'
+import { useMutation, QueryClient } from 'react-query'
 import { toastSuccess, toastError } from '../../../utils/toast'
 import moment from 'moment'
 
 const Pembayaran = () => {
 	const user = JSON.parse(localStorage.getItem('user'))
-	const [errMessage, setErrMessage] = useState('')
 	const [dataInput, setDataInput] = useState({ status_pajak: 0, pajak: '0', status_charge_service: 0, charge_service: 0, alur_pembayaran_konsumen: 'langsung_bayar' })
 	const [setting, setSetting] = useState('pajak_service')
 	const [isAction, setIsAction] = useState(false)
@@ -112,12 +106,11 @@ const Pembayaran = () => {
 	if(isLoading) return <div className="flex-1 flex justify-center items-center flex-col space-y-3"><LoadingPage /></div>
 
     return (
-        <React.Fragment>
-        	<HeaderContent title="Setting" breadcrumbs={breadcrumbs}>
-        	</HeaderContent>
+        <>
+        	<HeaderContent title="Setting" breadcrumbs={breadcrumbs} />
         	<div className="bg-white h-max px-6 rounded-lg h-96 mt-4 grid grid-cols-8 gap-4 relative" key={1}>
 
-        		<div className="col-span-3 shadow-lg shadow-blue-100 rounded grid grid-cols-2 gap-4 px-6 py-10 text-sm rounded">
+        		<div className="md:col-span-3 col-span-12 shadow-lg shadow-blue-100 rounded grid grid-cols-2 gap-4 px-6 py-10 text-sm rounded">
         			<div className={`setting__choose border-2 border-gray-300 p-2 h-32 flex flex-col items-center justify-center space-y-2 rounded ${setting == 'pajak_service' ? 'active' : ''} `} onClick={() => setSetting('pajak_service')}>
         				<HiOutlineReceiptTax size={40} />
         				<p>Pajak & Service</p>
@@ -128,7 +121,7 @@ const Pembayaran = () => {
         			</div>
         		</div>
 
-        		<div className="col-span-5 shadow-lg shadow-blue-100 rounded px-6 py-10 rounded">
+        		<div className="md:col-span-5 col-span-12 shadow-lg shadow-blue-100 rounded px-6 py-10 rounded">
     				<form onSubmit={handleSubmit(ubahSetting)}>
 	        			<div className={`${setting == 'pajak_service' ? 'block' : 'hidden'}`}>
 		        			<h1 className="text-md font-bold mb-4">Pajak & Charge Service</h1>
@@ -189,12 +182,12 @@ const Pembayaran = () => {
 		        			</div>	
 	        			</div>
 
-	                    <Button className="text-xs mr-2 mt-10" color="secondary" type="submit" startIcon={<FiSave size={16}/>} loading={isAction} title="Simpan" />
+	                    <Button className="text-xs mr-2 mt-10 bg-custom-blue border-custom-blue" color="secondary" type="submit" startIcon={<FiSave size={16}/>} loading={isAction} title="Simpan" />
     				</form>
         		</div>
         			
         	</div>
-        </React.Fragment>
+        </>
     );
 };
 
