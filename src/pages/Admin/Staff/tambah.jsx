@@ -13,7 +13,6 @@ import { HiPencil } from 'react-icons/hi'
 
 // library
 import axios from '../../../utils/axios'
-import { swNormal } from '../../../utils/sw'
 import { useForm, Controller } from "react-hook-form";
 import { useNavigate } from 'react-router-dom'
 import { useMutation, QueryClient } from 'react-query'
@@ -121,10 +120,10 @@ export default function Tambah() {
 	}, [setFocus])
 
     return (
-        <div>
+        <>
         	<HeaderContent linkBack="/staff" title="Tambah Staff" breadcrumbs={breadcrumbs}></HeaderContent>
-		    <div className="bg-white px-6 rounded-lg my-4 grid grid-cols-8">
-		    	<div className='profile__image col-span-2 flex justify-center'>
+		    <div className="bg-white px-6 rounded-lg my-4 grid grid-cols-12">
+		    	<div className='profile__image md:col-span-4 col-span-12 flex justify-center mb-4 md:mb-0'>
                     <div className='w-40 h-44 relative'>
                         <span className='cursor-pointer'>
                             <MdOutlineClose className='absolute top-0 right-0 text-gray-400' size={20} onClick={hapusGambar}/>
@@ -136,7 +135,7 @@ export default function Tambah() {
                         <input type="file" className='hidden' ref={inputFileRef} onChange={e => convertImageToBase64(e)}/>
                     </div>
                 </div>
-		    	<form className='col-span-4 space-y-1' onSubmit={handleSubmit(addStaff)}>
+		    	<form className='md:col-span-6 col-span-12 space-y-1' onSubmit={handleSubmit(addStaff)}>
 		    		<h3 className='uppercase text-sm text-black font-semibold'>Data Personal : </h3>
 			      	<div className="grid grid-cols-1 grid-rows-2">
 			      		<label className="label col-span-2">
@@ -199,9 +198,9 @@ export default function Tambah() {
 			      		</div>
 					</div>
 					
-					<div className="grid !mt-4">
+					<div className="grid !mt-4 mb-8">
 			      		<div className="relative">
-			      			<Button className="text-xs mr-2" color="secondary" type="submit" startIcon={<FiSave size={20}/>} loading={isAction} title="Simpan" />
+			      			<Button className="text-xs mr-2 bg-custom-blue border-custom-blue" type="submit" startIcon={<FiSave size={20}/>} loading={isAction} title="Simpan" />
 					        <Button className="text-xs" color="ghost" type="button" startIcon={<FiXCircle size={20}/>} loading={false} title="Kembali" onClick={() => navigate('/staff')}/>
 			      		</div>
 					</div>
@@ -210,6 +209,6 @@ export default function Tambah() {
 
 		    </div>
 
-        </div>
+        </>
     );
 }

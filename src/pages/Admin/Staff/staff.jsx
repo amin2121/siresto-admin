@@ -5,9 +5,9 @@ import { Button, ButtonIconOutline } from '../../../components/Button'
 import HeaderContent from '../../../layouts/HeaderContent'
 import TableContent from '../../../layouts/TableContent'
 import LoadingTable from '../../../components/LoadingTable'
+import PaginationTable from '../../../components/PaginationTable'
 
 // icons
-import { RiArrowLeftSFill, RiArrowRightSFill } from 'react-icons/ri'
 import { FiTrash2, FiEdit3, FiToggleRight, FiPlusCircle, FiSearch, FiKey } from 'react-icons/fi'
 
 // libraries
@@ -115,30 +115,30 @@ const Staff = () => {
 	})
 
     return (
-        <React.Fragment>
+        <>
         	<HeaderContent title="Staff" breadcrumbs={breadcrumbs}>
-        		<div className="grid grid-cols-12 gap-4">
-	        		<div className="relative col-span-7 col-start-3">
+        		<div className="md:flex mt-4 md:mt-0 flex-1 md:space-x-3 block space-y-3 md:space-y-0">
+	        		<div className="relative flex-1 w-full">
 		      			<div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
 					    	<FiSearch size={20}/>
 					  	</div>
 	        			<input type="text" placeholder="Cari Produk" onChange={(e) => setKeyword(e.target.value)} className="input input-bordered w-full pl-10 p-2.5 col-span-2" />
 		      		</div>
-	        		<div className="col-span-3">
+	        		<div className="text-right">
 	        			<Link to="/staff/tambah">
-	        				<Button className="text-xs" color="secondary" type="button" startIcon={<FiPlusCircle size={20}/>} loading={false} title="Tambah Staff"/>
+	        				<Button className="text-xs bg-custom-blue border-custom-blue" type="button" startIcon={<FiPlusCircle size={20}/>} loading={false} title="Tambah Staff"/>
 	        			</Link>
 	        		</div>
 	        	</div>
         	</HeaderContent>
-        	<div className="bg-white h-max px-6 rounded-lg mt-4">
+        	<div className="bg-white px-6 mt-4 mb-5">
 	        	<TableContent>
 	        		<thead className="text-xs text-blue-500 bg-blue-50 uppercase">
 			            <tr className="border-b border-blue-200">
-			                <th scope="col" className="py-3 px-6">
+			                <th scope="col" className="py-3 px-6 rounded-tl-md">
 			                    No
 			                </th>
-			                <th scope="col" className="py-3 px-6 rounded-tl-md">
+			                <th scope="col" className="py-3 px-6">
 			                    Nama Lengkap
 			                </th>
 			                <th scope="col" className="py-3 px-6">
@@ -148,7 +148,7 @@ const Staff = () => {
 			                    No Telepon
 			                </th>
 			                <th scope="col" className="py-3 px-6 rounded-tr-md">
-			                    Action
+								Aksi
 			                </th>
 			            </tr>
 			        </thead>
@@ -168,7 +168,7 @@ const Staff = () => {
 				                    {obj.no_telepon}
 				                </td>
 				                <td className="py-4 px-6">
-				                	<div className="space-x-3">
+				                	<div className="md:space-x-3 space-x-1 text-center">
 										<div className="tooltip tooltip-bottom" data-tip="Reset Password"><Link to="/staff/reset-password" state={{...obj, pathFirst: 'Staff', pathSecond: 'Reset Password'}}><ButtonIconOutline><FiKey size="16"/></ButtonIconOutline></Link></div>
 										<div className="tooltip tooltip-bottom" data-tip="Edit Staff"><Link to="/staff/edit" state={obj}><ButtonIconOutline><FiEdit3 size="16"/></ButtonIconOutline></Link></div>
 										<div className="tooltip tooltip-bottom" data-tip="Hapus Staff"><ButtonIconOutline onClick={() => confirmDeleteData(obj.id)}><FiTrash2 size="16"/></ButtonIconOutline></div>
@@ -178,34 +178,11 @@ const Staff = () => {
 			        	)) : <tr><td className="py-4 px-6 text-center font-medium w-max" colSpan="5">Data Staff Kosong</td></tr>)}
 			        	{isError && <tr><td className="py-4 px-6 text-center font-medium w-max" colSpan="5">Gagal Mengambil Data</td></tr>}
 			        </tbody>
-			        <tfoot>
-			        	<tr className="bg-blue-50 text-blue-500">
-			        		<td colSpan="6" className="text-right">
-			        			<div className="flex space-x-1 justify-end">
-				        		    <div>
-					        			Baris Per Halaman : 
-					        			<select className="select select-ghost w-24 focus:bg-opacity-0 focus:outline-0" onChange={(e) => setLimit(e.target.value)}>
-										  <option defaultValue="10">10</option>
-										  <option value="20">20</option>
-										  <option value="50">50</option>
-										  <option value="100">100</option>
-										</select>
-				        		    </div>
-				        		    <div className="flex space-x-1 items-center">
-				        		    	<span>{fromRow}-{toRow} dari {totalRows}</span>
-				        		    	<div className="mr-5 flex items-center">
-				        		    		<RiArrowLeftSFill size="30" className={`hover:text-blue-700 ${prevPageUrl == null ? 'text-blue-300 cursor-no-drop' : 'cursor-pointer'}`} onClick={() => prevPage()}/>
-				        		    		<RiArrowRightSFill size="30" className={`hover:text-blue-700 ${nextPageUrl == null ? 'text-blue-300 cursor-no-drop' : 'cursor-pointer'}`} onClick={() => nextPage()}/>
-				        		    	</div>
-				        		    </div>
-			        			</div>
-			        		</td>
-			        	</tr>
-			        </tfoot>
 	        	</TableContent>
+				<PaginationTable setLimit={setLimit} fromRow={fromRow} toRow={toRow} totalRows={totalRows} prevPageUrl={prevPageUrl} nextPageUrl={nextPageUrl} prevPage={prevPage} nextPage={nextPage}/>
         	</div>
 
-        </React.Fragment>
+        </>
     );
 };
 

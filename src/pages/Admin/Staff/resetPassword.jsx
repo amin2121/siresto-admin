@@ -10,10 +10,8 @@ import { FiSave, FiXCircle } from 'react-icons/fi'
 
 // library
 import axios from '../../../utils/axios'
-import user from '../../../utils/user'
-import { baseUrl, slugify } from '../../../utils/strings'
-import { swNormal } from '../../../utils/sw'
-import { useForm, Controller } from "react-hook-form";
+import { slugify } from '../../../utils/strings'
+import { useForm } from "react-hook-form";
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useMutation, QueryClient } from 'react-query'
 import { toastSuccess, toastError } from '../../../utils/toast'
@@ -83,35 +81,35 @@ export default function ResetPassword() {
   }
 
   return (
-      <div>
+      <>
         <HeaderContent linkBack="/staff" title="Reset Password" breadcrumbs={breadcrumbs}></HeaderContent>
-        <div className="bg-white h-max px-6 rounded-lg mt-4">
+        <div className="bg-white h-max px-6 rounded-lg mt-0 md:mt-4">
           <form onSubmit={handleSubmit(addStaff)}>
 
-            <div className="grid grid-cols-8 gap-4 mb-4">
-              <label className="label col-span-2">
+            <div className="grid grid-cols-8 gap-1 md:gap-4 mb-4">
+              <label className="label col-span-12 md:col-span-2">
                 <span className="label-text">Password Baru</span>
               </label>
-              <div className="relative col-span-4">
+              <div className="relative col-span-12 md:col-span-4">
                 <Input type="password" placeholder="Password Baru" name="password_baru" control={control} error={errors.password_baru ? true : false} onChange={(e) => setPassBaru(e.target.value)}/>
                 {errors.password_baru && <MessageError>Password Baru Tidak Boleh Kosong</MessageError>}
               </div>
             </div>
 
-            <div className="grid grid-cols-8 gap-4 mb-4">
-              <label className="label col-span-2">
+            <div className="grid grid-cols-8 gap-1 md:gap-4 mb-4">
+              <label className="label col-span-12 md:col-span-2">
                 <span className="label-text">Konfirmasi Password</span>
               </label>
-              <div className="relative col-span-4">
+              <div className="relative col-span-12 md:col-span-4">
                 <Input type="password" placeholder="Konfirmasi Password" name="konfirmasi_password" control={control} error={errors.konfirmasi_password || passwordTidakSama ? true : false} onChange={(e) => checkPasswordTidakSama(e)}/>
                 {errors?.konfirmasi_password && <MessageError>Konfirmasi Password Tidak Boleh Kosong</MessageError>}
                 {passwordTidakSama && <MessageError>Password Baru dengan Konfirmasi Password Tidak Sama</MessageError>}
               </div>
             </div>
 
-            <div className="grid grid-cols-8 gap-4 mb-4">
-              <div className="relative col-span-4 col-start-3 space-x-3">
-                <Button className="text-xs" color="secondary" type="submit" startIcon={<FiSave size={20}/>} loading={isAction} title="Simpan" />
+            <div className="grid grid-cols-8 md:gap-4 mt-8 mb-8">
+              <div className="relative col-span-12 gap-x-2 md:col-span-4 md:col-start-3">
+                <Button className="text-xs bg-custom-blue border-custom-blue" type="submit" startIcon={<FiSave size={20}/>} loading={isAction} title="Simpan" />
                 <Button className="text-xs" color="ghost" startIcon={<FiXCircle size={20}/>} type="button" loading={false} onClick={() => navigate('/staff')} title="Kembali" />
               </div>
             </div>
@@ -120,6 +118,6 @@ export default function ResetPassword() {
 
         </div>
 
-      </div>
+      </>
   );
 }

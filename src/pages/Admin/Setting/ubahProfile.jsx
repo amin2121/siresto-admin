@@ -156,7 +156,7 @@ export default function UbahProfile() {
     if(isLoading) return <div className="flex-1 flex justify-center items-center flex-col space-y-3"><LoadingPage /></div>
 
   return (
-      <div>
+      <>
         <HeaderContent title="Ubah Profile" breadcrumbs={breadcrumbs} />
         <div className="bg-white px-6 rounded-lg my-4 grid grid-cols-12">
           <div className='profile__image md:col-span-4 col-span-12 flex justify-center mb-4 md:mb-0'>
@@ -226,7 +226,7 @@ export default function UbahProfile() {
           
               <div className="grid !mt-4 mb-8">
                 <div className="relative">
-                  <Button className="text-xs" color="secondary" type="submit" startIcon={<FiSave size={20}/>} loading={isAction} title="Simpan" />
+                  <Button className="text-xs bg-custom-blue border-custom-blue" type="submit" startIcon={<FiSave size={20}/>} loading={isAction} title="Simpan" />
                 </div>
               </div>
 
@@ -234,6 +234,6 @@ export default function UbahProfile() {
 
         </div>
 
-      </div>
+      </>
   );
 }

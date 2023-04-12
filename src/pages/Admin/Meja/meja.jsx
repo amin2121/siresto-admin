@@ -4,7 +4,6 @@ import React, { useState, useEffect, useRef } from 'react'
 import { Button, ButtonIconOutline } from '../../../components/Button'
 import HeaderContent from '../../../layouts/HeaderContent'
 import TableContent from '../../../layouts/TableContent'
-import Pagination from '../../../components/Pagination'
 import LoadingTable from '../../../components/LoadingTable'
 import Badge from '../../../components/Badge'
 import PaginationTable from '../../../components/PaginationTable'
@@ -166,7 +165,7 @@ const Meja = () => {
 		      		</div>
 	        		<div className="text-right">
 	        			<Link to="/meja/tambah">
-	        				<Button className="text-xs bg-custom-blue border-custom-blue" color="secondary" type="button" startIcon={<FiPlusCircle size={20}/>} loading={false} title="Tambah Meja"/>
+	        				<Button className="text-xs bg-custom-blue border-custom-blue" type="button" startIcon={<FiPlusCircle size={20}/>} loading={false} title="Tambah Meja"/>
 	        			</Link>
 	        		</div>
 	        	</div>

@@ -186,9 +186,9 @@ export default function Detail() {
                                         <thead>
                                             <tr>
                                                 <th className='text-slate-400 uppercase text-xs text-left pb-5'>Detail Item</th>
-                                                <th className='text-slate-400 uppercase text-xs text-left pb-5 hidden md:block lg:block'>Jumlah Beli</th>
-                                                <th className='text-slate-400 uppercase text-xs text-left pb-5 hidden lg:block'>Harga</th>
-                                                <th className='text-slate-400 uppercase text-xs text-right pb-5'>Total</th>
+                                                <th className='text-slate-400 uppercase text-xs text-left pb-5 hidden lg:table-cell'>Jumlah Beli</th>
+                                                <th className='text-slate-400 uppercase text-xs text-left pb-5 hidden md:table-cell lg:table-cell w-24'>Harga</th>
+                                                <th className='text-slate-400 uppercase text-xs text-right pb-5 w-24'>Total</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -204,10 +204,10 @@ export default function Detail() {
                                                             </div>
                                                         </div>
                                                     </td>
-                                                    <td className="text-center md:block lg:block">
+                                                    <td className="text-center hidden lg:table-cell">
                                                         <div className='block mr-1 text-sm font-bold text-blue-500 h-full'>x{obj.jumlah_beli}</div>
                                                     </td>
-                                                    <td className="hidden lg:block">
+                                                    <td className="hidden md:table-cell lg:table-cell">
                                                         <span className='block text-sm text-slate-500'>IDR {rupiah(obj.produk.harga_jual)}</span>
                                                     </td>
                                                     <td className="text-right">
