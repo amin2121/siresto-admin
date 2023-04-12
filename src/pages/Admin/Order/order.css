@@ -1,0 +1,45 @@
+.pesanan-pelanggan__container, .order-pembayaran__container {
+    min-height: calc(100vh - 4rem);
+}
+
+.order-pembayaran__container {
+    width: 22rem;
+}
+
+.order-list__content td {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.order__status-item {
+    min-width: 120px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+    cursor: pointer;
+    border: 1px solid rgb(226 232 240);
+    transition: all 0.5s;
+}
+
+.order__status-item:hover {
+    background-color: rgb(226 232 240);
+}
+
+.order__status-item.active {
+    background-color: rgb(234 179 8);
+    border: 1px solid rgb(234 179 8);
+    color: black;
+    transition: all 0.5s;
+}
+
+.order__status-item.active:hover {
+    background-color: rgb(202 138 4);
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

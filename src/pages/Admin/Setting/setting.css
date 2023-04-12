@@ -1,0 +1,7 @@
+.setting__choose {
+	cursor: pointer;
+}
+
+.setting__choose.active {
+	border-color: rgb(59 130 246);
+}

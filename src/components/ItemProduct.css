@@ -1,0 +1,32 @@
+.item-product > .ripple {
+  width: 70px;
+  height: 70px;
+  position: absolute;
+  background: rgba(0, 0, 0, .5);
+  display: block;
+  content: "";
+  border-radius: 9999px;
+  opacity: 1;
+  z-index: 5;
+  animation: 1.8s ease 1 forwards ripple-effect;
+}
+
+@keyframes ripple-effect {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(10);
+    opacity: 0.375;
+  }
+  100% {
+    transform: scale(35);
+    opacity: 0;
+  }
+}
+
+.item-product > .content {
+  position: relative;
+  z-index: 2;
+}

@@ -1,0 +1,2047 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@font-face {
+  font-family: 'Outfit';
+  src: url('./assets/font/Outfit-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'OutfitMedium';
+  src: url('./assets/font/Outfit-Medium.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'OutfitSemiBold';
+  src: url('./assets/font/Outfit-SemiBold.ttf') format('truetype');
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap');
+
+html {
+  scroll-behavior: smooth
+}
+
+.input {
+  font-size: .875rem;
+}
+
+input,
+select {
+  background: #FFFFFF;
+  border: 1px solid #D8D8D8 !important;
+  border-radius: 10px !important;
+}
+
+#select-language .select {
+  padding: 0;
+}
+
+.dd-selected {
+  display: flex !important;
+  align-items: center;
+  padding: 8px !important;
+}
+
+.dd-selected-image {
+  margin-right: 8px !important;
+  max-width: 32px !important;
+}
+
+.dd-selected-text {
+  font-family: 'Nunito Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.dd-selected-description {
+  display: none !important;
+}
+
+.dd-container {
+  width: 174px !important;
+}
+
+.dd-select {
+  width: 174px !important;
+  height: 48px !important;
+  background-color: rgb(0, 0, 0, 0.3) !important;
+  border-radius: 64px !important;
+  color: #FFFFFF;
+}
+
+.dd-options {
+  width: 174px !important;
+}
+
+.dd-pointer-down {
+  border-top: solid 5px #FFFFFF !important;
+}
+
+.dd-pointer-up {
+  border-bottom: solid 5px #FFFFFF !important;
+}
+
+
+.checkbox:checked,
+.checkbox[checked="true"],
+.checkbox[aria-checked=true] {
+  background-image: linear-gradient(-45deg, transparent 65%, hsl(239, 65%, 60%) 65.99%),
+    linear-gradient(45deg, transparent 75%, hsl(239, 65%, 60%) 75.99%),
+    linear-gradient(-45deg, hsl(239, 65%, 60%) 40%, transparent 40.99%),
+    linear-gradient(45deg, hsl(239, 65%, 60%) 30%, hsl(var(--chkfg)) 30.99%, hsl(var(--chkfg)) 40%, transparent 40.99%),
+    linear-gradient(-45deg, hsl(var(--chkfg)) 50%, hsl(239, 65%, 60%) 50.99%)
+}
+
+/* Login */
+@media (max-width: 766px) {
+  .login {
+    .right {
+      .form-login {
+        width: 100%;
+        padding: 64px 20px;
+
+        .title {
+          h3 {
+            font-family: 'Outfit';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 36px;
+            line-height: 44px;
+            letter-spacing: -0.021em;
+            color: #0F1628;
+            margin-bottom: 14px;
+          }
+
+          p {
+            font-family: 'Outfit';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 24px;
+            letter-spacing: -0.011em;
+            color: #7D818B;
+            margin-bottom: 31px;
+          }
+        }
+
+        label {
+          font-family: 'Outfit';
+          font-style: normal;
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 20px;
+          display: flex;
+          align-items: center;
+          letter-spacing: -0.006em;
+          color: #0F1628;
+        }
+
+        input#email {
+          margin-bottom: 20px;
+        }
+
+        input#password {
+          margin-bottom: 13px;
+        }
+
+        .svg-email {
+          position: absolute;
+          height: 14.4px;
+          width: 16.8px;
+          top: 16.8px;
+          left: 15.6px;
+          background: url("./assets/images/login/mail.svg") no-repeat;
+          background-size: cover;
+        }
+
+        .svg-password {
+          position: absolute;
+          height: 16.2px;
+          width: 13.2px;
+          top: 14.8px;
+          left: 15.6px;
+          background: url("./assets/images/login/password.svg") no-repeat;
+          background-size: cover;
+        }
+
+
+        .remember-me {
+          column-gap: 8px;
+
+          input {
+            height: 16px;
+            width: 16px;
+            border-radius: 4px !important;
+          }
+        }
+
+        .action {
+          .btn {
+            text-transform: capitalize;
+            color: #FFFFFF;
+            font-family: 'Outfit';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 20px;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            letter-spacing: -0.006em;
+            margin-top: 23px;
+            margin-bottom: 21px;
+            background: #5557DB;
+            border-color: #5557DB;
+            border-radius: 10px;
+          }
+
+          .btn:hover {
+            background-color: #4691B4;
+            border-color: #4691B4;
+          }
+
+          p {
+            font-family: 'Outfit';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 20px;
+            /* identical to box height, or 143% */
+
+            display: flex;
+            align-items: center;
+            letter-spacing: -0.006em;
+
+            /* Neutral/600 */
+
+            color: #7D818B;
+
+            a {
+              margin-left: 2px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .login {
+    .left {
+      width: 380px;
+      padding-left: 40px;
+      padding-right: 32px;
+    }
+
+    .right {
+      width: calc(100% - 380px);
+    }
+
+    .left h3 {
+      font-family: 'Outfit';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 28px;
+      line-height: 36px;
+      letter-spacing: -0.019em;
+      color: #FFFFFF;
+      margin-bottom: 12px;
+    }
+
+    .left p {
+      font-family: 'Outfit';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 24px;
+      letter-spacing: -0.011em;
+      color: #EEEFF0;
+    }
+
+    .right {
+      .form-login .title {
+        margin-bottom: 31px;
+      }
+
+      .form-login {
+        width: 480px;
+      }
+
+      .form-login h3 {
+        font-family: 'Outfit';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 36px;
+        line-height: 44px;
+        letter-spacing: -0.021em;
+        color: #0F1628;
+        text-align: center;
+      }
+
+      .form-login p {
+        font-family: 'Outfit';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 24px;
+        letter-spacing: -0.011em;
+        color: #7D818B;
+        text-align: center;
+      }
+
+      .form-login a {
+        font-family: 'OutfitMedium';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 20px;
+        color: #4D4EC5;
+      }
+
+      .form-login .svg-email {
+        position: absolute;
+        height: 14.4px;
+        width: 16.8px;
+        top: 16.8px;
+        left: 15.6px;
+        background: url("./assets/images/login/mail.svg") no-repeat;
+        background-size: cover;
+      }
+
+      .form-login .svg-password {
+        position: absolute;
+        height: 16.2px;
+        width: 13.2px;
+        top: 14.8px;
+        left: 15.6px;
+        background: url("./assets/images/login/password.svg") no-repeat;
+        background-size: cover;
+      }
+
+      .form-login label {
+        font-family: 'OutfitMedium';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 20px;
+        display: flex;
+        align-items: center;
+        letter-spacing: -0.006em;
+        color: #0F1628;
+      }
+
+      >div:nth-child(3) {
+        height: calc(100% - 78.66px);
+        padding-top: 139px;
+      }
+
+      .form-login input[type="email"] {
+        margin-bottom: 20px;
+      }
+
+      .form-login .remember-me {
+        width: 122px;
+      }
+
+      .form-login .remember-me input {
+        border-radius: 4px !important;
+        height: 16px;
+        width: 16px;
+
+      }
+
+      .form-login .remember-me p {
+        font-family: 'Outfit';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 20px;
+        display: flex;
+        align-items: center;
+        letter-spacing: -0.006em;
+        color: #323338;
+      }
+
+      .form-login .forgot-password {
+        width: 358px;
+        padding: 10px 0px;
+        text-align: right;
+      }
+
+      .form-login .action .btn {
+        font-family: 'Outfit';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 20px;
+        letter-spacing: -0.006em;
+        color: #FFFFFF;
+        text-transform: capitalize;
+        margin-top: 31px;
+        margin-bottom: 21px;
+        background: #5557DB;
+        border-color: #5557DB;
+        border-radius: 10px;
+      }
+
+      .form-login .action .btn:hover {
+        background-color: #4691B4;
+        border-color: #4691B4;
+      }
+
+      .form-login .action a {
+        margin-left: 3px;
+      }
+    }
+  }
+}
+
+/* Register */
+@media (max-width: 766px) {
+  .register {
+    .title {
+      padding-top: 70px;
+
+      h3 {
+        font-family: 'Outfit';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 36px;
+        line-height: 44px;
+        letter-spacing: -0.021em;
+        color: #0F1628;
+        margin-bottom: 14px;
+      }
+
+      p {
+        font-family: 'Outfit';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 24px;
+        letter-spacing: -0.011em;
+        color: #7D818B;
+        margin-bottom: 31px;
+      }
+    }
+
+    label {
+      font-family: 'Outfit';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+      /* identical to box height, or 143% */
+
+      display: flex;
+      align-items: center;
+      letter-spacing: -0.006em;
+
+      /* Neutral/900 */
+
+      color: #0F1628;
+      margin-top: 20px;
+    }
+
+    .tnc {
+      margin-top: 13px;
+      margin-bottom: 31px;
+      column-gap: 8px;
+
+      input {
+        width: 16px;
+        height: 16px;
+        border-radius: 4px !important;
+      }
+
+      p {
+        max-width: 300px;
+        padding-left: 8px;
+        font-family: 'Outfit';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 20px;
+        letter-spacing: -0.006em;
+        color: #323338;
+
+        a {
+          color: #5557DB;
+        }
+      }
+    }
+
+    .action {
+      padding-bottom: 30px !important;
+
+      .btn {
+        text-transform: capitalize;
+        color: #FFFFFF;
+        font-family: 'Outfit';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 20px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        letter-spacing: -0.006em;
+        color: #FFFFFF;
+        margin-bottom: 21px;
+        background: #5557DB;
+        border-color: #5557DB;
+        border-radius: 10px;
+      }
+
+      .btn:hover {
+        background-color: #4691B4;
+        border-color: #4691B4;
+      }
+
+      p {
+        font-family: 'Outfit';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 20px;
+        display: flex;
+        align-items: center;
+        letter-spacing: -0.006em;
+        color: #7D818B;
+
+        a {
+          color: #4D4EC5;
+          margin-left: 2px;
+        }
+
+      }
+    }
+
+    .right {
+      .form-register {
+        .svg-email {
+          position: absolute;
+          height: 14.4px;
+          width: 16.8px;
+          top: 16.8px;
+          left: 15.6px;
+          background: url("./assets/images/login/mail.svg") no-repeat;
+          background-size: cover;
+        }
+
+        .svg-phone {
+          position: absolute;
+          height: 14.4px;
+          width: 10.8px;
+          top: 16.8px;
+          left: 15.6px;
+          background: url("./assets/images/register/phone.svg") no-repeat;
+          background-size: cover;
+        }
+
+        .svg-business {
+          position: absolute;
+          height: 15.6px;
+          width: 14.4px;
+          top: 16.8px;
+          left: 15.6px;
+          background: url("./assets/images/register/case.svg") no-repeat;
+          background-size: cover;
+        }
+
+        .svg-password {
+          position: absolute;
+          height: 16.2px;
+          width: 13.2px;
+          top: 14.8px;
+          left: 15.6px;
+          background: url("./assets/images/login/password.svg") no-repeat;
+          background-size: cover;
+        }
+
+        .svg-pin {
+          position: absolute;
+          height: 15.6px;
+          width: 13.2px;
+          top: 14.8px;
+          left: 15.6px;
+          background: url("./assets/images/register/pin.svg") no-repeat;
+          background-size: cover;
+        }
+
+        .svg-home {
+          position: absolute;
+          height: 15.6px;
+          width: 15px;
+          top: 14.8px;
+          left: 15.6px;
+          background: url("./assets/images/register/home.svg") no-repeat;
+          background-size: cover;
+        }
+      }
+
+      .form-product {
+        width: 100%;
+        padding-bottom: 1rem;
+
+        .title {
+          margin-bottom: 31px;
+
+          h3 {
+            font-family: 'Outfit';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 36px;
+            line-height: 44px;
+            letter-spacing: -0.021em;
+            color: #0F1628;
+            text-align: left;
+          }
+
+          p {
+            font-family: 'Outfit';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 24px;
+            letter-spacing: -0.011em;
+            color: #7D818B;
+            text-align: left;
+          }
+        }
+
+        .product-list {
+          margin-top: 31px;
+
+          .product {
+            padding: 20px;
+            width: 100%;
+            height: 95px;
+
+            background: #FFFFFF;
+            /* Neutral/300 */
+
+            border: 1px solid #E2E3E5;
+            border-radius: 8px;
+
+            .tag {
+              font-family: 'Outfit';
+              font-style: normal;
+              font-weight: 500;
+              font-size: 12px;
+              line-height: 15px;
+              letter-spacing: -0.006em;
+              color: #4D4EC5;
+            }
+
+            p {
+              font-family: 'Outfit';
+              font-style: normal;
+              font-weight: 400;
+              font-size: 14px;
+              line-height: 20px;
+              /* identical to box height, or 143% */
+
+              letter-spacing: -0.006em;
+
+              /* Neutral/600 */
+
+              color: #7D818B;
+              margin-top: 12px;
+            }
+          }
+
+          .product.active {
+            border-color: #5557DB;
+          }
+
+        }
+      }
+
+      .btn {
+        font-family: 'Outfit';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 20px;
+        /* identical to box height, or 143% */
+
+        display: flex;
+        align-items: center;
+        text-align: center;
+        letter-spacing: -0.006em;
+
+        /* Neutral/000 */
+
+        color: #FFFFFF;
+        text-transform: capitalize;
+      }
+    }
+  }
+}
+
+/* Register */
+@media (min-width: 768px) {
+
+  .register {
+    .left {
+      width: 380px;
+      padding-left: 40px;
+      padding-right: 32px;
+      height: 100vh;
+      position: fixed;
+    }
+
+    .right {
+      width: calc(100% - 380px);
+      margin-left: 380px;
+      height: fit-content;
+    }
+
+    .left h3 {
+      font-family: 'Outfit';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 28px;
+      line-height: 36px;
+      letter-spacing: -0.019em;
+      color: #FFFFFF;
+      margin-bottom: 12px;
+    }
+
+    .left p {
+      font-family: 'Outfit';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 24px;
+      letter-spacing: -0.011em;
+      color: #EEEFF0;
+    }
+
+    .right .form-register .title {
+      margin-bottom: 31px;
+    }
+
+    .right .form-register {
+      width: 480px;
+    }
+
+    .right .form-register h3 {
+      font-family: 'Outfit';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 36px;
+      line-height: 44px;
+      letter-spacing: -0.021em;
+      color: #0F1628;
+      text-align: center;
+    }
+
+    .right .form-register p {
+      font-family: 'Outfit';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 24px;
+      letter-spacing: -0.011em;
+      color: #7D818B;
+      text-align: center;
+    }
+
+    .right .form-register a {
+      font-family: 'OutfitMedium';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 20px;
+      color: #4D4EC5;
+    }
+
+    .right .form-register .svg-email {
+      position: absolute;
+      height: 14.4px;
+      width: 16.8px;
+      top: 16.8px;
+      left: 15.6px;
+      background: url("./assets/images/login/mail.svg") no-repeat;
+      background-size: cover;
+    }
+
+    .right .form-register .svg-phone {
+      position: absolute;
+      height: 14.4px;
+      width: 10.8px;
+      top: 16.8px;
+      left: 15.6px;
+      background: url("./assets/images/register/phone.svg") no-repeat;
+      background-size: cover;
+    }
+
+    .right .form-register .svg-business {
+      position: absolute;
+      height: 15.6px;
+      width: 14.4px;
+      top: 16.8px;
+      left: 15.6px;
+      background: url("./assets/images/register/case.svg") no-repeat;
+      background-size: cover;
+    }
+
+    .right .form-register .svg-password {
+      position: absolute;
+      height: 16.2px;
+      width: 13.2px;
+      top: 14.8px;
+      left: 15.6px;
+      background: url("./assets/images/login/password.svg") no-repeat;
+      background-size: cover;
+    }
+
+    .right .form-register .svg-pin {
+      position: absolute;
+      height: 15.6px;
+      width: 13.2px;
+      top: 14.8px;
+      left: 15.6px;
+      background: url("./assets/images/register/pin.svg") no-repeat;
+      background-size: cover;
+    }
+
+    .right .form-register .svg-home {
+      position: absolute;
+      height: 15.6px;
+      width: 15px;
+      top: 14.8px;
+      left: 15.6px;
+      background: url("./assets/images/register/home.svg") no-repeat;
+      background-size: cover;
+    }
+
+    .right .form-register label {
+      font-family: 'OutfitMedium';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+      display: flex;
+      align-items: center;
+      letter-spacing: -0.006em;
+      color: #0F1628;
+    }
+
+    .right>div:nth-child(3) {
+      padding-top: 80px;
+    }
+
+    .right .form-register input,
+    .right .form-register select {
+      margin-bottom: 20px;
+    }
+
+    .right .form-register .tnc {
+      width: 100%;
+
+    }
+
+    .right .form-register .tnc input {
+      margin-bottom: 0;
+    }
+
+    .right .form-register .tnc input {
+      border-radius: 4px !important;
+      height: 16px;
+      width: 16px;
+
+    }
+
+    .right .form-register .tnc p {
+      font-family: 'Outfit';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+      display: flex;
+      align-items: center;
+      letter-spacing: -0.006em;
+      color: #323338;
+    }
+
+    .right .form-register .forgot-password {
+      width: 358px;
+      padding: 10px 0px;
+      text-align: right;
+    }
+
+    .right .form-register .action .btn {
+      font-family: 'Outfit';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 20px;
+      letter-spacing: -0.006em;
+      color: #FFFFFF;
+      text-transform: capitalize;
+      margin-top: 31px;
+      margin-bottom: 21px;
+      background: #5557DB;
+      border-color: #5557DB;
+      border-radius: 10px;
+    }
+
+    .right .form-register .action .btn:hover {
+      background-color: #4691B4;
+      border-color: #4691B4;
+    }
+
+    .right .form-register .action a {
+      margin-left: 3px;
+    }
+
+    // asdas
+
+    .right .form-product .title {
+      margin-bottom: 31px;
+    }
+
+    .right .form-product {
+      width: 480px;
+
+      h3 {
+        font-family: 'Outfit';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 36px;
+        line-height: 44px;
+        letter-spacing: -0.021em;
+        color: #0F1628;
+        text-align: center;
+      }
+
+      p {
+        font-family: 'Outfit';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 24px;
+        letter-spacing: -0.011em;
+        color: #7D818B;
+        text-align: center;
+      }
+
+      .product-list {
+        margin-top: 31px;
+
+        .product {
+          padding: 20px;
+          width: 480px;
+          height: 95px;
+
+          background: #FFFFFF;
+          /* Neutral/300 */
+
+          border: 1px solid #E2E3E5;
+          border-radius: 8px;
+
+          .tag {
+            font-family: 'Outfit';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 12px;
+            line-height: 15px;
+            letter-spacing: -0.006em;
+            color: #4D4EC5;
+          }
+
+          p {
+            font-family: 'Outfit';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 20px;
+            /* identical to box height, or 143% */
+
+            letter-spacing: -0.006em;
+
+            /* Neutral/600 */
+
+            color: #7D818B;
+            margin-top: 12px;
+          }
+        }
+
+        .product.active {
+          border-color: #5557DB;
+        }
+      }
+
+      .btn {
+        font-family: 'Outfit';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 20px;
+        /* identical to box height, or 143% */
+
+        display: flex;
+        align-items: center;
+        text-align: center;
+        letter-spacing: -0.006em;
+
+        /* Neutral/000 */
+
+        color: #FFFFFF;
+        text-transform: capitalize;
+      }
+    }
+
+  }
+}
+
+
+// Forgot Password
+@media (max-width: 766px) {
+  .forgot-password {
+    .right {
+      width: 100%;
+
+      >div:nth-child(2) {
+        padding-top: 64px;
+        width: 100%;
+        padding-left: 20px;
+        padding-right: 20px;
+
+        div {
+          width: 100%;
+
+          h3 {
+            font-family: 'Outfit';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 36px;
+            line-height: 44px;
+            letter-spacing: -0.021em;
+            color: #0F1628;
+          }
+
+          p {
+            font-family: 'Outfit';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 24px;
+            letter-spacing: -0.011em;
+            color: #7D818B;
+            margin-bottom: 31px;
+          }
+
+          label {
+            font-family: 'Outfit';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 20px;
+            display: flex;
+            align-items: center;
+            letter-spacing: -0.006em;
+            color: #0F1628;
+          }
+
+          .action {
+            .btn {
+              text-transform: capitalize;
+              color: #FFFFFF;
+              font-family: 'Outfit';
+              font-style: normal;
+              font-weight: 500;
+              font-size: 14px;
+              line-height: 20px;
+              display: flex;
+              align-items: center;
+              text-align: center;
+              letter-spacing: -0.006em;
+              margin-top: 23px;
+              margin-bottom: 21px;
+              background: #5557DB;
+              border-color: #5557DB;
+              border-radius: 10px;
+            }
+
+            .btn:hover {
+              background-color: #4691B4;
+              border-color: #4691B4;
+            }
+
+            p {
+              font-family: 'Outfit';
+              font-style: normal;
+              font-weight: 400;
+              font-size: 14px;
+              line-height: 20px;
+              /* identical to box height, or 143% */
+
+              display: flex;
+              align-items: center;
+              letter-spacing: -0.006em;
+
+              /* Neutral/600 */
+
+              color: #7D818B;
+
+              a {
+                margin-left: 2px;
+                color: #5557DB;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .forgot-password {
+    .left {
+      width: 380px;
+      padding-left: 40px;
+      padding-right: 32px;
+    }
+
+    .right {
+      width: calc(100% - 380px);
+    }
+
+    .left h3 {
+      font-family: 'Outfit';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 28px;
+      line-height: 36px;
+      letter-spacing: -0.019em;
+      color: #FFFFFF;
+      margin-bottom: 12px;
+    }
+
+    .left p {
+      font-family: 'Outfit';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 24px;
+      letter-spacing: -0.011em;
+      color: #EEEFF0;
+    }
+
+    .right {
+      .form-login .title {
+        margin-bottom: 31px;
+      }
+
+      .form-login {
+        width: 480px;
+      }
+
+      .form-login h3 {
+        font-family: 'Outfit';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 36px;
+        line-height: 44px;
+        letter-spacing: -0.021em;
+        color: #0F1628;
+        text-align: center;
+      }
+
+      .form-login p {
+        font-family: 'Outfit';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 24px;
+        letter-spacing: -0.011em;
+        color: #7D818B;
+        text-align: center;
+      }
+
+      .form-login a {
+        font-family: 'OutfitMedium';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 20px;
+        color: #4D4EC5;
+      }
+
+      .form-login .svg-email {
+        position: absolute;
+        height: 14.4px;
+        width: 16.8px;
+        top: 16.8px;
+        left: 15.6px;
+        background: url("./assets/images/login/mail.svg") no-repeat;
+        background-size: cover;
+      }
+
+      .form-login .svg-password {
+        position: absolute;
+        height: 16.2px;
+        width: 13.2px;
+        top: 14.8px;
+        left: 15.6px;
+        background: url("./assets/images/login/password.svg") no-repeat;
+        background-size: cover;
+      }
+
+      .form-login label {
+        font-family: 'OutfitMedium';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 20px;
+        display: flex;
+        align-items: center;
+        letter-spacing: -0.006em;
+        color: #0F1628;
+      }
+
+      >div:nth-child(3) {
+        height: calc(100% - 78.66px);
+        padding-top: 139px;
+      }
+
+      .form-login input[type="email"] {
+        margin-bottom: 20px;
+      }
+
+      .form-login .remember-me {
+        width: 122px;
+      }
+
+      .form-login .remember-me input {
+        border-radius: 4px !important;
+        height: 16px;
+        width: 16px;
+
+      }
+
+      .form-login .remember-me p {
+        font-family: 'Outfit';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 20px;
+        display: flex;
+        align-items: center;
+        letter-spacing: -0.006em;
+        color: #323338;
+      }
+
+      .form-login .forgot-password {
+        width: 358px;
+        padding: 10px 0px;
+        text-align: right;
+      }
+
+      .form-login .action .btn {
+        font-family: 'Outfit';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 20px;
+        letter-spacing: -0.006em;
+        color: #FFFFFF;
+        text-transform: capitalize;
+        margin-top: 31px;
+        margin-bottom: 21px;
+        background: #5557DB;
+        border-color: #5557DB;
+        border-radius: 10px;
+      }
+
+      .btn:hover {
+        background-color: #4691B4;
+        border-color: #4691B4;
+      }
+
+      .form-login .action a {
+        margin-left: 3px;
+      }
+    }
+  }
+}
+
+
+@media (max-width: 767px) {
+
+  .syaratDanKetentuan,
+  .kebijakanPrivasi {
+
+    .contentSyaratDanKetentuan,
+    .contentKebijakanPrivasi {
+      width: 100%;
+    }
+
+    h3 {
+      font-family: 'Outfit';
+      font-style: normal;
+      font-weight: 600;
+      font-size: 32px;
+      line-height: 40px;
+      color: #0F1628;
+      margin-bottom: 51px;
+    }
+
+    h4 {
+      font-family: 'Outfit';
+      font-style: normal;
+      font-weight: 600;
+      font-size: 24px;
+      line-height: 30px;
+      color: #0F1628;
+      margin-bottom: 12px;
+    }
+
+    p {
+      font-family: 'Outfit';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 24px;
+      letter-spacing: -0.011em;
+      color: #4B505E;
+      // text-align: justify;
+      margin-bottom: 32px;
+    }
+
+    span {
+      color: #5557DB;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+
+  .syaratDanKetentuan,
+  .kebijakanPrivasi {
+
+    .contentSyaratDanKetentuan,
+    .contentKebijakanPrivasi {
+      width: calc(100% - 312px);
+      margin-left: 20px;
+
+      h3 {
+        font-family: 'Outfit';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 32px;
+        line-height: 40px;
+        color: #0F1628;
+        margin-bottom: 51px;
+      }
+
+      h4 {
+        font-family: 'Outfit';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 30px;
+        color: #0F1628;
+        margin-bottom: 12px;
+      }
+
+      p {
+        font-family: 'Outfit';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 24px;
+        letter-spacing: -0.011em;
+        color: #4B505E;
+        // text-align: justify;
+        margin-bottom: 32px;
+      }
+
+      span {
+        color: #5557DB;
+      }
+    }
+  }
+}
+
+@media (max-width: 766px) {
+  .usecase {
+    .section1 {
+      background: linear-gradient(166.14deg, #FAFAFA -3.38%, rgba(230, 227, 255, 0.76) 90.11%);
+      height: 744px;
+      padding-top: 106px;
+
+      .content {
+        text-align: center;
+        margin: 0 auto;
+
+        h2 {
+          font-family: 'Outfit';
+          font-style: normal;
+          font-weight: 600;
+          font-size: 32px;
+          line-height: 49px;
+          text-align: center;
+          width: 311px;
+          color: #4B505E;
+          margin: auto;
+        }
+
+        p {
+          width: 344px;
+          margin: 32px auto;
+        }
+
+        .btn {
+          text-transform: capitalize;
+          font-family: 'Outfit';
+          font-style: normal;
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 20px;
+          letter-spacing: -0.006em;
+          color: #FFFFFF;
+          column-gap: 8px;
+          border-radius: 4px !important;
+          width: 169px;
+          height: 60px;
+          box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.12);
+        }
+      }
+    }
+
+    .section2-mobile {
+      background: url('./assets/images-mobile/usecase/cloud.png') no-repeat;
+      background-size: 100% 100%;
+      height: 419.53px;
+      margin-top: -100px;
+      position: relative;
+      z-index: 3;
+      padding-top: 145px;
+
+      h2 {
+        font-family: 'Outfit';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 32px;
+        line-height: 49px;
+        text-align: center;
+        color: #4B505E;
+      }
+    }
+
+    .section2 {
+      height: 2087px;
+      background: linear-gradient(166.14deg, #FAFAFA -3.38%, rgba(230, 227, 255, 0.76) 90.11%);
+      background-size: 100% 100%;
+      margin-top: -10%;
+      padding-bottom: 3px;
+      border-radius: 0px;
+      padding-top: 70px;
+
+      h2 {
+        font-family: 'Outfit';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 32px;
+        line-height: 49px;
+        align-items: center;
+        text-align: center;
+        color: #4B505E;
+        margin: auto;
+        margin-bottom: 91px;
+      }
+
+      .col-span-1 {
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 8px;
+        padding: 32px 24px;
+
+        >div {
+          width: 61px;
+          height: 61px;
+          background: #5557DB;
+          border-radius: 8px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-bottom: 24px;
+
+          svg path {
+            fill: #FDA92F;
+          }
+        }
+
+        h3 {
+          font-family: 'Inter';
+          font-style: normal;
+          font-weight: 700;
+          font-size: 30px;
+          line-height: 40px;
+          font-feature-settings: 'liga' off;
+          color: #5557DB;
+          padding-left: 4%;
+
+        }
+
+        p {
+          font-family: 'Inter';
+          font-style: normal;
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 24px;
+          font-feature-settings: 'liga' off;
+          color: #4B505E;
+          max-width: 304px;
+          padding-left: 4%;
+
+        }
+      }
+
+      .col-span-1:hover {
+        background: #5557DB;
+
+
+        >div {
+          background: #BBBCF1;
+
+          svg path {
+            fill: #4D4EC5;
+          }
+        }
+
+        h3 {
+          color: #FFFFFF;
+        }
+
+        p {
+          color: #EEEFF0;
+        }
+      }
+    }
+
+    .section5 {
+      height: 390px !important;
+      margin-top: 20px;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .usecase {
+    .section1 {
+      background: linear-gradient(166.14deg, #FAFAFA -3.38%, rgba(230, 227, 255, 0.76) 90.11%);
+      height: 640px;
+      padding-top: 141px;
+
+      .content {
+        width: 744px;
+        text-align: center;
+        margin: -170px auto 0 auto;
+
+        h2 {
+          font-family: 'Outfit';
+          font-style: normal;
+          font-weight: 600;
+          font-size: 48px;
+          line-height: 49px;
+          text-align: center;
+          color: #4B505E;
+        }
+
+        p {
+          width: 581px;
+          margin: 32px auto;
+        }
+
+        .btn {
+          text-transform: capitalize;
+          font-family: 'Outfit';
+          font-style: normal;
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 20px;
+          letter-spacing: -0.006em;
+          color: #FFFFFF;
+          column-gap: 12px;
+        }
+      }
+    }
+
+    .section2 {
+      height: 1165px;
+      background: url('./assets/images/usecase/circle.png') no-repeat;
+      background-size: 100% 100%;
+      margin-top: -117px;
+      padding-top: 14%;
+
+      h2 {
+        font-family: 'Outfit';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 48px;
+        line-height: 49px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: #4B505E;
+        width: 889px;
+        margin: auto;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 91px;
+      }
+
+      .col-span-1 {
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 8px;
+        padding: 32px 24px;
+
+        >div {
+          width: 61px;
+          height: 61px;
+          background: #5557DB;
+          border-radius: 8px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-bottom: 24px;
+
+          svg path {
+            fill: #FDA92F;
+          }
+        }
+
+        h3 {
+          font-family: 'Inter';
+          font-style: normal;
+          font-weight: 700;
+          font-size: 30px;
+          line-height: 40px;
+          font-feature-settings: 'liga' off;
+          color: #5557DB;
+          padding-left: 4%;
+
+        }
+
+        p {
+          font-family: 'Inter';
+          font-style: normal;
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 24px;
+          font-feature-settings: 'liga' off;
+          color: #4B505E;
+          max-width: 304px;
+          padding-left: 4%;
+
+        }
+      }
+
+      .col-span-1:hover {
+        background: #5557DB;
+
+
+        >div {
+          background: #BBBCF1;
+
+          svg path {
+            fill: #4D4EC5;
+          }
+        }
+
+        h3 {
+          color: #FFFFFF;
+        }
+
+        p {
+          color: #EEEFF0;
+        }
+      }
+    }
+
+    .section5 {
+      height: 740px !important;
+    }
+  }
+}
+
+.dashboard {
+  .main {
+    margin: auto;
+
+    .title {
+      text-align: center;
+
+      h3 {
+        font-family: 'Outfit';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 36px;
+        line-height: 44px;
+        letter-spacing: -0.021em;
+        color: #0F1628;
+      }
+
+      p {
+        font-family: 'Outfit';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 24px;
+        letter-spacing: -0.011em;
+        color: #7D818B;
+      }
+    }
+
+    .product-list {
+      margin-top: 31px;
+
+      li {
+        height: 146px;
+        width: 100%;
+        background: #FFFFFF;
+        border: 1px solid #E2E3E5;
+        border-radius: 8px;
+        margin-bottom: 31px;
+
+        .product-header {
+          height: 86px;
+          border-bottom: 1px solid #C5C7CB;
+          padding: 16px 20px;
+
+          .license-type {
+            border-radius: 8px;
+            font-family: 'Outfit';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 12px;
+            line-height: 15px;
+            letter-spacing: -0.006em;
+            text-align: center;
+            width: fit-content;
+            padding: 5px 13px;
+          }
+
+          .license-type.lite {
+            background: #CCF4E3;
+            color: #008C52;
+          }
+
+          p {
+            font-family: 'Outfit';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 20px;
+            letter-spacing: -0.006em;
+            color: #A4A6AD;
+            margin-top: 4px;
+          }
+        }
+
+        .go-to-product {
+          padding: 12px 20px;
+          margin-top: 5px;
+
+          p {
+            font-family: 'Outfit';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 20px;
+            /* identical to box height, or 143% */
+
+            letter-spacing: -0.006em;
+
+            /* Primary/500 */
+
+            color: #5557DB;
+
+          }
+        }
+      }
+
+    }
+
+    .btn {
+      font-family: 'Outfit';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 20px;
+      /* identical to box height, or 143% */
+
+      display: flex;
+      align-items: center;
+      text-align: center;
+      letter-spacing: -0.006em;
+
+      /* Neutral/000 */
+
+      color: #FFFFFF;
+      text-transform: capitalize;
+    }
+  }
+}
+
+.manage-subscription {
+  .btn {
+    svg {
+      width: 24px;
+      height: 24px;
+      margin-right: 12px;
+    }
+
+    background-color: transparent;
+    border: transparent;
+    outline: none;
+    font-family: 'Outfit';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 36px;
+    letter-spacing: -0.019em;
+    color: #0F1628;
+    text-transform: capitalize;
+    padding: 0;
+  }
+
+  .title {
+    border-bottom: 1px solid #C5C7CB;
+    padding-top: 53.5px;
+    padding-bottom: 27.62px;
+    margin-bottom: 40px;
+  }
+
+  .content {
+    h3 {
+      font-family: 'Outfit';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 36px;
+      line-height: 44px;
+      letter-spacing: -0.021em;
+      color: #0F1628;
+      margin-top: 32px;
+      margin-bottom: 20px;
+    }
+
+    .collapse-title {
+      font-family: 'Outfit';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 28px;
+      letter-spacing: -0.017em;
+      color: #4B505E;
+    }
+
+    .collapse-content {
+      font-family: 'Outfit';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 24px;
+      letter-spacing: -0.011em;
+      color: #7D818B;
+    }
+
+    .license-type {
+      li {
+        border: 1px solid #E2E3E5;
+        border-radius: 8px;
+        padding: 23.25px 20px;
+        margin-bottom: 31px;
+
+        input[type="radio"] {
+          border-radius: 50% !important;
+        }
+
+        input[type="radio"]:checked {
+          border-radius: 50% !important;
+          background-color: white !important;
+          border: 7px solid #5557DB !important;
+        }
+
+
+
+        p.type {
+          font-family: 'Outfit';
+          font-style: normal;
+          font-weight: 500;
+          font-size: 16px;
+          line-height: 24px;
+          letter-spacing: -0.011em;
+          color: #5557DB;
+          margin-left: 10px;
+        }
+
+        p.price {
+          font-family: 'Outfit';
+          font-style: normal;
+          font-weight: 500;
+          font-size: 16px;
+          line-height: 24px;
+          letter-spacing: -0.011em;
+          color: #0F1628;
+        }
+
+        p.license-description {
+          font-family: 'Outfit';
+          font-style: normal;
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 20px;
+          letter-spacing: -0.006em;
+          color: #A4A6AD;
+          padding-left: 34px;
+          margin-top: 5.2px;
+        }
+
+      }
+
+      .btn {
+        height: 50px;
+
+        /* Primary/500 */
+
+        background: #5557DB;
+        border-radius: 10px;
+        letter-spacing: -0.006em;
+
+        /* Neutral/000 */
+
+        color: #FFFFFF;
+        font-family: 'Outfit';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 20px;
+        width: 100%;
+      }
+    }
+  }
+}
+
+.manage-product {
+  .main {
+    margin: auto;
+    width: 480px;
+
+    h3 {
+      font-family: 'Outfit';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 36px;
+      line-height: 44px;
+      letter-spacing: -0.021em;
+      color: #0F1628;
+      text-align: center;
+    }
+
+    p {
+      font-family: 'Outfit';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 24px;
+      letter-spacing: -0.011em;
+      color: #7D818B;
+      text-align: center;
+    }
+
+    .product-list {
+      margin-top: 31px;
+
+      .product {
+        padding: 20px;
+        width: 480px;
+        height: 95px;
+
+        background: #FFFFFF;
+        /* Neutral/300 */
+
+        border: 1px solid #E2E3E5;
+        border-radius: 8px;
+
+        .tag {
+          font-family: 'Outfit';
+          font-style: normal;
+          font-weight: 500;
+          font-size: 12px;
+          line-height: 15px;
+          letter-spacing: -0.006em;
+          color: #4D4EC5;
+        }
+
+        p {
+          font-family: 'Outfit';
+          font-style: normal;
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 20px;
+          /* identical to box height, or 143% */
+
+          letter-spacing: -0.006em;
+
+          /* Neutral/600 */
+
+          color: #7D818B;
+          margin-top: 12px;
+        }
+      }
+
+      .product.active {
+        border-color: #5557DB;
+      }
+    }
+
+    .btn {
+      font-family: 'Outfit';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 20px;
+      /* identical to box height, or 143% */
+
+      display: flex;
+      align-items: center;
+      text-align: center;
+      letter-spacing: -0.006em;
+
+      /* Neutral/000 */
+
+      color: #FFFFFF;
+      text-transform: capitalize;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .manage-product {
+    .main {
+      margin: auto;
+      width: 100%;
+
+      .product-list {
+        margin-top: 31px;
+
+        .product {
+          width: 100%;
+        }
+      }
+    }
+  }
+}

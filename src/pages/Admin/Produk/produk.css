@@ -1,0 +1,13 @@
+.react-select__control {
+  background-color: #f5f5f5;
+  border: none;
+  border-radius: 4px;
+}
+
+.react-select__value-container {
+  padding: 8px;
+}
+
+.react-select__indicator {
+  color: #000;
+}
