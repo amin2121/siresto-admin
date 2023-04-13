@@ -41,9 +41,9 @@ export const rupiahToNumber = str => {
   return str
 }
 
-// export const baseUrl = 'https://api.siresto.awandigital.id/'
-export const baseUrl = 'http://127.0.0.1:8000/'
-export const baseUrlFrontEnd = 'https://siresto.awandigital.id/'
+export const baseUrl = process.env.REACT_APP_BACKEND_DOMAIN
+// export const baseUrl = process.env.REACT_APP_API_LOCAL_DOMAIN
+export const baseUrlFrontEnd = process.env.REACT_APP_SIRESTO_DOMAIN
 
 // export const baseUrl = 'http://127.0.0.1:8000/'
 // export const baseUrlFrontEnd = 'http://localhost:3000/'
