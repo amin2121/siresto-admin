@@ -41,7 +41,7 @@ export const rupiahToNumber = str => {
   return str
 }
 
-export const baseUrl = process.env.REACT_APP_BACKEND_DOMAIN
+export const baseUrl = process.env.REACT_APP_API_DOMAIN
 // export const baseUrl = process.env.REACT_APP_API_LOCAL_DOMAIN
 export const baseUrlFrontEnd = process.env.REACT_APP_SIRESTO_DOMAIN
 
