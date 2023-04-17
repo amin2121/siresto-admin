@@ -1,146 +1,147 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react'
+import SiResto from "../../../assets/images/logo/SiResto.png"
+import Instagram from "../../../assets/images/login/Instagram.svg"
+import Twitter from "../../../assets/images/login/Twitter.svg"
+import Facebook from "../../../assets/images/login/facebook.svg"
+import Youtube from "../../../assets/images/login/youtube.svg"
+import Icon from "../../../assets/images/login/icon.svg"
+import Slider from "../../../components/auth/Slider"
+import { Link, useNavigate } from 'react-router-dom'
+import ApiService from '../../../services/api.service'
+import JwtService from '../../../services/jwt.service'
+import Alert from '../../../components/auth/Alert'
+import { useEffect } from 'react'
 
-// component
-import { Button } from '../../../components/Button'
-import { Modal } from '../../../components/Modal'
-import Logo from '../../../assets/images/logo/SiResto.png'
+export default function Login() {
+    const [remember, setRemember] = useState(false)
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [isLoaded, setIsLoaded] = useState(false)
 
-// assets
-import { BsFillSave2Fill } from 'react-icons/bs'
-import { MdOutlineCancel } from 'react-icons/md'
-// import BgAuth from '../../../assets/images/bg-auth.jpg'
+    const navigate = useNavigate()
 
-// library
-import axios from '../../../utils/axios'
-import { swNormal } from '../../../utils/sw'
-import { useMutation, QueryClient } from 'react-query'
-import { useNavigate } from 'react-router-dom'
-import { useForm } from "react-hook-form";
-import { useSelector, useDispatch } from 'react-redux'
-import { setDataLogin } from '../../../features/loginSlice'
-import { toastSuccess, toastError } from '../../../utils/toast'
-import moment from 'moment'
+    function login() {
+        ApiService
+            .post(process.env.REACT_APP_BACKEND_DOMAIN + '/oauth/token', {
+                username: email,
+                password: password,
+                grantType: 'password',
+                clientId: process.env.REACT_APP_CLIENT_ID,
+                clientSecret: process.env.REACT_APP_CLIENT_SECRET,
+            })
+            .then((response) => {
+                if (response.status === 200) {
+                    JwtService.saveToken(response.data.accessToken)
+                    console.log(response.data, 'login berhasil')
+                    // navigate('/dashboard/owner')
+                }
+            })
+            .catch((error) => {
+                var alert = document.getElementById('alert');
+                alert.classList.toggle('hidden');
+                alert.classList.toggle('opacity-[0]')
 
-const Login = () => {
-	moment.locale('id')
-	const statusNotif = useSelector(state => state.notifTrial.statusNotif)
-	const navigate = useNavigate()
-	const dispatch = useDispatch()
-	const labelNotifTrial = useRef(null)
-	const queryClient = new QueryClient()
-	const [isAction, setIsAction] = useState(false)
-	const [errMessage, setErrMessage] = useState("")
-	const [isDisabledInput, setIsDisabledInput] = useState(false)
+                setTimeout(() => {
+                    alert.classList.toggle('opacity-[0]')
+                }, 2000)
 
-	const { register, handleSubmit, errors, reset, clearErrors } = useForm();
+                setTimeout(() => {
+                    alert.classList.toggle('hidden');
+                }, 2500)
 
-	const submitLoginUser = async (data) => {
-		const response = await axios.post('auth/login', data)
-		const res = response.data
+            })
+    }
 
-		if(res.meta.code != 200) {
-			throw new Error('Gagal Login')
-		}
-
-		return res.data
-	}
-
-	const mutation = useMutation(submitLoginUser, {
-		onMutate: () => {
-			// spinner
-			setIsDisabledInput(!isDisabledInput)
-			setIsAction(!isAction)
-		},
-		onSuccess: async (data) => {
-			reset()
-			clearErrors()
-			setIsDisabledInput(false) // disable input login
-			setIsAction(false) // mematikan loading button
-
-			// cek jika lisence trial lebih dari 30 hari
-			let endDate = moment(data.created_at)
-  			let startDate = moment()
-  			let _30hari = moment(endDate).add(30, 'days')
-
-  			let diff = moment.duration(endDate.diff(startDate)).asDays()
-  			let rentangHari = Math.abs(Math.round(diff))
-
-  			if(rentangHari > 30) {
-				document.getElementById("label-notif-trial").click()
-			} else {
-				localStorage.setItem('user', JSON.stringify({token: data.token, level: data.level, lisence: data.lisence, name: data.name, tanggal: data.created_at}))
-
-				if(data.level == 'Owner') {
-					navigate('/dashboard/owner')
-				} else if(data.level == 'Superadmin') {
-					navigate('/dashboard/superadmin')
-				} else if(data.level == 'Staff') {
-					navigate('/order')
-				}
-
-				toastSuccess('Login Berhasil Dilakukan')
-			}
-		},
-		onError: async () => {
-			setIsDisabledInput(false)
-			setIsAction(false)
-			
-			toastError('Login Gagal Dilakukan')
-		}
-	})
-
-	const loginUser = async (data) => {
-		await mutation.mutate(data)
-	}
+    useEffect(() => {
+        if (isLoaded === false) {
+            setIsLoaded(true)
+            ApiService.init()
+            ApiService
+                .get(process.env.REACT_APP_BACKEND_DOMAIN + '/api/get-my-data')
+                .then((response) => {
+                    let data = response.data.data
+                    navigate('/dashboard/superadmin')
+                })
+                .catch((error) => {
+                })
+        }
+    })
 
     return (
-        <div className="h-screen flex">
-        	<div className="basis-3/5">
-        		{/*<img src={BgAuth} alt={BgAuth} className="w-full h-screen object-cover object-center"/>*/}
-        	</div>
-		    <div className="basis-2/5 bg-white flex items-center justify-center flex-col">
-		    	<div className="mb-10">
-		    		<div className='logo-website gap-x-2 flex items-center justify-center'>
-						<img src={Logo} alt={Logo} className="w-28"/>
-					</div>
-		    	</div>
-		    	<form onSubmit={handleSubmit(loginUser)} className="w-full px-16">
+        <div className="w-screen md:flex h-screen login">
+            <div className='bg-[#5557DB] hidden md:flex items-center justify-center h-screen left'>
+                <div className='w-[308px]'>
+                    <div>
+                        <img src={Icon} className="-ml-[24px] w-24" alt="" />
+                    </div>
+                    <Slider />
+                    <div className='flex mt-[26.83px]'>
+                        <a href="https://www.youtube.com/channel/UCtQgKQgDQlHS3sO_LTxxh0Q"><img src={Youtube} alt="youtube" /></a>
+                        <a href="https://www.instagram.com/awandigitalindonesia/"><img src={Instagram} alt="instagram" /></a>
+                        <a href="https://web.facebook.com/profile.php?id=100077383916860"><img src={Facebook} alt="facebook" /></a>
+                        <a href="https://twitter.com/AdiMaketing"><img src={Twitter} alt="twitter" /></a>
+                    </div>
+                </div>
+            </div>
+            <div className='right h-screen relative'>
+                <div className='absolute top-[50px] w-full mx-auto flex justify-center hidden opacity-[0]' id="alert">
+                    <Alert type={'error'} msg={'Akun Email atau Password Anda Salah.'} />
+                </div>
+                <div className='px-[20px] md:px-[39.73px] pt-[11px] md:pt-[30.66px]'>
+                    <Link to="/" className="/">
+                        <img src={SiResto} alt="" className="w-24"/>
+                    </Link>
+                </div>
+                <div className='flex justify-center'>
+                    <div className='form-login'>
+                        <div className='title'>
+                            <h3>Login</h3>
+                            <p>Selamat datang kembali di SiResto</p>
+                        </div>
 
-					<div className="relative mb-3">
-						<label className="label mb-1 px-0">
-				        	<span className="label-text font-medium">Username</span>
-				        </label>
-		      			<div className="relative">
-						  	<input type='text' className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Username" {...register("username", { required: true })} disabled={isDisabledInput ? 'disabled' : ''}/>
-		      				{errors?.email && <span className="text-red-400 block mt-2">Email Tidak Boleh Kosong</span>}
-						</div>
-					</div>
+                        <div>
+                            <label htmlFor="email">Email</label>
+                            <div className='relative'>
+                                <div className='svg-email'></div>
+                                <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} className='input input-bordered w-full pl-[50px]' />
+                            </div>
+                        </div>
 
-					<div className="relative">
-						<label className="label mb-1 px-0">
-				        	<span className="label-text font-medium">Password</span>
-				        	<span className="label-text font-bold text-blue-500 hover:text-blue-700 cursor-pointer text-xs duration-200">Forgot Password?</span>
-				        </label>
-			      		<div className="relative">
-							<input type='password' className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="******" {...register("password", { required: true })} disabled={isDisabledInput ? 'disabled' : ''}/>
-			      			{errors?.password && <span className="text-red-400 block mt-2">Password Tidak Boleh Kosong</span>}
-						</div>
-					</div>
+                        <div>
+                            <label htmlFor="password">Password</label>
+                            <div className='relative'>
+                                <div className='svg-password'></div>
+                                <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} className='input input-bordered w-full pl-[50px]' />
+                            </div>
+                        </div>
 
-					<Button className="w-full text-xs mt-5" color="secondary" type="submit" loading={isAction} title="Login"/>
+                        <div className='flex flex-wrap'>
+                            <div className='remember-me cursor-pointer label'>
+                                <input type="checkbox" checked="checked" className="checkbox" value={remember} onChange={(e) => setRemember(e.target.value)} />
+                                <p className="label-text">Ingat saya</p>
+                            </div>
+                            <div className='forgot-password hidden md:block'>
+                                <Link to="/forgot-password" className="/">
+                                    Lupa Password?
+                                </Link>
+                            </div>
+                        </div>
 
-					{/*<span className="label-text font-medium text-xs">Belum Menjadi Anggota?</span> <span className="label-text font-bold text-blue-500 hover:text-blue-700 cursor-pointer text-xs duration-200" onClick={() => navigate('/auth/register')}>Registrasi</span>*/}
-		    	</form>
+                        <div className='action'>
+                            <button className='btn w-full' onClick={login.bind(this)}>
+                                Login
+                            </button>
 
-		    	<label htmlFor="modal-notif-trial" id="label-notif-trial"></label>
-	            <Modal id="modal-notif-trial" showButtonConfirm={false} showButtonClose={true} titleModal="Perhatian">
-	                <p className="py-2 text-sm text-slate-600">
-	                	Penggunaan lisence anda sudah berakhir, silahkan upgrade ke versi lisence premium atau multicabang untuk menikmati fitur yang tidak disediakan di lisence trial
-	                </p>
-	            </Modal>
-		    </div>
+                            <p>
+                                Belum punya akun?
+                                <Link to="/register" className="text-[#EB008B]">
+                                    Daftar Sekarang
+                                </Link>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    );
-};
-
-export default Login;
+    )
+}

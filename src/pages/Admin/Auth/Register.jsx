@@ -191,7 +191,6 @@ export default function Register() {
     const updateCity = (e) => {
         e.preventDefault();
         setCity(e.target.value)
-        console.log(e.target.value)
     }
 
     function optionKota() {
