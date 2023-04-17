@@ -55,7 +55,8 @@ export default function Login() {
 
     async function submitLoginUser (data) {
         const response = await axios.post('auth/login', data)
-        const res = response.data
+        const res = response.data.data
+        localStorage.setItem('user', JSON.stringify({token: res.token, level: res.level, lisence: res.lisence, name: res.name, tanggal: res.created_at}))
 
         if(res.level === 'Superadmin') {
             navigate('/dashboard/superadmin')
