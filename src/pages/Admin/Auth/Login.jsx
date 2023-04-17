@@ -11,6 +11,7 @@ import ApiService from '../../../services/api.service'
 import JwtService from '../../../services/jwt.service'
 import Alert from '../../../components/auth/Alert'
 import { useEffect } from 'react'
+import axios from '../../../utils/axios'
 
 export default function Login() {
     const [remember, setRemember] = useState(false)
@@ -33,7 +34,7 @@ export default function Login() {
                 if (response.status === 200) {
                     JwtService.saveToken(response.data.accessToken)
                     console.log(response.data, 'login berhasil')
-                    // navigate('/dashboard/owner')
+                    submitLoginUser({email, password})
                 }
             })
             .catch((error) => {
@@ -52,6 +53,21 @@ export default function Login() {
             })
     }
 
+    async function submitLoginUser (data) {
+        const response = await axios.post('auth/login', data)
+        const res = response.data
+
+        if(res.level === 'Superadmin') {
+            navigate('/dashboard/superadmin')
+        } else if(res.level === 'Owner') {
+            navigate('/dashboard/owner')
+        }
+
+        if(res.meta.code != 200) {
+            throw new Error('Gagal Login')
+        }
+    }
+
     useEffect(() => {
         if (isLoaded === false) {
             setIsLoaded(true)
@@ -60,7 +76,7 @@ export default function Login() {
                 .get(process.env.REACT_APP_BACKEND_DOMAIN + '/api/get-my-data')
                 .then((response) => {
                     let data = response.data.data
-                    navigate('/dashboard/superadmin')
+                    console.log('ada loginannya')
                 })
                 .catch((error) => {
                 })

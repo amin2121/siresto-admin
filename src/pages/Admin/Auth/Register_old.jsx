@@ -58,12 +58,8 @@ const Register = () => {
 
     return (
         <div className="h-screen flex md:h-max">
-            <div className="basis-3/5">
-        		{/*<img src={BgAuth} alt={BgAuth} className="w-full h-screen object-cover object-center flex-col"/>*/}
-        	</div>
 		    <div className="basis-2/5 bg-white p-4 flex items-center justify-center flex-col">
 		    	<div className='mb-1'>
-			    	{/*<img src={IconAplikasi} alt="logo" className={`cursor-pointer duration-500 w-30`}/>*/}
 			    	<p className="font-medium mt-2">Register</p>
 		    	</div>
 		    	<form onSubmit={handleSubmit(registerUser)} className="w-full px-16">

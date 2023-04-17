@@ -14,6 +14,7 @@ import Sikas from '../../../assets/images/logo/sikas.png'
 import Siqasir from '../../../assets/images/logo/siqasir.png'
 import Skrin from '../../../assets/images/logo/skrin.png'
 import Kyoo from '../../../assets/images/logo/kyoo.png'
+import axios from '../../../utils/axios'
 
 export default function Register() {
     const navigate = useNavigate()
@@ -267,6 +268,15 @@ export default function Register() {
         }
     }
 
+    async function submitRegisterUser (data) {
+        const response = await axios.post('auth/register', data)
+        const res = response.data
+
+        if(res.meta.code != 200) {
+            throw new Error(res.meta.message)
+        }
+    }
+
     function startNow() {
         let params = {
             email: email,
@@ -286,6 +296,8 @@ export default function Register() {
             .then((response) => {
                 setType('success')
                 setMessage('Berhasil mendaftarkan akun anda.')
+
+                submitRegisterUser(params)
 
                 var alert = document.getElementById('alert');
                 alert.classList.toggle('hidden');
