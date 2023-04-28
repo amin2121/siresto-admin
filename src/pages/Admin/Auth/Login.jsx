@@ -32,8 +32,8 @@ export default function Login() {
             })
             .then((response) => {
                 if (response.status === 200) {
-                    JwtService.saveToken(response.data.accessToken)
-                    console.log(response.data, 'login berhasil')
+                    // JwtService.saveToken(response.data.accessToken)
+                    // console.log(response.data, 'login berhasil')
                     submitLoginUser({email, password})
                 }
             })
@@ -57,6 +57,7 @@ export default function Login() {
         const response = await axios.post('auth/login', data)
         const res = response.data.data
         localStorage.setItem('user', JSON.stringify({token: res.token, level: res.level, lisence: res.lisence, name: res.name, tanggal: res.created_at}))
+        JwtService.saveToken(res.token)
 
         if(res.level === 'Superadmin') {
             navigate('/dashboard/superadmin')

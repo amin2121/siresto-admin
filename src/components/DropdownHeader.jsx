@@ -4,6 +4,7 @@ import { Menu, Transition } from '@headlessui/react'
 import { BiChevronDown } from 'react-icons/bi'
 import User from '../assets/images/user/user-1.jpg'
 import { useNavigate } from 'react-router-dom'
+import JwtService from '../services/jwt.service'
 import { swConfirm } from '../utils/sw'
 
 const links = [
@@ -24,6 +25,7 @@ const DropdownHeader = ({ name, gambar }) => {
     confirm.then(result => {
       if (result.isConfirmed) {
           localStorage.removeItem('user')
+          JwtService.destroyToken()
           navigate('/login')
       }
     })
