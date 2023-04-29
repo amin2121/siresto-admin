@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "https://siresto.awandigital.id/static/css/main.438a9445.css",
-    "main.js": "https://siresto.awandigital.id/static/js/main.eaea00f9.js",
+    "main.js": "https://siresto.awandigital.id/static/js/main.25368cdc.js",
     "static/js/787.0866c6d6.chunk.js": "https://siresto.awandigital.id/static/js/787.0866c6d6.chunk.js",
     "static/media/circle.png": "https://siresto.awandigital.id/static/media/circle.e852f95ffaa23c95f404.png",
     "static/media/background.png": "https://siresto.awandigital.id/static/media/background.7fa1a58281ecd2d17e06.png",
@@ -39,11 +39,11 @@
     "static/media/tautan.svg": "https://siresto.awandigital.id/static/media/tautan.637e23312aebea331d40.svg",
     "static/media/sikas.svg": "https://siresto.awandigital.id/static/media/sikas.298b2e03e8d6016631f3.svg",
     "main.438a9445.css.map": "https://siresto.awandigital.id/static/css/main.438a9445.css.map",
-    "main.eaea00f9.js.map": "https://siresto.awandigital.id/static/js/main.eaea00f9.js.map",
+    "main.25368cdc.js.map": "https://siresto.awandigital.id/static/js/main.25368cdc.js.map",
     "787.0866c6d6.chunk.js.map": "https://siresto.awandigital.id/static/js/787.0866c6d6.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.438a9445.css",
-    "static/js/main.eaea00f9.js"
+    "static/js/main.25368cdc.js"
   ]
 }
