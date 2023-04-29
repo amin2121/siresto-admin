@@ -18,7 +18,7 @@ export const QrCode = React.forwardRef(({ noTelp, alamat, noMeja, slug }, ref) =
                     <p>No Meja : {noMeja}</p>
                 </div>
                 <div className="flex justify-center items-center mb-4">
-                    <QRCode size={120} value={process.env.REACT_APP_SIRESTO_MENU + `source=qrcode&branch=${slug}&meja=E${noMeja}`}/>
+                    <QRCode size={120} value={process.env.REACT_APP_SIRESTO_MENU_DOMAIN + `home?source=qrcode&branch=${slug}&meja=${noMeja}`}/>
                 </div>
                 <div>
                     <p className="text-[8px]">Scan QR Code dengan Smartphone anda, setelah itu
