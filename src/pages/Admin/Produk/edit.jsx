@@ -140,6 +140,7 @@ const Edit = () => {
 
 	const promiseOptions = async (inputValue) => {
 		setIsLoadingSelect(!isLoadingSelect)
+		axios.defaults.headers.common['Authorization'] = `Bearer ${user.token}`
 		const response = await axios.get('kategori-produk/all?s=' + inputValue)
 		const res = await response.data.data
 

@@ -237,7 +237,7 @@ const Meja = () => {
 							<p className='uppercase text md mt-1 mb-5'>No Meja : {qrCode.noMeja}</p>
 							<div className='p-3 border border-blue-500 rounded inline-block mb-2'>
 								{/* <QRCode size={200} className="mx-auto" value={baseUrlFrontEnd + `home/${qrCode.uuid}/${guest}`}/> */}
-								<QRCode size={200} className="mx-auto" value={process.env.REACT_APP_SIRESTO_DOMAIN + `home?source=qrcode&branch=${qrCode.slug}&meja=E${qrCode.noMeja}`}/>
+								<QRCode size={200} className="mx-auto" value={process.env.REACT_APP_SIRESTO_DOMAIN + `home?source=qrcode&branch=${qrCode.slug}&meja=${qrCode.noMeja}`}/>
 							</div>
 							<p className='text-xs text-slate-400'>Scan QR Code dengan Smartphone anda, setelah itu <br/> akses link dari hasil QR Code Tersebut</p>
 						</div>
