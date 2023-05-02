@@ -276,9 +276,9 @@ const Produk = () => {
 				                </td>
 				                <td className="py-4 px-6">
 				                	<div className="md:space-x-3 space-x-1 text-center">
-										<div className="tooltip tooltip-bottom" data-tip="Ubah Status Produk"><label htmlFor="modal-ubah-status-produk"><ButtonIconOutline onClick={() => checkedStatusProduk(obj)}><FiToggleRight size="16"/></ButtonIconOutline></label></div>
-										<div className="tooltip tooltip-bottom" data-tip="Edit Produk"><Link to="/produk/edit" state={obj}><ButtonIconOutline><FiEdit3 size="16"/></ButtonIconOutline></Link></div>
-										<div className="tooltip tooltip-bottom" data-tip="Hapus Produk"><ButtonIconOutline onClick={() => confirmDeleteData(obj.id)}><FiTrash2 size="16"/></ButtonIconOutline></div>
+										<div className="tooltip tooltip-bottom z-20" data-tip="Ubah Status Produk"><label htmlFor="modal-ubah-status-produk"><ButtonIconOutline onClick={() => checkedStatusProduk(obj)}><FiToggleRight size="16"/></ButtonIconOutline></label></div>
+										<div className="tooltip tooltip-bottom z-20" data-tip="Edit Produk"><Link to="/produk/edit" state={obj}><ButtonIconOutline><FiEdit3 size="16"/></ButtonIconOutline></Link></div>
+										<div className="tooltip tooltip-bottom z-20" data-tip="Hapus Produk"><ButtonIconOutline onClick={() => confirmDeleteData(obj.id)}><FiTrash2 size="16"/></ButtonIconOutline></div>
 									</div>
 				                </td>
 				            </tr>
