@@ -54,7 +54,7 @@ const Header = ({}) => {
             {
                 showBanner == true 
                 ? <div className="w-full px-6 mt-2 mb-4">
-                    <div class="alert bg-yellow-500 text-white shadow-sm !rounded-md !w-full !lg:h-16 py-4 lg:py-0 !h-fit">
+                    <div class="alert bg-yellow-500 text-white shadow-sm !rounded-md !w-full py-2">
                       <div className="w-full flex justify-between flex-wrap">
                         <span>Masa percobaan Anda akan berakhir dalam {sisaHari} hari. Upgrage akun Anda agar dapat kembali menikmati layanan SiResto </span>
                         <button type="button" className="btn w-full md:w-fit bg-transparent border-white text-white px-10 hover:bg-yellow-600 hover:border-yellow-600 mt-4 lg:mt-0">Upgrade</button>

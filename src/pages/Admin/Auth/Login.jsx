@@ -63,6 +63,8 @@ export default function Login() {
             navigate('/dashboard/superadmin')
         } else if(res.level === 'Owner') {
             navigate('/dashboard/owner')
+        } else if(res.level === 'Staff') {
+            navigate('/order')
         }
 
         if(res.meta.code != 200) {
