@@ -8,7 +8,6 @@ export const sidebarSlice = createSlice({
     reducers: {
         openSidebar: (state, action) => {
             state.open = !state.open
-            console.log(state.open)
         },
     }
 })
