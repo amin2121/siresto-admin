@@ -13,10 +13,10 @@ export const InputGroup = ({ type, id, icon, directionIcon, placeholder, classNa
 	let directionRight = ''
 	let paddingIcon = ''
 	if(directionIcon == 'left') {
-		directionLeft = <span className='absolute left-4 text-gray-500 z-40'>{icon}</span>
+		directionLeft = <span className='absolute left-4 text-gray-500'>{icon}</span>
 		paddingIcon = 'pl-14'
 	} else {
-		directionRight = <span className='absolute right-4 text-gray-500 z-40'>{icon}</span>
+		directionRight = <span className='absolute right-4 text-gray-500'>{icon}</span>
 		paddingIcon = 'pr-14'
 	}
 
@@ -28,7 +28,7 @@ export const InputGroup = ({ type, id, icon, directionIcon, placeholder, classNa
 				rules={{ required: true }}
 				render={(props) => (
 					<input 
-						className={`input input-bordered ${paddingIcon} !outline-0 input-bordered border-blue-500 text-gray-900 text-sm !focus:ring-0 !focus:ring-offset-0 focus:border-2 block w-full ${className ?? ''} ${error ? '!border-red-400 focus:ring-red-600' : ''}`} 
+						className={`input input-bordered ${paddingIcon} !outline-0 input-bordered !border-blue-500 text-gray-900 text-sm !focus:ring-0 !focus:ring-offset-0 focus:border-2 block w-full ${className ?? ''} ${error ? '!border-red-400 focus:ring-red-600' : ''}`} 
 						type={type} 
 						id={id}
 						disabled={disabled}
@@ -47,7 +47,7 @@ export const InputGroup = ({ type, id, icon, directionIcon, placeholder, classNa
 					type={type} 
 					id={id} 
 					disabled={disabled}
-					className={`input input-bordered ${paddingIcon} !outline-0 input-bordered border-blue-500 text-gray-900 text-sm !focus:ring-0 !focus:ring-offset-0 focus:border-2 block w-full ${className ?? ''}`} 
+					className={`input input-bordered ${paddingIcon} !outline-0 input-bordered !border-blue-500 text-gray-900 text-sm !focus:ring-0 !focus:ring-offset-0 focus:border-2 block w-full ${className ?? ''}`} 
 					placeholder={placeholder}
 					onChange={onChange}
 					name={name}
@@ -75,7 +75,7 @@ export const Input = ({type, id, placeholder, name, className, disabled, control
 					rules={rules}
 					render={({ field }) => (
 						<input 
-							className={`input input-bordered !outline-0 input-bordered border-blue-500 text-gray-900 text-sm !focus:ring-0 !focus:ring-offset-0 focus:border-2 block w-full ${className ?? ''} ${error ? '!border-red-400 focus:ring-red-600' : ''}`} 
+							className={`input input-bordered !outline-0 input-bordered !border-blue-500 text-gray-900 text-sm !focus:ring-0 !focus:ring-offset-0 focus:border-2 block w-full ${className ?? ''} ${error ? '!border-red-400 focus:ring-red-600' : ''}`} 
 							type={type} 
 							id={id}
 							disabled={disabled}
@@ -95,7 +95,7 @@ export const Input = ({type, id, placeholder, name, className, disabled, control
 					id={id} 
 					value={value}
 					disabled={disabled}
-					className={`input input-bordered !outline-0 input-bordered border-blue-500 text-gray-900 text-sm !focus:ring-0 !focus:ring-offset-0 focus:border-2 block w-full ${className ?? ''}`} 
+					className={`input input-bordered !outline-0 input-bordered !border-blue-500 text-gray-900 text-sm !focus:ring-0 !focus:ring-offset-0 focus:border-2 block w-full ${className ?? ''}`} 
 					placeholder={placeholder}
 					onChange={onChange} 
 					name={name}
@@ -119,7 +119,7 @@ export const InputCurrency = ({id, placeholder, className, name, value, disabled
 		      		rules={rules}
 		      		render={({ field }) => (
         			<Cleave 
-        				className={`input input-bordered !outline-0 border-blue-500 text-gray-900 text-sm !focus:ring-0 !focus:ring-offset-0 focus:border-2 block w-full ${className ?? ''} ${error ? '!border-red-400 focus:ring-red-600' : ''}`}
+        				className={`input input-bordered !outline-0 !border-blue-500 text-gray-900 text-sm !focus:ring-0 !focus:ring-offset-0 focus:border-2 block w-full ${className ?? ''} ${error ? '!border-red-400 focus:ring-red-600' : ''}`}
         				{...field} 
         				id={id}
         				disabled={disabled}
@@ -136,7 +136,7 @@ export const InputCurrency = ({id, placeholder, className, name, value, disabled
 
 	} else {
 		input = <Cleave 
-					className={`input input-bordered !outline-0 input-bordered border-blue-500 text-gray-900 text-sm !focus:ring-0 !focus:ring-offset-0 focus:border-2 block w-full ${className ?? ''} `}
+					className={`input input-bordered !outline-0 input-bordered !border-blue-500 text-gray-900 text-sm !focus:ring-0 !focus:ring-offset-0 focus:border-2 block w-full ${className ?? ''} `}
 					id={id}
 					name={name}
 					disabled={disabled}
@@ -163,10 +163,10 @@ export const InputGroupCurrency = ({ type, id, icon, directionIcon, disabled, pl
 	let directionRight = ''
 	let paddingIcon = ''
 	if(directionIcon == 'left') {
-		directionLeft = <span className='absolute left-4 text-gray-500 z-40'>{icon}</span>
+		directionLeft = <span className='absolute left-4 text-gray-500'>{icon}</span>
 		paddingIcon = 'pl-12'
 	} else {
-		directionRight = <span className='absolute right-4 text-gray-500 z-40'>{icon}</span>
+		directionRight = <span className='absolute right-4 text-gray-500'>{icon}</span>
 		paddingIcon = 'pr-12'
 	}
 
@@ -178,7 +178,7 @@ export const InputGroupCurrency = ({ type, id, icon, directionIcon, disabled, pl
 		      	rules={rules}
 		      	render={({ field }) => (
 					<Cleave 
-						className={`input input-bordered ${paddingIcon} border-blue-500 text-gray-900 text-sm !focus:ring-0 !focus:ring-offset-0 focus:border-2 block w-full p-2.5 ${className ?? ''} ${error ? 'border-red-400 focus:ring-red-600' : ''} `}
+						className={`input input-bordered ${paddingIcon} !border-blue-500 text-gray-900 text-sm !focus:ring-0 !focus:ring-offset-0 focus:border-2 block w-full p-2.5 ${className ?? ''} ${error ? 'border-red-400 focus:ring-red-600' : ''} `}
 						type={type}
 						id={id} 
 						disabled={disabled}
@@ -195,7 +195,7 @@ export const InputGroupCurrency = ({ type, id, icon, directionIcon, disabled, pl
 		    />
 	} else {
 		input = <Cleave 
-					className={`input input-bordered ${paddingIcon} border-blue-500 text-gray-900 text-sm !focus:ring-0 !focus:ring-offset-0 focus:border-2 block w-full p-2.5 ${className ?? ''}`}
+					className={`input input-bordered ${paddingIcon} !border-blue-500 text-gray-900 text-sm !focus:ring-0 !focus:ring-offset-0 focus:border-2 block w-full p-2.5 ${className ?? ''}`}
 					type={type}
 					id={id}
 					name={name}

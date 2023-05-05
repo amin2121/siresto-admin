@@ -2,36 +2,39 @@ import React, {useState, useEffect, useRef} from 'react';
 import './order.css'
 
 // components
-import { Button } from '../../../components/Button'
 import HeaderContent from '../../../layouts/HeaderContent'
 import { InputGroup, Input, InputGroupCurrency, Textarea } from '../../../components/Input'
 import LoadingPage from '../../../components/LoadingPage'
 
 // icons
 import { HiArrowRight } from 'react-icons/hi'
-import { FiTrash2, FiEdit3, FiToggleRight, FiPlusCircle, FiSearch, FiFileText } from 'react-icons/fi'
+import { FiTrash2, FiSearch } from 'react-icons/fi'
 
 // libraries
 import axios from '../../../utils/axios'
-import { swNormal } from '../../../utils/sw'
-import { rupiahToNumber, rupiah, baseUrl } from '../../../utils/strings'
-import { useMutation, QueryClient, useQuery } from 'react-query'
+import { rupiah, baseUrl } from '../../../utils/strings'
+import { useQuery } from 'react-query'
 import { useNavigate } from 'react-router-dom'
 import { useForm } from "react-hook-form";
-import MetodePembayaran from '../../../components/MetodePembayaran';
-import { toastSuccess, toastError } from '../../../utils/toast'
+import { toastError } from '../../../utils/toast'
 
 const Tambah = () => {
 	const navigate = useNavigate()
-	const queryClient = new QueryClient()
-	const [loading, setLoading] = useState(false)
+	const user = JSON.parse(localStorage.getItem('user'))
 	const [keyword, setKeyword] = useState('')
 	const [page, setPage] = useState(1)
 	const [rowCart, setRowCart] = useState([])
-	let indexRow = useRef(0)
+	const [settingPembayaran, setSettingPembayaran] = useState([])
 
+	
 	let discount = rowCart.length > 0 ? rowCart.reduce((n, {harga_total_diskon}) => n + harga_total_diskon, 0) : 0 // menjumlahkan harga total diskon
 	let subtotal = rowCart.length > 0 ? rowCart.reduce((n, {harga_total}) => n + harga_total, 0) : 0 // menjumlahkan harga total
+	
+	let serviceCharge = settingPembayaran?.status_charge_service === 1 ? settingPembayaran?.charge_service : 0
+	let pajak = settingPembayaran?.status_pajak === 1 ? (settingPembayaran?.pajak * subtotal) / 100 : 0
+	let pajakPersen = settingPembayaran?.status_pajak === 1 ? settingPembayaran?.pajak : 0
+
+	let totalSemua = subtotal + parseInt(serviceCharge) + parseInt(pajak)
 
 	const breadcrumbs = [
 		{ link: '/', menu: 'Home' },
@@ -68,7 +71,7 @@ const Tambah = () => {
 	const tambahDataOrder = async (e) => {
 		e.preventDefault()
 
-		let data_produk = { subtotal: subtotal, diskon_total: discount, produk: [...rowCart] }
+		let data_produk = { subtotal: subtotal, diskon_total: discount, pajak: pajak, serviceCharge: serviceCharge, pajakPersen: pajakPersen, totalSemua : totalSemua, produk: [...rowCart] }
 		if(rowCart.length == 0) {
 			toastError('Pilih Makanan & Minuman Terlebih Dahulu')
 		} else {
@@ -77,12 +80,25 @@ const Tambah = () => {
 	}
 
 	const getProduk = async () => {
+		axios.defaults.headers.common['Authorization'] = `Bearer ${user.token}`
 		const response = await axios.get(`produk?s=${keyword}&limit=${10}&sort=DESC&page=${page}`)
 		const res = await response.data.data
 		const data = res.data.data
 		
 		return data
 	}
+
+	const getSettingPembayaran = async () => {
+		axios.defaults.headers.common['Authorization'] = `Bearer ${user.token}`
+		const response = await axios.get(`setting`)
+		const res = await response.data.data
+		
+		setSettingPembayaran(res)
+	}
+
+	useEffect(() => {
+		getSettingPembayaran()
+	}, [])
 
 	useEffect(() => {
 		refetch()
@@ -220,7 +236,7 @@ const Tambah = () => {
 							</div>
 							<div className="grid grid-cols-3 gap-4 w-full pl-6 pr-3 flex-1">
 								{isLoading && <div className="flex justify-center items-center flex-col col-span-3 space-y-3"><LoadingPage /></div>}
-								{data && data.map((item, index) => (layoutProduk(item, index)))}
+								{data?.length > 0 ? data.map((item, index) => (layoutProduk(item, index))) : <div className="flex justify-center items-center flex-col col-span-3 space-y-3"><p>Data Produk Kosong, Silahkan Menambahkan Data Produk Terlebih Dahulu</p></div>}
 							</div>
 						</div>
 						<div className="col-span-4 bg-slate-100 rounded relative flex flex-col pesanan-pelanggan__container">
@@ -235,13 +251,27 @@ const Tambah = () => {
 										<p className="font-medium">Subtotal :</p>
 										<p className="font-medium">Rp. {rupiah(subtotal)}</p>
 									</div>
-									<div className="flex justify-between text-xs text-slate-500">
-										<p className="font-medium">Discount :</p>
-										<p className="font-medium">- Rp. {rupiah(discount)}</p>
+									<div className="flex justify-between text-xs ">
+										<p className="font-medium text-green-500">Discount :</p>
+										<p className="font-medium text-green-500">- Rp. {rupiah(discount)}</p>
 									</div>
+									{
+										settingPembayaran?.status_charge_service === 1
+										? <div className="flex justify-between text-xs text-slate-700">
+											<p className="font-medium">Servic Charge :</p>
+											<p className="font-medium">Rp. {rupiah(serviceCharge)}</p>
+										</div> : ''
+									}
+									{
+										settingPembayaran?.status_pajak === 1
+										? <div className="flex justify-between text-xs text-slate-700">
+											<p className="font-medium">Pajak :</p>
+											<p className="font-medium">Rp. {rupiah(pajak)}</p>
+										</div> : ''
+									}
 									<div className="flex justify-between border-t border-zinc-200 pt-2">
 										<p className="font-bold text-lg text-slate-700">Total :</p>
-										<p className="font-bold text-blue-500 text-xl">Rp. {rupiah(subtotal)}</p>
+										<p className="font-bold text-blue-500 text-xl">Rp. {rupiah(totalSemua)}</p>
 									</div>
 									<button type="submit" className="btn btn-active bg-blue-500 border-0 hover:bg-blue-600 btn-block text-white flex justify-between !mt-6">
 										<span>Lakukan Pembayaran</span>

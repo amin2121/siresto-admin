@@ -3,18 +3,15 @@ import './order.css'
 
 // components
 import { Button } from '../../../components/Button'
-import HeaderContent from '../../../layouts/HeaderContent'
 import { Input, InputGroupCurrency, Textarea } from '../../../components/Input'
 import { Struk } from './Cetak/struk'
 
 // icons
-import { HiArrowRight } from 'react-icons/hi'
 import { FiSave } from 'react-icons/fi'
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai'
 
 // libraries
 import axios from '../../../utils/axios'
-import { swNormal } from '../../../utils/sw'
 import { rupiahToNumber, rupiah, baseUrl } from '../../../utils/strings'
 import { useMutation, QueryClient, useQuery } from 'react-query'
 import { useNavigate, useLocation } from 'react-router-dom'
@@ -225,8 +222,8 @@ export default function Pembayaran() {
             <form onSubmit={handleSubmit(pembayaran)}>
                 <div className="h-max">
                     <div className="grid grid-cols-12 gap-4 mb-6">
-                        <div className="col-span-8">
-                            <div className="w-full pl-6 pr-3 mt-3 order-list__container">
+                        <div className="lg:col-span-8 col-span-12">
+                            <div className="w-full pl-6 pr-6 mt-3 order-list__container">
                                 <div className='flex justify-between items-center order-list__title border-b border-zinc-200 pb-4 pr-2'>
                                     <h2 className='text-black text-xl font-semibold'>Pesanan Anda</h2>
                                     <p className='text-xl text-black font-semibold'>{state != null ? state.produk.length : 0} Item</p>
@@ -257,14 +254,14 @@ export default function Pembayaran() {
                                                     <td>
                                                         <div className='flex border border-slate-300 w-fit rounded-md'>
                                                             <button type="button" className="w-8 h-8 flex justify-center items-center rounded-tl-md rounded-bl-md hover:bg-blue-500 hover:text-white duration-200" onClick={() => kurangJumlahBeli(obj.id)}><AiOutlineMinus size={12}/></button>
-                                                            <input type="number" value={obj.jumlah_produk} className="w-10 text-center focus:outline-0" onChange={e => ubahJumlahBeli(key, e.target.value)}/>
+                                                            <input type="number" value={obj.jumlah_produk} className="w-10 text-center focus:outline-0 !border-none" onChange={e => ubahJumlahBeli(key, e.target.value)}/>
                                                             <button type="button" className="w-8 h-8 flex justify-center items-center rounded-tr-md rounded-br-md hover:bg-blue-500 hover:text-white duration-200" onClick={() => tambahJumlahBeli(obj.id)}><AiOutlinePlus size={12}/></button>
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <span className='block text-sm font-bold text-slate-500'>IDR {rupiah(obj.harga_jual)}</span>
                                                     </td>
-                                                    <td>
+                                                    <td className='text-right'>
                                                         <span className={`inline-block mr-1 text-sm font-bold text-blue-500 ${obj.diskon > 0 && 'mt-4'}`}>IDR {rupiah(obj.harga_total)}</span>
                                                         {obj.diskon > 0 && <span className="text-xs text-slate-500 block">- IDR {rupiah(obj.harga_total_diskon)}</span>}
                                                     </td>
@@ -274,7 +271,7 @@ export default function Pembayaran() {
                                     </table>
 
                                     <div className="flex grow items-end">
-                                        <div className="w-full bg-white sticky bottom-0 left-0 px-4 py-4 space-y-3 mt-5">
+                                        <div className="w-full bg-white sticky bottom-0 left-0 space-y-3 mt-5">
                                             <div className="flex justify-between text-xs text-slate-700">
                                                 <p className="font-medium">Subtotal :</p>
                                                 <p className="font-medium">Rp. {rupiah(subtotal)}</p>
@@ -297,7 +294,7 @@ export default function Pembayaran() {
                                 </div>
                             </div>
                         </div>
-                        <div className="bg-slate-100 rounded fixed right-0 flex flex-col px-6 order-pembayaran__container">
+                        <div className="lg:w-full lg:col-span-4 col-span-12 bg-slate-100 rounded flex flex-col px-6">
                             <h2 className='text-black text-xl font-semibold mt-3 order-pembayaran__title border-b border-zinc-200 pb-4'>Pembayaran</h2>
                             <div className="order-pembayaran__form">
                                 <div className="w-full">
@@ -341,11 +338,7 @@ export default function Pembayaran() {
                                     </label>
                                     <InputGroupCurrency type="text" id="input-kembalian" readOnly={true} directionIcon="left" name="kembalian" icon='IDR' placeholder="Kembalian" control={control} error={errors.kembalian ? true : false}/>
                                 </div>
-                                {/*<button type="submit" className="btn btn-active bg-blue-500 border-0 hover:bg-blue-600 btn-block text-white flex justify-between !mt-8">
-                                    <span>Bayar Sekarang</span>
-                                    <HiArrowRight size={16} />
-                                </button>*/}
-                                <Button className="text-xs mr-2 w-full mt-4" color="secondary" type="submit" startIcon={<FiSave size={20}/>} loading={isAction} title="BAYAR SEKARANG" />
+                                <Button className="text-xs mr-2 w-full mt-4 bg-custom-blue border-custom-blue" type="submit" startIcon={<FiSave size={20}/>} loading={isAction} title="BAYAR SEKARANG" />
                             </div>
                         </div>
                     </div>
