@@ -104,7 +104,7 @@ const Edit = () => {
 					
 					<div className="grid grid-cols-8 md:gap-4 mt-8">
 			      		<div className="relative col-span-12 gap-x-2 md:col-span-4 md:col-start-3">
-			      			<Button className="text-xs mr-2" color="secondary" type="submit" startIcon={<FiSave size={20}/>} loading={isAction} title="Simpan" />
+			      			<Button className="text-xs mr-2 bg-custom-blue border-custom-blue" type="submit" startIcon={<FiSave size={20}/>} loading={isAction} title="Simpan" />
 					        <Button className="text-xs" color="ghost" type="button" startIcon={<FiXCircle size={20}/>} loading={false} title="Kembali"  onClick={() => navigate('/kategori-bisnis')}/>
 			      		</div>
 					</div>

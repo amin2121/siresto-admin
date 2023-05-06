@@ -16,15 +16,17 @@ const ProtectedRoute = ({redirectPath = '/login', children}) => {
   }
 
   // cek jika lisence trial lebih dari 30 hari
-  let endDate = moment(user.tanggal)
-  let startDate = moment()
-  let _30hari = moment(endDate).add(30, 'days')
+  if(user.level !== 'Superadmin') {
+    let endDate = moment(user.tanggal)
+    let startDate = moment()
+    let _30hari = moment(endDate).add(30, 'days')
 
-  let diff = moment.duration(endDate.diff(startDate)).asDays()
-  let rentangHari = Math.abs(Math.round(diff))
-  if(rentangHari > 30) {
-    // dispatch(showNotif())
-    return <Navigate to={redirectPath} replace />;
+    let diff = moment.duration(endDate.diff(startDate)).asDays()
+    let rentangHari = Math.abs(Math.round(diff))
+    if(rentangHari > 30) {
+      // dispatch(showNotif())
+      return <Navigate to={redirectPath} replace />;
+    }
   }
 
   return children;

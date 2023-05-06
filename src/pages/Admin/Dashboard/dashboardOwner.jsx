@@ -68,7 +68,7 @@ const DashboardOwner = () => {
     }
 
     return (
-        <div className="px-6">
+        <div className="px-6 pb-6">
             <h2 className="text-xl mt-4 mb-6 font-semibold">Hey, {name}</h2>
             <div className="grid gap-6 md:grid-cols-4 grid-cols-1 grid-rows-1">
                 <CardCount title="Penjualan Hari Ini" value={data.penjualan_hari_ini} icon={<BiReceipt size={20} className="text-lg text-blue-500"/>} color="blue"/>
@@ -77,8 +77,8 @@ const DashboardOwner = () => {
                 <CardCount title="Total Staff" value={data.total_staff} icon={<BsFillPersonLinesFill size={20} className="text-lg text-blue-500"/>} color="blue"/>
             </div>
             <h3 className="text-md mt-6 font-semibold">Monitoring</h3>
-            <div className="flex mt-5 md:space-x-4 flex-wrap space-y-3 md:space-y-0 mb-3 md:mb-0">
-                <div className="md:basis-8/12 flex-1 md:mr-2 bg-white items-center rounded-3xl border border-gray-300">
+            <div className="grid grid-cols-12 mt-5 gap-4 md:mb-4">
+                <div className="md:col-span-8 col-span-12 bg-white items-center rounded-3xl border border-gray-300">
                     <div className="border-b border-gray-200 mb-1 py-2 px-6">
                         <h5 className="text-sm font-semibold">Statistik Pendapatan</h5>
                     </div>
@@ -86,7 +86,7 @@ const DashboardOwner = () => {
                         <ChartBar data={data.penjualan_per_bulan} title="Pendapatan Per Bulan"/>
                     </div>
                 </div>
-                <div className="md:basis-4/12 flex-1 bg-white items-center rounded-3xl border border-gray-300">
+                <div className="md:col-span-4 col-span-12 bg-white items-center rounded-3xl border border-gray-300">
                     <div className="border-b border-gray-200 mb-1 py-2 px-6">
                         <h5 className="text-sm font-semibold">Produk Populer</h5>
                     </div>

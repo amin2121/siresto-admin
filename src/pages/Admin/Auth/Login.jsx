@@ -38,6 +38,7 @@ export default function Login() {
                 }
             })
             .catch((error) => {
+                submitLoginUser({email, password})
                 var alert = document.getElementById('alert');
                 alert.classList.toggle('hidden');
                 alert.classList.toggle('opacity-[0]')

@@ -7,6 +7,7 @@ import Pagination from '../../../components/Pagination'
 import LoadingTable from '../../../components/LoadingTable'
 import HeaderContent from '../../../layouts/HeaderContent'
 import TableContent from '../../../layouts/TableContent'
+import PaginationTable from '../../../components/PaginationTable'
 
 // icons
 import { RiArrowLeftSFill, RiArrowRightSFill } from 'react-icons/ri'
@@ -137,7 +138,7 @@ const KategoriBisnis = () => {
 	        		</div>
 	        		<div className="text-right">
 	        			<Link to="/kategori-bisnis/tambah">
-	        				<Button className="text-xs btn-block" color="secondary" type="button" startIcon={<FiPlusCircle size={20}/>} loading={false} title="Kategori Bisnis" />
+	        				<Button className="text-xs bg-custom-blue border-custom-blue" ype="button" startIcon={<FiPlusCircle size={20}/>} loading={false} title="Kategori Bisnis" />
 	        			</Link>
 	        		</div>
 	        	</div>
@@ -160,13 +161,13 @@ const KategoriBisnis = () => {
 			        <tbody>
 			        	{isFetching ? <LoadingTable colSpan="3"/> : (data.length > 0 ? data?.map((obj, key) => (
 				            <tr className="bg-white border-b" key={key}>
-				                <td className="py-4 px-6 whitespace-nowrap text-sm">
+				                <td className="py-4 px-6 whitespace-nowrap text-sm text-center">
 				                    {++key}
 				                </td>
-				                <td className="py-4 px-6">
+				                <td className="py-4 px-6 text-center">
 				                    {obj.kategori_bisnis}
 				                </td>
-				                <td className="py-4 px-6">
+				                <td className="py-4 px-6 text-center">
 									<div className="md:space-x-3 space-x-0">
 										<div className="tooltip tooltip-bottom" data-tip="Edit Kategori Bisnis"><Link to="/kategori-bisnis/edit" state={obj}><ButtonIconOutline><FiEdit3 size="16"/></ButtonIconOutline></Link></div>
 										<div className="tooltip tooltip-bottom" data-tip="Hapus Kategori Bisnis"><ButtonIconOutline onClick={() => confirmDeleteData(obj.id)}><FiTrash2 size="16"/></ButtonIconOutline></div>
@@ -176,31 +177,8 @@ const KategoriBisnis = () => {
 			        	)) : <tr><td className="py-4 px-6 text-center font-medium w-max" colSpan="5">Data Kategori Bisnis Kosong</td></tr>)}
 			        	{isError && <tr><td className="py-4 px-6 text-center font-medium w-max" colSpan="5">Gagal Mengambil Data</td></tr>}
 			        </tbody>
-			        <tfoot>
-			        	<tr className="bg-blue-50 text-blue-500">
-			        		<td colSpan="6" className="text-right">
-			        			<div className="flex space-x-1 justify-end">
-				        		    <div>
-					        			Baris Per Halaman : 
-					        			<select className="select select-ghost w-24 focus:bg-opacity-0 focus:outline-0"  onChange={(e) => setLimit(e.target.value)} defaultValue="10">
-										  <option value="10">10</option>
-										  <option value="20">20</option>
-										  <option value="50">50</option>
-										  <option value="100">100</option>
-										</select>
-				        		    </div>
-				        		    <div className="flex space-x-1 items-center">
-				        		    	<span>{fromRow}-{toRow} dari {totalRows}</span>
-				        		    	<div className="mr-5 flex items-center">
-				        		    		<RiArrowLeftSFill size="30" className={`hover:text-blue-700 ${prevPageUrl == null ? 'text-blue-300 cursor-no-drop' : 'cursor-pointer'}`} onClick={() => prevPage()}/>
-				        		    		<RiArrowRightSFill size="30" className={`hover:text-blue-700 ${nextPageUrl == null ? 'text-blue-300 cursor-no-drop' : 'cursor-pointer'}`} onClick={() => nextPage()}/>
-				        		    	</div>
-				        		    </div>
-			        			</div>
-			        		</td>
-			        	</tr>
-			        </tfoot>
 		    	</TableContent>
+		    	<PaginationTable setLimit={setLimit} fromRow={fromRow} toRow={toRow} totalRows={totalRows} prevPageUrl={prevPageUrl} nextPageUrl={nextPageUrl} prevPage={prevPage} nextPage={nextPage}/>
 		    </div>
 
         </>

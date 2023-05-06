@@ -6,6 +6,7 @@ import { Modal } from '../../../components/Modal'
 import HeaderContent from '../../../layouts/HeaderContent'
 import TableContent from '../../../layouts/TableContent'
 import LoadingTable from '../../../components/LoadingTable'
+import PaginationTable from '../../../components/PaginationTable'
 import Badge from '../../../components/Badge'
 
 // icons
@@ -162,7 +163,7 @@ const Resto = () => {
 		      		</div>
 	        		<div className="text-right">
 	        			<Link to="/resto/tambah">
-	        				<Button className="text-xs btn-block" color="secondary" type="button" startIcon={<FiPlusCircle size={20}/>} loading={false} title="Tambah Resto" />
+	        				<Button className="text-xs bg-custom-blue border-custom-blue" type="button" startIcon={<FiPlusCircle size={20}/>} loading={false} title="Tambah Resto" />
 	        			</Link>
 	        		</div>
 	        	</div>
@@ -194,26 +195,26 @@ const Resto = () => {
 			        <tbody>
 			        	{isFetching ? <LoadingTable colSpan="6"/> : (data.length > 0 ? data?.map((obj, key) => (
 				            <tr className="bg-white border-b border-blue-200" key={key}>
-				            	<td className="py-4 px-6 text-sm">
+				            	<td className="py-4 px-6 text-sm text-center">
 				                    {++key}
 				                </td>
-				                <td className="py-4 px-6 whitespace-nowrap text-sm">
+				                <td className="py-4 px-6 whitespace-nowrap text-sm text-center">
 				                    {obj.nama_resto}
 				                </td>
-				                <td className="py-4 px-6 text-sm">
+				                <td className="py-4 px-6 text-sm text-center">
 				                    {obj.nama_pemilik}
 				                </td>
-				                <td className="py-4 px-6 text-sm">
-				                    {obj.kategori_bisnis.kategori_bisnis}
+				                <td className="py-4 px-6 text-sm text-center">
+				                    {obj?.kategori_bisnis?.kategori_bisnis}
 				                </td>
-				                <td className="py-4 px-6">
+				                <td className="py-4 px-6 text-center">
 				                	{
 				                		obj.status_resto == '1' 
 				                		? <Badge title="Aktif" type="success" /> 
 				                		: <Badge title="Tidak Aktif" type="error" />
 				                	}
 				                </td>
-				                <td className="py-4 px-6">
+				                <td className="py-4 px-6 text-center">
 									<div className="md:space-x-3 space-x-1">
 										<div className="tooltip tooltip-bottom" data-tip="Ubah Status"><label htmlFor="modal-ubah-status"><ButtonIconOutline onClick={() => checkedStatusResto(obj)}><FiToggleRight size="16"/></ButtonIconOutline></label></div>
 										<div className="tooltip tooltip-bottom" data-tip="Edit Resto"><Link to="/resto/edit" state={obj}><ButtonIconOutline><FiEdit3 size="16"/></ButtonIconOutline></Link></div>
@@ -224,31 +225,8 @@ const Resto = () => {
 			        	)) : <tr><td className="py-4 px-6 text-center font-medium w-max" colSpan="5">Data Resto Kosong</td></tr>)}
 			        	{isError && <tr><td className="py-4 px-6 text-center font-medium w-max" colSpan="5">Gagal Mengambil Data</td></tr>}
 			        </tbody>
-			        <tfoot>
-			        	<tr className="bg-blue-50 text-blue-500">
-			        		<td colSpan="6" className="text-right">
-			        			<div className="flex space-x-1 justify-end">
-				        		    <div>
-					        			Baris Per Halaman : 
-					        			<select className="select select-ghost w-24 focus:bg-opacity-0 focus:outline-0" onChange={(e) => setLimit(e.target.value)} defaultValue="10">
-										  <option value="10">10</option>
-										  <option value="20">20</option>
-										  <option value="50">50</option>
-										  <option value="100">100</option>
-										</select>
-				        		    </div>
-				        		    <div className="flex space-x-1 items-center">
-				        		    	<span>{fromRow}-{toRow} dari {totalRows}</span>
-				        		    	<div className="mr-5 flex items-center">
-				        		    		<RiArrowLeftSFill size="30" className={`hover:text-blue-700 ${prevPageUrl == null ? 'text-blue-300 cursor-no-drop' : 'cursor-pointer'}`} onClick={() => prevPage()}/>
-				        		    		<RiArrowRightSFill size="30" className={`hover:text-blue-700 ${nextPageUrl == null ? 'text-blue-300 cursor-no-drop' : 'cursor-pointer'}`} onClick={() => nextPage()}/>
-				        		    	</div>
-				        		    </div>
-			        			</div>
-			        		</td>
-			        	</tr>
-			        </tfoot>
 	        	</TableContent>
+	        	<PaginationTable setLimit={setLimit} fromRow={fromRow} toRow={toRow} totalRows={totalRows} prevPageUrl={prevPageUrl} nextPageUrl={nextPageUrl} prevPage={prevPage} nextPage={nextPage}/>
         	</div>
 
 			<Modal id="modal-ubah-status" showButtonConfirm={true} typeButtonConfirm="submit" titleButtonConfirm="Simpan" showButtonClose={true} titleModal="Ubah Status Resto" submitForm={handleSubmit(changeStatus)}>

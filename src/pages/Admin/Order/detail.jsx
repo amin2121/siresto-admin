@@ -70,6 +70,8 @@ export default function Detail() {
         data.metode_pembayaran = metodePembayaran
         data.pembayaran = rupiahToNumber(data.pembayaran)
         data.kembalian = data.kembalian
+        data.status_order = 'in_progress'
+        data.status_bayar = 'already_paid'
 
         const config = {
             headers: { Authorization: `Bearer ${user.token}` }
@@ -95,17 +97,25 @@ export default function Detail() {
                 reset()
                 clearErrors()
                 setStatusOrder(data.status_order)
+                setStatusBayar(data.status_bayar)
             }
         },
         onSuccess: async () => {
-            swNormal('Berhasil', 'Pembayaran Berhasil Dilakukan', 'success')
+            toastSuccess('Pembayaran Berhasil Dilakukan')
         },
         onError: async () => {
-            swNormal('Gagal', 'Pembayaran Gagal Dilakukan', 'error')
+            toastError('Pembayaran Gagal Dilakukan')
         }
     })
 
-    const pembayaran = async (data) => await mutation.mutate(data)
+    const pembayaran = async (data) => {
+        if(data.pembayaran === null || data.kembalian === null || data.pembayaran == '' || data.kembalian == '' || data.pembayaran == 0 || data.kembalian == 0) {
+            toastError('Silahkan Isi Pembayaran Pelanggan Terlebih Dahulu')
+        } else {
+            await mutation.mutate(data)
+        }
+
+    }
 
     const mutationUbahStatusOrder = useMutation(async (data) => {
         const config = {
@@ -223,11 +233,19 @@ export default function Detail() {
                                         <div className="w-1/2 bg-white sticky bottom-0 left-0 pl-6 py-4 space-y-3 mt-5">
                                             <div className="flex justify-between text-xs text-slate-700">
                                                 <p className="font-medium">Subtotal :</p>
-                                                <p className="font-medium">Rp. {rupiah(parseInt(subtotal) + parseInt(diskon))}</p>
+                                                <p className="font-medium">Rp. {rupiah((parseInt(subtotal) + parseInt(diskon)) - (parseInt(state.pajak) + parseInt(state.service_charge)))}</p>
+                                            </div>
+                                            <div className="flex justify-between text-xs text-green-500">
+                                                <p className="font-medium">Diskon :</p>
+                                                <p className="font-medium">Rp. {rupiah(diskon)}</p>
                                             </div>
                                             <div className="flex justify-between text-xs text-slate-700">
-                                                <p className="font-medium">Discount :</p>
-                                                <p className="font-medium">Rp. {rupiah(diskon)}</p>
+                                                <p className="font-medium">Pajak :</p>
+                                                <p className="font-medium">Rp. {rupiah(state.pajak)}</p>
+                                            </div>
+                                            <div className="flex justify-between text-xs text-slate-700">
+                                                <p className="font-medium">Service Charge :</p>
+                                                <p className="font-medium">Rp. {rupiah(state.service_charge)}</p>
                                             </div>
                                             <div className="flex justify-between">
                                                 <p className="font-bold text-slate-700">Total :</p>
@@ -252,8 +270,8 @@ export default function Detail() {
                             <div className="border border-slate-200 rounded p-4">
                                 <h1 className="text-sm text-black font-semibold mb-2">Detail Lainnya</h1>
                                 <div className="flex justify-between text-xs text-slate-500 mb-2">
-                                    <h1>Customer</h1>
-                                    <p className="font-semibold text-sm">{state.nama_customer}</p>
+                                    <h1>Pelanggan</h1>
+                                    <p className="font-semibold text-sm">{state.nama_pelanggan}</p>
                                 </div>
                                 <div className="flex justify-between text-xs text-slate-500 mb-2">
                                     <h1>No Meja</h1>

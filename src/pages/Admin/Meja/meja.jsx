@@ -189,23 +189,23 @@ const Meja = () => {
 			        <tbody>
 			        	{isFetching ? <LoadingTable colSpan="5"/> : (data.length > 0 ? data?.map((obj, key) => (
 				            <tr className="bg-white border-b border-blue-200" key={key}>
-				                <td className="py-4 px-6 whitespace-nowrap">
+				                <td className="py-4 px-6 whitespace-nowrap text-center">
 				                    {++key}
 				                </td>
-				                <td className="py-4 px-6">
+				                <td className="py-4 px-6 text-center">
 				                    {obj.no_meja}
 				                </td>
-				                <td className="py-4 px-6">
+				                <td className="py-4 px-6 text-center">
 				                    {obj.resto.nama_resto}
 				                </td>
-				                <td className="py-4 px-6">
+				                <td className="py-4 px-6 text-center">
 				                	{
 				                		obj.meja_tersedia == '1' 
 				                		? <Badge title="Tersedia" type="success" /> 
 				                		: <Badge title="Tidak Tersedia" type="error" />
 				                	}
 				                </td>
-				                <td className="py-4 px-6">
+				                <td className="py-4 px-6 text-center">
 				                	<div className="md:space-x-3 space-x-1 text-center">
 										<div className="tooltip tooltip-bottom" data-tip="QR Code Meja"><label htmlFor="modal-qr-code" onClick={() => showQrCode(obj)}><ButtonIconOutline><FiHash size="16"/></ButtonIconOutline></label></div>
 										<div className="tooltip tooltip-bottom" data-tip="Edit Meja"><Link to="/meja/edit" state={obj}><ButtonIconOutline><FiEdit3 size="16"/></ButtonIconOutline></Link></div>
