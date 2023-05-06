@@ -46,6 +46,9 @@ export default function Pembayaran() {
     const { metodePembayaran } = useSelector(state => state.pembayaran)
     const [diskon, setDiskon] = useState(state.diskon_total)
     const [subtotal, setSubtotal] = useState(state.subtotal)
+    const [pajak, setPajak] = useState(state.pajak)
+    const [chargeService, setChargeService] = useState(state.chargeService)
+    const [totalSemua, setTotalSemua] = useState(state.totalSemua)
     const [errMessage, setErrMessage] = useState('')
     const navigate = useNavigate()
 
@@ -85,7 +88,7 @@ export default function Pembayaran() {
 
     const hitungKembalian = () => {
         let pembayaran = document.getElementById('input-nilai-pembayaran')
-        let kembalian = rupiahToNumber(pembayaran.value) - subtotal
+        let kembalian = rupiahToNumber(pembayaran.value) - totalSemua
 
         setBayar(rupiahToNumber(getValues('pembayaran')))
         setKembalian(kembalian)
@@ -174,6 +177,9 @@ export default function Pembayaran() {
         data.metode_pembayaran = metodePembayaran
         data.pembayaran = rupiahToNumber(data.pembayaran)
         data.kembalian = data.kembalian
+        data.pajak = pajak
+        data.charge_service = chargeService
+        data.total_semua = totalSemua
         data.produk = produk
 
         const config = {
@@ -277,17 +283,44 @@ export default function Pembayaran() {
                                                 <p className="font-medium">Rp. {rupiah(subtotal)}</p>
                                             </div>
                                             <div className="flex justify-between text-xs text-slate-500">
-                                                <p className="font-medium">Discount :</p>
+                                                <p className="font-medium">Diskon :</p>
                                                 <p className="font-medium">- Rp. {rupiah(diskon)}</p>
                                             </div>
+                                            {
+                                                state.statusPajak === 1
+                                                ? <div className="flex justify-between text-xs text-slate-700">
+                                                    <p className="font-medium">Pajak :</p>
+                                                    <p className="font-medium">Rp. {rupiah(pajak)}</p>
+                                                </div> : ''
+                                            }
+                                            {
+                                                state.statusChargeService === 1
+                                                ? <div className="flex justify-between text-xs text-slate-700">
+                                                    <p className="font-medium">Service Charge :</p>
+                                                    <p className="font-medium">Rp. {rupiah(chargeService)}</p>
+                                                </div> : ''
+                                            }
                                             <div className="flex justify-between border-t border-zinc-200 pt-2">
                                                 <p className="font-bold text-lg text-slate-700">Total :</p>
-                                                <p className="font-bold text-blue-500 text-xl">Rp. {rupiah(subtotal)}</p>
+                                                <p className="font-bold text-blue-500 text-xl">Rp. {rupiah(totalSemua)}</p>
                                             </div>
                                         </div>
 
                                         <div className="hidden">
-                                            <Struk ref={componentRef} data={produk} subtotal={subtotal} bayar={bayar} kembali={kembalian} resto={resto}/>
+                                            <Struk 
+                                                ref={componentRef} 
+                                                data={produk} 
+                                                subtotal={subtotal} 
+                                                bayar={bayar} 
+                                                kembali={kembalian} 
+                                                resto={resto} 
+                                                serviceCharge={chargeService} 
+                                                diskon={diskon} 
+                                                totalSemua={totalSemua} 
+                                                pajak={pajak} 
+                                                statusChargeService={state.statusChargeService} 
+                                                statusPajak={state.statusPajak}
+                                            />
                                         </div>
 
                                     </div>

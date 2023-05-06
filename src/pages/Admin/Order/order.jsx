@@ -157,13 +157,13 @@ const Order = () => {
 			        </thead>
 			        <tbody>
 			        	{isLoading ? <LoadingTable colSpan="5"/> : (data.length > 0 ? data?.map((obj, key) => (
-				        	<tr className="bg-white  border-b border-blue-200" key={key}>
-						        <td className="py-4 px-6 text-sm w-full">{obj.no_transaksi}</td>
-						        <td className="py-4 px-6 text-sm w-full">{obj.nama_pelanggan}</td>
-						        <td className="py-4 px-6 text-sm w-full">Rp. {rupiah(obj.nilai_transaksi)}</td>
-						        <td className="py-4 px-6 text-sm w-full">{obj.metode_pembayaran == '' ? 'Belum Membayar' : capitalize(obj.metode_pembayaran)}</td>
-						        <td className="py-4 px-6 text-sm w-full">15-10-2022</td>
-						        <td className="py-4 px-6 w-full">
+				        	<tr className="bg-white border-b border-blue-200" key={key}>
+						        <td className="py-4 px-6 text-sm">{obj.no_transaksi}</td>
+						        <td className="py-4 px-6 text-sm">{obj.nama_pelanggan}</td>
+						        <td className="py-4 px-6 text-sm">Rp. {rupiah(obj.nilai_transaksi)}</td>
+						        <td className="py-4 px-6 text-sm">{obj.metode_pembayaran == '' ? 'Belum Membayar' : capitalize(obj.metode_pembayaran)}</td>
+						        <td className="py-4 px-6 text-sm">15-10-2022</td>
+						        <td className="py-4 px-6">
 				                	<div className="md:space-x-3 space-x-1 text-center">
 										<div className="tooltip tooltip-bottom" data-tip="Detail Order"><Link to="/order/detail" state={obj}><ButtonIconOutline><FiFileText size="16"/></ButtonIconOutline></Link></div>
 										<div className="tooltip tooltip-bottom" data-tip="Edit Order"><Link to="/order/edit" state={obj}><ButtonIconOutline><FiEdit3 size="16"/></ButtonIconOutline></Link></div>
@@ -171,7 +171,7 @@ const Order = () => {
 									</div>
 				                </td>
 						    </tr>
-			        	)) : <tr><td className="py-4 px-6 text-center font-medium w-max" colSpan="5">Data Meja Kosong</td></tr>)}
+			        	)) : <tr><td className="py-4 px-6 text-center font-medium w-max" colSpan="5">Data Order Kosong</td></tr>)}
 			        	{isError && <tr><td className="py-4 px-6 text-center font-medium w-max" colSpan="5">Gagal Mengambil Data</td></tr>}
 			        </tbody>
         		</TableContent>

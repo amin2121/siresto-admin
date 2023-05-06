@@ -15,18 +15,13 @@ export const rupiah = (number) => {
   }
 
   var rupiah = '';
-  var angkarev = number.toString().split('').reverse().join('');
-  for(var i = 0; i < angkarev.length; i++) if(i%3 == 0) rupiah += angkarev.substr(i,3)+'.';
-  return rupiah.split('',rupiah.length-1).reverse().join('');
-  
-  // return new Intl.NumberFormat("id-ID", {
-  //   style: "currency",
-  //   currency: "IDR",
-  //   minimumFractionDigits: 0,
-  //   maximumFractionDigits: 0,
-  // }).format(number)
+  if(number != null || number != undefined) {
+    var angkarev = number.toString().split('').reverse().join('');
+    for(var i = 0; i < angkarev.length; i++) if(i%3 == 0) rupiah += angkarev.substr(i,3)+'.';
+    return rupiah.split('',rupiah.length-1).reverse().join('');
+  }
 
-  // return number?.toLocaleString("id-ID", {minimumFractionDigits: 0, maximumFractionDigits: 0})
+  return ''
 }
 
 export const rupiahToNumber = str => {

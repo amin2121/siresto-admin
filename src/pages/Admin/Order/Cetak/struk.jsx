@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import moment from 'moment'
 import { rupiah } from '../../../../utils/strings'
 
-export const Struk = React.forwardRef(({ data, subtotal, bayar, kembali, resto }, ref) => {
+export const Struk = React.forwardRef(({ data, subtotal, bayar, kembali, resto, diskon, pajak, statusPajak, statusChargeService, chargeService, totalSemua }, ref) => {
 	moment.locale('id')
 
 	return (
@@ -30,16 +30,38 @@ export const Struk = React.forwardRef(({ data, subtotal, bayar, kembali, resto }
 
 			<div className="order__payment text-[10px]">
 				<div className="flex justify-between">
-                    <p className="font-medium">Total :</p>
+                    <p className="font-medium">Subtotal :</p>
                     <p className="font-medium">{rupiah(subtotal)}</p>
                 </div>
+                <div className="flex justify-between">
+                    <p className="font-medium">Diskon :</p>
+                    <p className="font-medium">{rupiah(diskon)}</p>
+                </div>
+                {
+                    statusPajak === 1
+                    ? <div className="flex justify-between">
+                        <p className="font-medium">Pajak :</p>
+                        <p className="font-medium">{rupiah(pajak)}</p>
+                    </div> : ''
+                }
+                {
+                    statusChargeService === 1
+                    ? <div className="flex justify-between">
+                        <p className="font-medium">Service Charge :</p>
+                        <p className="font-medium">{rupiah(chargeService)}</p>
+                    </div> : ''
+                }
+				<div className="flex justify-between pt-2 border-t border-dashed border-slate-400">
+                    <p className="font-bold">Total :</p>
+                    <p className="font-bold">{rupiah(totalSemua)}</p>
+                </div>
 				<div className="flex justify-between">
-                    <p className="font-medium">Bayar (Cash) :</p>
-                    <p className="font-medium">{rupiah(bayar)}</p>
+                    <p className="font-bold">Bayar (Cash) :</p>
+                    <p className="font-bold">{rupiah(bayar)}</p>
                 </div>
                 <div className="flex justify-between">
-                    <p className="font-medium">Kembali :</p>
-                    <p className="font-medium">{rupiah(kembali)}</p>
+                    <p className="font-bold">Kembali :</p>
+                    <p className="font-bold">{rupiah(kembali)}</p>
                 </div>
 			</div>
 

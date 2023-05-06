@@ -25,16 +25,15 @@ const Tambah = () => {
 	const [page, setPage] = useState(1)
 	const [rowCart, setRowCart] = useState([])
 	const [settingPembayaran, setSettingPembayaran] = useState([])
-
 	
 	let discount = rowCart.length > 0 ? rowCart.reduce((n, {harga_total_diskon}) => n + harga_total_diskon, 0) : 0 // menjumlahkan harga total diskon
 	let subtotal = rowCart.length > 0 ? rowCart.reduce((n, {harga_total}) => n + harga_total, 0) : 0 // menjumlahkan harga total
 	
-	let serviceCharge = settingPembayaran?.status_charge_service === 1 ? settingPembayaran?.charge_service : 0
+	let chargeService = settingPembayaran?.status_charge_service === 1 ? settingPembayaran?.charge_service : 0
 	let pajak = settingPembayaran?.status_pajak === 1 ? (settingPembayaran?.pajak * subtotal) / 100 : 0
 	let pajakPersen = settingPembayaran?.status_pajak === 1 ? settingPembayaran?.pajak : 0
 
-	let totalSemua = subtotal + parseInt(serviceCharge) + parseInt(pajak)
+	let totalSemua = subtotal + parseInt(chargeService) + parseInt(pajak)
 
 	const breadcrumbs = [
 		{ link: '/', menu: 'Home' },
@@ -71,7 +70,18 @@ const Tambah = () => {
 	const tambahDataOrder = async (e) => {
 		e.preventDefault()
 
-		let data_produk = { subtotal: subtotal, diskon_total: discount, pajak: pajak, serviceCharge: serviceCharge, pajakPersen: pajakPersen, totalSemua : totalSemua, produk: [...rowCart] }
+		let data_produk = { 
+			subtotal: subtotal, 
+			diskon_total: discount, 
+			pajak: pajak,
+			statusChargeService: settingPembayaran?.status_charge_service == null ? 0 : settingPembayaran.status_charge_service,
+			statusPajak: settingPembayaran?.status_pajak == null ? 0 : settingPembayaran.status_pajak,
+			chargeService: chargeService, 
+			pajakPersen: pajakPersen, 
+			totalSemua : totalSemua, 
+			produk: [...rowCart] 
+		}
+
 		if(rowCart.length == 0) {
 			toastError('Pilih Makanan & Minuman Terlebih Dahulu')
 		} else {
@@ -259,7 +269,7 @@ const Tambah = () => {
 										settingPembayaran?.status_charge_service === 1
 										? <div className="flex justify-between text-xs text-slate-700">
 											<p className="font-medium">Servic Charge :</p>
-											<p className="font-medium">Rp. {rupiah(serviceCharge)}</p>
+											<p className="font-medium">Rp. {rupiah(chargeService)}</p>
 										</div> : ''
 									}
 									{
