@@ -1,40 +1,39 @@
-import axios from 'axios'
-import JwtService from './jwt.service'
-import camelcaseKeys from 'camelcase-keys'
-import snakecaseKeys from 'snakecase-keys'
+import axios from "axios";
+import JwtService from "./jwt.service";
+import camelcaseKeys from "camelcase-keys";
+import snakecaseKeys from "snakecase-keys";
 
 const ApiService = {
   init() {
-    axios.defaults.baseURL = process.env.REACT_APP_BACKEND_DOMAIN
+    axios.defaults.baseURL = process.env.REACT_APP_BACKEND_DOMAIN;
     axios.defaults.headers.common[
-      'Authorization'
-    ] = `Bearer ${JwtService.getToken()}`
-    axios.defaults.headers.post['Content-Type'] =
-      'application/json'
+      "Authorization"
+    ] = `Bearer ${JwtService.getToken()}`;
+    axios.defaults.headers.post["Content-Type"] = "application/json";
   },
 
   reInitAuthorization() {
-    axios.defaults.baseURL = process.env.REACT_APP_BACKEND_DOMAIN
+    axios.defaults.baseURL = process.env.REACT_APP_BACKEND_DOMAIN;
     axios.defaults.headers.common[
-      'Authorization'
-    ] = `Bearer ${JwtService.getToken}`
+      "Authorization"
+    ] = `Bearer ${JwtService.getToken}`;
   },
 
   reInitBaseURL() {
-    axios.defaults.baseURL = process.env.REACT_APP_BACKEND_DOMAIN
+    axios.defaults.baseURL = process.env.REACT_APP_BACKEND_DOMAIN;
   },
 
   setHeaderMultipartFormData() {
-    axios.defaults.headers.post['Content-Type'] = 'multipart/form-data'
+    axios.defaults.headers.post["Content-Type"] = "multipart/form-data";
   },
 
   resetHeader() {
-    axios.defaults.headers.post['Content-Type'] =
-      'application/x-www-form-urlencoded'
+    axios.defaults.headers.post["Content-Type"] =
+      "application/x-www-form-urlencoded";
   },
 
   query(resource) {
-    return axios.get(resource)
+    return axios.get(resource);
   },
 
   get(resource, params) {
@@ -45,20 +44,20 @@ const ApiService = {
         transformResponse: [
           (data) => {
             try {
-              return camelcaseKeys(JSON.parse(data), { deep: true })
+              return camelcaseKeys(JSON.parse(data), { deep: true });
             } catch (error) {
-              console.log(error)
+              console.log(error);
             }
           },
         ],
       })
       .catch((err) => {
         if (err.response.status === 401) {
-            this.purgeAuth()
-            throw new Error('Somethings Wrong')
+          this.purgeAuth();
+          throw new Error("Somethings Wrong");
         }
-        throw err
-      })
+        throw err;
+      });
   },
 
   getFile(resource, params) {
@@ -66,45 +65,41 @@ const ApiService = {
       .get(`${resource}`, {
         params:
           params !== undefined ? snakecaseKeys(params, { deep: true }) : params,
-        responseType: 'blob',
+        responseType: "blob",
       })
       .catch((err) => {
         if (err.response.status === 401) {
-            this.purgeAuth()
-            throw new Error('Somethings Wrong')
+          this.purgeAuth();
+          throw new Error("Somethings Wrong");
         }
-        throw err
-      })
+        throw err;
+      });
   },
 
   post(resource, params) {
     return axios
-      .post(
-        `${resource}`,
-        snakecaseKeys(params, { deep: true }),
-        {
-          transformResponse: [
-            (data) => {
-              try {
-                return camelcaseKeys(JSON.parse(data), { deep: true })
-              } catch (error) {
-                console.log(error)
-              }
-            },
-          ],
-        }
-      )
+      .post(`${resource}`, snakecaseKeys(params, { deep: true }), {
+        transformResponse: [
+          (data) => {
+            try {
+              return camelcaseKeys(JSON.parse(data), { deep: true });
+            } catch (error) {
+              console.log(error);
+            }
+          },
+        ],
+      })
       .catch((err) => {
         if (err.response.status === 401) {
-            this.purgeAuth()
-            throw new Error('Somethings Wrong')
+          this.purgeAuth();
+          throw new Error("Somethings Wrong");
         }
-        throw err
-      })
+        throw err;
+      });
   },
 
   update(resource, slug, params) {
-    return axios.put(`${resource}/${slug}`, params)
+    return axios.put(`${resource}/${slug}`, params);
   },
 
   put(resource, params) {
@@ -116,9 +111,9 @@ const ApiService = {
           transformResponse: [
             (data) => {
               try {
-                return camelcaseKeys(JSON.parse(data), { deep: true })
+                return camelcaseKeys(JSON.parse(data), { deep: true });
               } catch (error) {
-                console.log(error)
+                console.log(error);
               }
             },
           ],
@@ -126,11 +121,11 @@ const ApiService = {
       )
       .catch((err) => {
         if (err.response.status === 401) {
-            this.purgeAuth()
-            throw new Error('Somethings Wrong')
+          this.purgeAuth();
+          throw new Error("Somethings Wrong");
         }
-        throw err
-      })
+        throw err;
+      });
   },
 
   delete(resource, params) {
@@ -140,29 +135,29 @@ const ApiService = {
         transformResponse: [
           (data) => {
             try {
-              return camelcaseKeys(JSON.parse(data), { deep: true })
+              return camelcaseKeys(JSON.parse(data), { deep: true });
             } catch (error) {
-              console.log(error)
+              console.log(error);
             }
           },
         ],
       })
       .catch((err) => {
         if (err.response.status === 401) {
-            this.purgeAuth()
-            throw new Error('Somethings Wrong')
+          this.purgeAuth();
+          throw new Error("Somethings Wrong");
         }
-        throw err
-      })
+        throw err;
+      });
   },
 
-  purgeAuth(){
+  purgeAuth() {
     // state.loggedIn = false
     // state.user = {}
     // state.errors = {}
-    JwtService.destroyToken()
+    JwtService.destroyToken();
     // router.push({ path: '/auth/login' })
-  }
-}
+  },
+};
 
-export default ApiService
+export default ApiService;

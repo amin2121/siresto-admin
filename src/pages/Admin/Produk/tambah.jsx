@@ -287,7 +287,7 @@ const Tambah = () => {
 				        </label>
 			      		<div className="relative col-span-12 md:col-span-4">
 					  			<label className="label cursor-pointer">
-					  				<input type="checkbox" className="checkbox checkbox-secondary" value={1} onChange={(e) => showHargaDiskon(e)}/>
+					  				<input type="checkbox" className="checkbox checkbox-secondary focus:outline-custom-blue" value={1} onChange={(e) => showHargaDiskon(e)}/>
 							  	</label>
 			      		</div>
 							</div>
