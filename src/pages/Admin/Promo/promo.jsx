@@ -43,6 +43,7 @@ const Promo = () => {
   const [limit, setLimit] = useState(10);
   const [totalRows, setTotalRows] = useState(0);
   const [keyword, setKeyword] = useState("");
+  const [selectedId, setSelectedId] = useState(null);
 
   // react query
   const queryClient = new QueryClient();
@@ -94,7 +95,7 @@ const Promo = () => {
   const fetchData = async () => {
     axios.defaults.headers.common["Authorization"] = `Bearer ${user.token}`;
     const response = await axios.get(
-      `promo?s=${keyword}&limit=${1}&sort=DESC&page=${page}`
+      `promo?s=${keyword}&limit=${limit}&sort=DESC&page=${page}`
     );
     const res = await response.data.data;
     const data = res.data;
@@ -220,7 +221,10 @@ const Promo = () => {
                       >
                         <ButtonIconOutline
                           type="button"
-                          onClick={() => setIsShowModal(true)}
+                          onClick={() => {
+                            setSelectedId(obj.id);
+                            setIsShowModal(true);
+                          }}
                         >
                           <FiTrash2 size="16" />
                         </ButtonIconOutline>
@@ -257,9 +261,10 @@ const Promo = () => {
                                     <div className="items-center gap-2 mt-4 sm:flex">
                                       <button
                                         className="w-full h-10 px-12 py-1 mt-2 p-2.5 flex-1 text-white bg-red-600 rounded-md outline-none ring-offset-2 ring-red-600 focus:ring-2"
-                                        onClick={() =>
-                                          confirmDeleteData(obj.id)
-                                        }
+                                        onClick={() => {
+                                          confirmDeleteData(selectedId);
+                                          setIsShowModal(false);
+                                        }}
                                       >
                                         Hapus
                                       </button>

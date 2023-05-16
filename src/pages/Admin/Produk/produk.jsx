@@ -62,7 +62,7 @@ const Produk = () => {
   const [limit, setLimit] = useState(10);
   const [totalRows, setTotalRows] = useState(0);
   const [keyword, setKeyword] = useState("");
-  const [idProduk, setIdProduk] = useState(0);
+  const [selectedId, setSelectedId] = useState(null);
 
   // react query
   const queryClient = new QueryClient();
@@ -362,7 +362,10 @@ const Produk = () => {
                       >
                         <ButtonIconOutline
                           type="button"
-                          onClick={() => setIsShowModal(true)}
+                          onClick={() => {
+                            setSelectedId(obj.id);
+                            setIsShowModal(true);
+                          }}
                         >
                           <FiTrash2 size="16" />
                         </ButtonIconOutline>
@@ -399,9 +402,10 @@ const Produk = () => {
                                     <div className="items-center gap-2 mt-4 sm:flex">
                                       <button
                                         className="w-full h-10 px-12 py-1 mt-2 p-2.5 flex-1 text-white bg-red-600 rounded-md outline-none ring-offset-2 ring-red-600 focus:ring-2"
-                                        onClick={() =>
-                                          confirmDeleteData(obj.id)
-                                        }
+                                        onClick={() => {
+                                          confirmDeleteData(selectedId);
+                                          setIsShowModal(false);
+                                        }}
                                       >
                                         Hapus
                                       </button>

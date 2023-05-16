@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import moment from "moment";
 import { rupiah } from "../../../../utils/strings";
+import Logo from "../../../../assets/images/logo/SiResto.png";
 
 export const Struk = React.forwardRef(
   (
@@ -31,9 +32,12 @@ export const Struk = React.forwardRef(
           {resto.nomor_telepon}
         </h2>
 
-        <div className="order__information mt-2 mb-4 text-[10px]">
-          <p>{moment().format("DD-MM-YYYY")}</p>
-          <p>{moment().format("HH:mm:ss")}</p>
+        <div className="flex justify-between">
+          <div className="order__information mt-2 mb-4 text-[10px] ">
+            <p>{moment().format("DD-MM-YYYY")}</p>
+            <p>{moment().format("HH:mm:ss")}</p>
+          </div>
+          <img src={Logo} alt={Logo} className="w-20 h-8 block" />
         </div>
 
         <div className="order__list mb-4 text-[10px]">
