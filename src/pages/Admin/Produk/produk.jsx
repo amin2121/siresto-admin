@@ -237,6 +237,7 @@ const Produk = () => {
       navigate("/produk/tambah");
     }
   };
+  // console.log(data.gambar);
 
   return (
     <>

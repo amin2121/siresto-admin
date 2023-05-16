@@ -14,7 +14,6 @@ import { useEffect } from "react";
 import axios from "../../../utils/axios";
 
 export default function Login() {
-  const [remember, setRemember] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoaded, setIsLoaded] = useState(false);
@@ -93,6 +92,9 @@ export default function Login() {
     }
   });
 
+  const user = JSON.parse(localStorage.getItem("user"));
+  console.log(user);
+
   return (
     <div className="w-screen md:flex h-screen login">
       <div className="bg-[#5557DB] hidden md:flex items-center justify-center h-screen left">
@@ -165,17 +167,7 @@ export default function Login() {
             </div>
 
             <div className="flex flex-wrap">
-              <div className="remember-me cursor-pointer label">
-                <input
-                  type="checkbox"
-                  checked="checked"
-                  className="checkbox"
-                  value={remember}
-                  onChange={(e) => setRemember(e.target.value)}
-                />
-                <p className="label-text">Ingat saya</p>
-              </div>
-              <div className="forgot-password hidden md:block">
+              <div className="forgot-password hidden md:block ml-auto">
                 <Link to="/forgot-password" className="/">
                   Lupa Password?
                 </Link>

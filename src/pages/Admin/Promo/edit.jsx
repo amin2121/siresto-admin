@@ -25,6 +25,8 @@ import AsyncCreatableSelect from "react-select/async-creatable";
 import { toastSuccess, toastError } from "../../../utils/toast";
 import moment from "moment";
 import { useDropzone } from "react-dropzone";
+import { getBase64 } from "../../../utils/image";
+import { baseUrl } from "../../../utils/strings";
 
 const colourStyles = {
   control: (styles) => ({
@@ -75,12 +77,38 @@ const Edit = () => {
     setFocus,
   } = useForm();
 
+  useEffect(() => {
+    if (data.gambar) {
+      localStorage.setItem("image", JSON.stringify(baseUrl + data.gambar));
+    }
+  }, []);
+
   // dropzone
   const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
     accept: {
       "image/*": [],
     },
+    value: {},
   });
+
+  const getBase64 = (file) => {
+    return new Promise((resolve) => {
+      let fileInfo;
+      let baseURL = "";
+      // Make new FileReader
+      let reader = new FileReader();
+
+      // Convert the file to base64 text
+      reader.readAsDataURL(file);
+
+      // on reader load somthing...
+      reader.onload = () => {
+        // Make a fileInfo Object
+        baseURL = reader.result;
+        resolve(baseURL);
+      };
+    });
+  };
 
   useEffect(() => {
     // Make sure to revoke the data uris to avoid memory leaks, will run on unmount
@@ -88,10 +116,13 @@ const Edit = () => {
       acceptedFiles.forEach((file) => URL.revokeObjectURL(file.preview));
   }, []);
 
+  const gambar_lama = JSON.parse(localStorage.getItem("image"));
+
   const files = acceptedFiles.map((file, key) => {
     getBase64(file)
       .then((result) => {
         setImageBase64(result);
+        localStorage.removeItem("image");
       })
       .catch((err) => {
         console.log(err);
@@ -175,25 +206,6 @@ const Edit = () => {
     }
   );
 
-  const getBase64 = (file) => {
-    return new Promise((resolve) => {
-      let fileInfo;
-      let baseURL = "";
-      // Make new FileReader
-      let reader = new FileReader();
-
-      // Convert the file to base64 text
-      reader.readAsDataURL(file);
-
-      // on reader load somthing...
-      reader.onload = () => {
-        // Make a fileInfo Object
-        baseURL = reader.result;
-        resolve(baseURL);
-      };
-    });
-  };
-
   const tambahData = async (data) => {
     await mutation.mutate(data);
   };
@@ -249,6 +261,8 @@ const Edit = () => {
                 <div className="flex justify-center w-full h-32 transition bg-white border-2 border-gray-300 border-dashed rounded-md appearance-none cursor-pointer hover:border-gray-400 focus:outline-none">
                   {acceptedFiles.length > 0 ? (
                     files
+                  ) : acceptedFiles.length === 0 && gambar_lama !== "null" ? (
+                    <img src={baseUrl + data.gambar} alt={data.gambar} />
                   ) : (
                     <span className="flex items-center space-x-2">
                       <svg

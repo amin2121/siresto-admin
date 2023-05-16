@@ -15,6 +15,7 @@ import Siqasir from "../../../assets/images/logo/siqasir.png";
 import Skrin from "../../../assets/images/logo/skrin.png";
 import Kyoo from "../../../assets/images/logo/kyoo.png";
 import axios from "../../../utils/axios";
+import { findRenderedComponentWithType } from "react-dom/test-utils";
 
 export default function Register() {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ export default function Register() {
   const [tnc, setTnc] = useState(false);
   const [province, setProvince] = useState("");
   const [businessName, setBusinessName] = useState();
-  const [businessCategory, setBusinessCategory] = useState("Health");
+  const [businessCategory, setBusinessCategory] = useState("");
   const [listProvinsi, setListProvince] = useState([]);
   const [city, setCity] = useState();
   const [listKota, setListCity] = useState([]);
@@ -56,7 +57,7 @@ export default function Register() {
             });
 
           fetch(
-            `https://www.emsifa.com/api-wilayah-indonesia/api/regencies/11.json`
+            `https://www.emsifa.com/api-wilayah-indonesia/api/regencies.json`
           )
             .then((response) => response.json())
             .then((city) => {
@@ -405,6 +406,7 @@ export default function Register() {
                   onChange={(e) => setBusinessCategory(e.target.value)}
                 >
                   <option disabled>Pilih Kategori</option>
+                  <option value="">Pilih Kategori</option>
                   <option value="Health">Health</option>
                   <option value="Beauty and Treatment">
                     Beauty and Treatment
@@ -465,6 +467,7 @@ export default function Register() {
                     onChange={(e) => changeListKota(e)}
                   >
                     <option disabled>Pilih Provinsi</option>
+                    <option value="">Pilih Provinsi</option>
                     {pronvinceOption}
                   </select>
                 </div>
@@ -481,6 +484,7 @@ export default function Register() {
                     onChange={(e) => updateCity(e)}
                   >
                     <option disabled>Pilih Kota</option>
+                    <option value="">Pilih Kota</option>
                     {optionKota()}
                   </select>
                 </div>
@@ -520,14 +524,17 @@ export default function Register() {
             <div className="flex flex-wrap tnc cursor-pointer label">
               <input
                 type="checkbox"
-                checked="checked"
-                className="checkbox checkbox-custom"
+                className="checkbox checkbox-custom border-4"
                 value={tnc}
                 onChange={(e) => setTnc(e.target.value)}
               />
               <p className="label-text">
                 Saya telah membaca dan menyetujui{" "}
-                <Link to="/syarat-dan-ketentuan" className="mx-[2px]">
+                <Link
+                  to="https://awandigital.id/term_condition.html"
+                  target="_blank"
+                  className="mx-[2px]"
+                >
                   {" "}
                   syarat dan ketentuan{" "}
                 </Link>{" "}

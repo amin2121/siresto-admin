@@ -13,7 +13,7 @@ import { FiSave, FiXCircle } from "react-icons/fi";
 import axios from "../../../utils/axios";
 import { swNormal } from "../../../utils/sw";
 import { getBase64 } from "../../../utils/image";
-import { rupiahToNumber } from "../../../utils/strings";
+import { baseUrl, rupiahToNumber } from "../../../utils/strings";
 import { useMutation, QueryClient } from "react-query";
 import { useForm, Controller } from "react-hook-form";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -70,6 +70,12 @@ const Edit = () => {
     setValue,
     setFocus,
   } = useForm();
+
+  useEffect(() => {
+    if (data.gambar) {
+      localStorage.setItem("image", JSON.stringify(baseUrl + data.gambar));
+    }
+  }, []);
 
   // dropzone
   const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
@@ -184,10 +190,13 @@ const Edit = () => {
     }
   };
 
+  const gambar_lama = JSON.parse(localStorage.getItem("image"));
+
   const files = acceptedFiles.map((file, key) => {
     getBase64(file)
       .then((result) => {
         setImageBase64(result);
+        localStorage.removeItem("image");
       })
       .catch((err) => {
         console.log(err);
@@ -299,6 +308,8 @@ const Edit = () => {
                 <div className="flex justify-center w-full h-32 transition bg-white border-2 border-gray-300 border-dashed rounded-md appearance-none cursor-pointer hover:border-gray-400 focus:outline-none">
                   {acceptedFiles.length > 0 ? (
                     files
+                  ) : acceptedFiles.length === 0 && gambar_lama !== "null" ? (
+                    <img src={baseUrl + data.gambar} alt={data.gambar} />
                   ) : (
                     <span className="flex items-center space-x-2">
                       <svg
