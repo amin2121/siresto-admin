@@ -23,6 +23,7 @@ const DropdownHeader = ({ name, gambar }) => {
   const [isShowModal, setIsShowModal] = useState(false);
   const logout = () => {
     localStorage.removeItem("user");
+    localStorage.removeItem("image");
     JwtService.destroyToken();
     navigate("/login");
   };

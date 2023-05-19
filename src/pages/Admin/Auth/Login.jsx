@@ -86,14 +86,14 @@ export default function Login() {
       ApiService.get(process.env.REACT_APP_BACKEND_DOMAIN + "/api/get-my-data")
         .then((response) => {
           let data = response.data.data;
-          console.log("ada loginannya");
+          // console.log("ada loginannya");
         })
         .catch((error) => {});
     }
   });
 
-  const user = JSON.parse(localStorage.getItem("user"));
-  console.log(user);
+  // const user = JSON.parse(localStorage.getItem("user"));
+  // console.log(user);
 
   return (
     <div className="w-screen md:flex h-screen login">

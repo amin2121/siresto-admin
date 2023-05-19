@@ -16,7 +16,9 @@ const Header = ({}) => {
   const [showBanner, setShowbanner] = useState(false);
 
   useEffect(() => {
-    cek_lisence();
+    if (user != null) {
+      cek_lisence();
+    }
   }, []);
 
   const cek_lisence = () => {

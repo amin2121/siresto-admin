@@ -76,6 +76,8 @@ const Tambah = () => {
     refetchOnWindowFocus: false,
   });
 
+  const filteredData = data?.filter((item) => item.status_produk === "1");
+
   const {
     register,
     handleSubmit,
@@ -371,8 +373,8 @@ const Tambah = () => {
                     <LoadingPage />
                   </div>
                 )}
-                {data?.length > 0
-                  ? data.map((item, index) => layoutProduk(item, index))
+                {filteredData?.length > 0
+                  ? filteredData.map((item, index) => layoutProduk(item, index))
                   : !isLoading && (
                       <div className="flex justify-center items-center flex-col col-span-3 space-y-3">
                         <p>
@@ -380,8 +382,7 @@ const Tambah = () => {
                           Terlebih Dahulu
                         </p>
                       </div>
-                  )
-                }
+                    )}
               </div>
             </div>
             <div className="col-span-4 bg-slate-100 rounded relative flex flex-col pesanan-pelanggan__container">

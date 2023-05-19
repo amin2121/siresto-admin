@@ -256,17 +256,14 @@ export default function Pembayaran() {
       data.metode_pembayaran = metodePembayaran;
       data.pembayaran = rupiahToNumber(data.pembayaran);
       data.kembalian = data.kembalian;
-      data.pajak = pajak.toString();
-      data.charge_service = chargeService;
-      data.total_semua = totalSemua;
+      data.pajak = parseFloat(pajak);
+      data.charge_service = parseFloat(chargeService);
+      data.total_semua = parseFloat(totalSemua);
       data.produk = produk;
 
       const config = {
         headers: { Authorization: `Bearer ${user.token}` },
       };
-
-      // console.log(pajak);
-      console.log(data);
 
       const response = await axios.post("order", data, config);
       const res = response.data;

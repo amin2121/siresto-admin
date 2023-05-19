@@ -272,9 +272,6 @@ export default function Detail() {
                                   <span className="text-xs text-blue-400">
                                     Makanan Pedas
                                   </span>
-                                  <span className="text-xs text-black-400 ml-3">
-                                    x{obj.jumlah_beli}
-                                  </span>
                                 </div>
                               </div>
                             </td>
