@@ -36,18 +36,23 @@ export default function Login() {
         }
       })
       .catch((error) => {
-        submitLoginUser({ email, password });
-        var alert = document.getElementById("alert");
-        alert.classList.toggle("hidden");
-        alert.classList.toggle("opacity-[0]");
+        submitLoginUser({ email, password })
+          .then((response) => {
+            //
+          })
+          .catch((error) => {
+            var alert = document.getElementById("alert");
+            alert.classList.toggle("hidden");
+            alert.classList.toggle("opacity-[0]");
 
-        setTimeout(() => {
-          alert.classList.toggle("opacity-[0]");
-        }, 2000);
+            setTimeout(() => {
+              alert.classList.toggle("opacity-[0]");
+            }, 2000);
 
-        setTimeout(() => {
-          alert.classList.toggle("hidden");
-        }, 2500);
+            setTimeout(() => {
+              alert.classList.toggle("hidden");
+            }, 2500);
+          });
       });
   }
 
@@ -91,9 +96,6 @@ export default function Login() {
         .catch((error) => {});
     }
   });
-
-  // const user = JSON.parse(localStorage.getItem("user"));
-  // console.log(user);
 
   return (
     <div className="w-screen md:flex h-screen login">
