@@ -39,6 +39,8 @@ export default function Register() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [products, setProducts] = useState([]);
 
+  console.log(tnc);
+
   useEffect(() => {
     if (isLoaded === false) {
       ApiService.init();
@@ -306,7 +308,7 @@ export default function Register() {
       })
 
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
         setType("error");
         setMessage("Periksa kembali data anda.");
         var alert = document.getElementById("alert");
@@ -521,12 +523,16 @@ export default function Register() {
               </div>
             </div>
 
-            <div className="flex flex-wrap tnc cursor-pointer label">
+            <div
+              className="flex flex-wrap tnc cursor-pointer label"
+              onClick={() => setTnc(!tnc)}
+            >
               <input
                 type="checkbox"
                 className="checkbox checkbox-custom border-4"
+                checked={tnc}
                 value={tnc}
-                onChange={(e) => setTnc(e.target.value)}
+                onChange={(e) => {}}
               />
               <p className="label-text">
                 Saya telah membaca dan menyetujui{" "}
@@ -543,7 +549,11 @@ export default function Register() {
             </div>
 
             <div className="action mb-[111px]">
-              <button className="btn w-full" onClick={register.bind(this)}>
+              <button
+                className="btn w-full"
+                disabled={!tnc}
+                onClick={register.bind(this)}
+              >
                 Register
               </button>
 
@@ -555,7 +565,7 @@ export default function Register() {
               </p>
             </div>
           </div>
-          <div className="form-product hidden">
+          {/* <div className="form-product hidden">
             <div className="title">
               <h3>Register</h3>
               <p>Lengkapi form untuk membuat akun</p>
@@ -574,7 +584,7 @@ export default function Register() {
                 </button>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

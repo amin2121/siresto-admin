@@ -68,7 +68,7 @@ const Header = ({}) => {
           <div class="alert bg-yellow-500 text-white shadow-sm !rounded-md !w-full py-2">
             <div className="w-full flex justify-between flex-wrap">
               <span>
-                Masa percobaan Anda akan berakhir dalam {sisaHari} hari. Upgrage
+                Masa percobaan Anda akan berakhir dalam {sisaHari} hari. Upgrade
                 akun Anda agar dapat kembali menikmati layanan SiResto{" "}
               </span>
               <button

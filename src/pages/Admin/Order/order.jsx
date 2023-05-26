@@ -219,16 +219,6 @@ const Order = () => {
                       </div>
                       <div
                         className="tooltip tooltip-bottom"
-                        data-tip="Edit Order"
-                      >
-                        <Link to="/order/edit" state={obj}>
-                          <ButtonIconOutline>
-                            <FiEdit3 size="16" />
-                          </ButtonIconOutline>
-                        </Link>
-                      </div>
-                      <div
-                        className="tooltip tooltip-bottom"
                         data-tip="Hapus Order"
                       >
                         <ButtonIconOutline

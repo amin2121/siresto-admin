@@ -21,68 +21,113 @@ export default function Login() {
   const navigate = useNavigate();
 
   function login() {
-    ApiService.post(process.env.REACT_APP_BACKEND_DOMAIN + "/oauth/token", {
-      username: email,
-      password: password,
-      grantType: "password",
-      clientId: process.env.REACT_APP_CLIENT_ID,
-      clientSecret: process.env.REACT_APP_CLIENT_SECRET,
-    })
+    axios
+      .post("auth/login", { email, password })
       .then((response) => {
-        if (response.status === 200) {
-          // JwtService.saveToken(response.data.accessToken)
-          // console.log(response.data, 'login berhasil')
-          submitLoginUser({ email, password });
-        }
-      })
-      .catch((error) => {
-        submitLoginUser({ email, password })
+        const res = response.data.data;
+
+        ApiService.post(process.env.REACT_APP_BACKEND_DOMAIN + "/oauth/token", {
+          username: email,
+          password: password,
+          grantType: "password",
+          clientId: process.env.REACT_APP_CLIENT_ID,
+          clientSecret: process.env.REACT_APP_CLIENT_SECRET,
+        })
           .then((response) => {
-            //
+            if (response.status === 200) {
+              // JwtService.saveToken(response.data.accessToken)
+              // console.log(response.data, 'login berhasil')
+              localStorage.setItem(
+                "user",
+                JSON.stringify({
+                  token: res.token,
+                  level: res.level,
+                  lisence: res.lisence,
+                  name: res.name,
+                  tanggal: res.created_at,
+                })
+              );
+              JwtService.saveToken(res.token);
+
+              if (res.level === "Superadmin") {
+                navigate("/dashboard/superadmin");
+              } else if (res.level === "Owner") {
+                navigate("/dashboard/owner");
+              }
+            }
           })
           .catch((error) => {
-            var alert = document.getElementById("alert");
-            alert.classList.toggle("hidden");
-            alert.classList.toggle("opacity-[0]");
+            if (res.level === "Staff") {
+              localStorage.setItem(
+                "user",
+                JSON.stringify({
+                  token: res.token,
+                  level: res.level,
+                  lisence: res.lisence,
+                  name: res.name,
+                  tanggal: res.created_at,
+                })
+              );
+              JwtService.saveToken(res.token);
 
-            setTimeout(() => {
-              alert.classList.toggle("opacity-[0]");
-            }, 2000);
-
-            setTimeout(() => {
+              navigate("/order");
+            } else {
+              var alert = document.getElementById("alert");
               alert.classList.toggle("hidden");
-            }, 2500);
+              alert.classList.toggle("opacity-[0]");
+
+              setTimeout(() => {
+                alert.classList.toggle("opacity-[0]");
+              }, 2000);
+
+              setTimeout(() => {
+                alert.classList.toggle("hidden");
+              }, 2500);
+            }
           });
+      })
+      .catch((error) => {
+        var alert = document.getElementById("alert");
+        alert.classList.toggle("hidden");
+        alert.classList.toggle("opacity-[0]");
+
+        setTimeout(() => {
+          alert.classList.toggle("opacity-[0]");
+        }, 2000);
+
+        setTimeout(() => {
+          alert.classList.toggle("hidden");
+        }, 2500);
       });
   }
 
-  async function submitLoginUser(data) {
-    const response = await axios.post("auth/login", data);
-    const res = response.data.data;
-    localStorage.setItem(
-      "user",
-      JSON.stringify({
-        token: res.token,
-        level: res.level,
-        lisence: res.lisence,
-        name: res.name,
-        tanggal: res.created_at,
-      })
-    );
-    JwtService.saveToken(res.token);
+  // async function submitLoginUser(data) {
+  //   const response = await axios.post("auth/login", data);
+  //   const res = response.data.data;
+  //   localStorage.setItem(
+  //     "user",
+  //     JSON.stringify({
+  //       token: res.token,
+  //       level: res.level,
+  //       lisence: res.lisence,
+  //       name: res.name,
+  //       tanggal: res.created_at,
+  //     })
+  //   );
+  //   JwtService.saveToken(res.token);
 
-    if (res.level === "Superadmin") {
-      navigate("/dashboard/superadmin");
-    } else if (res.level === "Owner") {
-      navigate("/dashboard/owner");
-    } else if (res.level === "Staff") {
-      navigate("/order");
-    }
+  //   if (res.level === "Superadmin") {
+  //     navigate("/dashboard/superadmin");
+  //   } else if (res.level === "Owner") {
+  //     navigate("/dashboard/owner");
+  //   } else if (res.level === "Staff") {
+  //     navigate("/order");
+  //   }
 
-    if (res.meta.code != 200) {
-      throw new Error("Gagal Login");
-    }
-  }
+  //   if (res.meta.code != 200) {
+  //     throw new Error("Gagal Login");
+  //   }
+  // }
 
   useEffect(() => {
     if (isLoaded === false) {
