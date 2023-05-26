@@ -60,6 +60,7 @@ const Pembayaran = () => {
 		axios.defaults.headers.common['Authorization'] = `Bearer ${user.token}`
 		const response = await axios.get(`setting`)
 		const res = await response.data.data
+		// 
 
 		setValue('status_pajak', res.status_pajak || '')
 		setValue('pajak', res.pajak || '')
