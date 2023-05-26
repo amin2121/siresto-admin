@@ -51,6 +51,10 @@ const Pembayaran = () => {
 		refetchOnWindowFocus: false
 	})
 
+	useEffect(() => {
+		console.log(dataInput)
+	}, [dataInput])
+
 	// fetch data
 	const fetchData = async () => {
 		axios.defaults.headers.common['Authorization'] = `Bearer ${user.token}`
@@ -135,7 +139,7 @@ const Pembayaran = () => {
 			        					</div>
 			        				</div>
 			        				<div>
-			        					<input type="checkbox" className="toggle toggle-secondary toggle-sm" name="status_pajak" {...register('status_pajak')} onChange={() => setDataInput({...data, status_pajak: dataInput.status_pajak == 0 ? 1 : 0})}/>
+			        					<input type="checkbox" className="toggle toggle-secondary toggle-sm checked:bg-custom-blue" name="status_pajak" {...register('status_pajak')} onChange={() => setDataInput({...dataInput, status_pajak: dataInput.status_pajak == 0 ? 1 : 0})}/>
 			        				</div>
 			        			</div>
 			        			<div className="setting__item flex justify-between items-center">
@@ -147,7 +151,7 @@ const Pembayaran = () => {
 			        					</div>
 			        				</div>
 			        				<div>
-			        					<input type="checkbox" className="toggle toggle-secondary toggle-sm" name="status_charge_service" value={dataInput.status_charge_service} {...register('status_charge_service')} onChange={() => setDataInput({...data, status_charge_service: dataInput.status_charge_service == 0 ? 1 : 0})}/>
+			        					<input type="checkbox" className="toggle toggle-secondary toggle-sm checked:bg-custom-blue" name="status_charge_service" value={dataInput.status_charge_service} {...register('status_charge_service')} onChange={() => setDataInput({...dataInput, status_charge_service: dataInput.status_charge_service == 0 ? 1 : 0})}/>
 			        				</div>
 			        			</div>
 		        			</div>
