@@ -80,6 +80,7 @@ import {
   LaporanPenjualan,
   LaporanPendapatan,
 } from "../pages/Admin/Laporan";
+import ForgotPassword from "../pages/Admin/Auth/ForgotPassword";
 
 const RouteManager = () => {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -251,6 +252,7 @@ const RouteManager = () => {
         </Route>
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
+        <Route path="forgot-password" element={<ForgotPassword />} />
       </Route>
     </Routes>
   );
