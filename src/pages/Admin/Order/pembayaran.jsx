@@ -47,6 +47,7 @@ export default function Pembayaran() {
   const location = useLocation();
   const state = location.state;
   const user = JSON.parse(localStorage.getItem("user"));
+  const promo = JSON.parse(localStorage.getItem("promo"));
   const [produk, setProduk] = useState(state.produk);
   const [isAction, setIsAction] = useState(false);
   const [bayar, setBayar] = useState(0);
@@ -58,7 +59,9 @@ export default function Pembayaran() {
   const [subtotal, setSubtotal] = useState(state.subtotal);
   const [pajak, setPajak] = useState(state.pajak);
   const [chargeService, setChargeService] = useState(state.chargeService);
-  const [totalSemua, setTotalSemua] = useState(state.totalSemua);
+  const [totalSemua, setTotalSemua] = useState(
+    state.totalSemua + (promo ? parseFloat(promo.promo) : 0)
+  );
   const [errMessage, setErrMessage] = useState("");
   const navigate = useNavigate();
 
@@ -107,7 +110,9 @@ export default function Pembayaran() {
 
   const hitungKembalian = () => {
     let pembayaran = document.getElementById("input-nilai-pembayaran");
-    let kembalian = rupiahToNumber(pembayaran.value) - totalSemua;
+    let kembalian =
+      rupiahToNumber(pembayaran.value) -
+      (totalSemua - (promo ? parseFloat(promo.promo) : 0));
 
     setBayar(rupiahToNumber(getValues("pembayaran")));
     setKembalian(kembalian);
@@ -250,7 +255,7 @@ export default function Pembayaran() {
 
   const mutation = useMutation(
     async (data) => {
-      data.diskon = diskon;
+      data.diskon = diskon + (promo ? parseFloat(promo.promo) : 0);
       data.subtotal = subtotal;
       data.id_meja = data.no_meja.value;
       data.metode_pembayaran = metodePembayaran;
@@ -258,7 +263,8 @@ export default function Pembayaran() {
       data.kembalian = data.kembalian;
       data.pajak = parseFloat(pajak);
       data.charge_service = parseFloat(chargeService);
-      data.total_semua = parseFloat(totalSemua);
+      data.total_semua =
+        parseFloat(totalSemua) - (promo ? parseFloat(promo.promo) : 0);
       data.produk = produk;
 
       const config = {
@@ -417,7 +423,12 @@ export default function Pembayaran() {
                       </div>
                       <div className="flex justify-between text-xs text-slate-500">
                         <p className="font-medium">Diskon :</p>
-                        <p className="font-medium">- Rp. {rupiah(diskon)}</p>
+                        <p className="font-medium">
+                          - Rp.{" "}
+                          {rupiah(
+                            diskon + (promo ? parseFloat(promo.promo) : 0)
+                          )}
+                        </p>
                       </div>
                       {state.statusPajak === 1 ? (
                         <div className="flex justify-between text-xs text-slate-700">
@@ -442,7 +453,11 @@ export default function Pembayaran() {
                           Total :
                         </p>
                         <p className="font-bold text-blue-500 text-xl">
-                          Rp. {rupiah(totalSemua)}
+                          Rp.{" "}
+                          {rupiah(
+                            parseFloat(totalSemua) -
+                              (promo ? parseFloat(promo.promo) : 0)
+                          )}
                         </p>
                       </div>
                     </div>
@@ -456,8 +471,11 @@ export default function Pembayaran() {
                         kembali={kembalian}
                         resto={resto}
                         serviceCharge={chargeService}
-                        diskon={diskon}
-                        totalSemua={totalSemua}
+                        diskon={diskon + (promo ? parseFloat(promo.promo) : 0)}
+                        totalSemua={
+                          parseFloat(totalSemua) -
+                          (promo ? parseFloat(promo.promo) : 0)
+                        }
                         pajak={pajak}
                         statusChargeService={state.statusChargeService}
                         statusPajak={state.statusPajak}

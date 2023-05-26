@@ -8,18 +8,26 @@ import DropdownHeader from "../components/DropdownHeader";
 import Logo from "../assets/images/logo/SiResto.png";
 import axios from "../utils/axios";
 import moment from "moment";
+import { useLocation } from "react-router";
 
 const Header = ({}) => {
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("user"));
   const [sisaHari, setSisaHari] = useState(0);
   const [showBanner, setShowbanner] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
+    const pathname = location.pathname;
+
+    if (pathname !== "/order/tambah" && pathname !== "/order/pembayaran") {
+      localStorage.removeItem("promo");
+    }
+
     if (user != null) {
       cek_lisence();
     }
-  }, []);
+  }, [location]);
 
   const cek_lisence = () => {
     // cek jika lisence trial lebih dari 30 hari

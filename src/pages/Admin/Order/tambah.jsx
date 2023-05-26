@@ -22,6 +22,8 @@ import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { toastError } from "../../../utils/toast";
+import PilihPromo from "../../../components/PilihPromo";
+import { Button } from "../../../components/Button";
 
 const Tambah = () => {
   const navigate = useNavigate();
@@ -30,6 +32,8 @@ const Tambah = () => {
   const [page, setPage] = useState(1);
   const [rowCart, setRowCart] = useState([]);
   const [settingPembayaran, setSettingPembayaran] = useState([]);
+  const [isShowModal, setIsShowModal] = useState(false);
+  const promo = JSON.parse(localStorage.getItem("promo"));
 
   let discount =
     rowCart.length > 0
@@ -51,7 +55,12 @@ const Tambah = () => {
   let pajakPersen =
     settingPembayaran?.status_pajak === 1 ? settingPembayaran?.pajak : 0;
 
-  let totalSemua = subtotal + parseInt(chargeService) + parseInt(pajak);
+  let totalSemua =
+    subtotal +
+    parseInt(chargeService) +
+    parseInt(pajak) -
+    parseInt(discount) -
+    (promo ? parseInt(promo.promo) : 0);
 
   const breadcrumbs = [
     { link: "/", menu: "Home" },
@@ -135,6 +144,18 @@ const Tambah = () => {
     const res = await response.data.data;
 
     setSettingPembayaran(res);
+  };
+
+  useEffect(() => {
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
+
+  const handleBeforeUnload = () => {
+    localStorage.removeItem("promo");
   };
 
   useEffect(() => {
@@ -395,6 +416,55 @@ const Tambah = () => {
 
               <div className="flex grow items-end">
                 <div className="w-full bg-white sticky bottom-0 left-0 px-4 py-4 space-y-3 mt-5">
+                  <button
+                    type="button"
+                    className="btn gap-3flex items-center justify-between w-full bg-blue-400 border-0 hover:bg-blue-700 text-xs mb-5"
+                    onClick={() => setIsShowModal(true)}
+                  >
+                    {promo ? (
+                      <span className="flex items-center">
+                        {promo.judul_promo} (IDR {rupiah(promo.promo)})
+                      </span>
+                    ) : (
+                      <span className="flex items-center">Pilih Promo</span>
+                    )}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-4 w-4"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
+                  </button>
+
+                  {isShowModal ? (
+                    <>
+                      <div className="fixed inset-0 z-50 overflow-y-auto">
+                        <div className="fixed inset-0 w-full h-full bg-black opacity-20"></div>
+                        <div className="flex items-center min-h-screen px-4 py-8">
+                          <div className="relative w-full max-w-lg p-10 mx-auto bg-white rounded-xl shadow-lg">
+                            <PilihPromo />
+                            <div className="w-full px-4 bottom-10 left-0">
+                              <Button
+                                title="Pilih"
+                                type="button"
+                                className="w-full bg-blue-500 border-0 hover:bg-blue-700 text-xs"
+                                onClick={() => setIsShowModal(false)}
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </>
+                  ) : null}
+
                   <div className="flex justify-between text-xs text-slate-700">
                     <p className="font-medium">Subtotal :</p>
                     <p className="font-medium">Rp. {rupiah(subtotal)}</p>
@@ -402,7 +472,8 @@ const Tambah = () => {
                   <div className="flex justify-between text-xs ">
                     <p className="font-medium text-green-500">Discount :</p>
                     <p className="font-medium text-green-500">
-                      - Rp. {rupiah(discount)}
+                      - Rp.{" "}
+                      {rupiah(discount + (promo ? parseFloat(promo.promo) : 0))}
                     </p>
                   </div>
                   {settingPembayaran?.status_charge_service === 1 ? (
