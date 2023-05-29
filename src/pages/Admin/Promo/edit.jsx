@@ -149,7 +149,7 @@ const Edit = () => {
       moment(data.tanggal_awal_promo).format("YYYY-MM-DD")
     );
     setValue("periode_promo", data.periode_promo);
-    setValue("status_promo", data.status_promo);
+    setValue("status_promo", "nominal");
     setValue("nominal_promo", data.promo);
     setValue("deskripsi_promo", data.deskripsi_promo);
   }, []);
@@ -338,7 +338,7 @@ const Edit = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-8 gap-1 md:gap-4 mb-4">
+          {/* <div className="grid grid-cols-8 gap-1 md:gap-4 mb-4">
             <label className="label col-span-12 md:col-span-2">
               <span className="label-text">Status Promo</span>
             </label>
@@ -369,11 +369,11 @@ const Edit = () => {
                 </label>
               </div>
             </div>
-          </div>
+          </div> */}
 
           <div className="grid grid-cols-8 gap-1 md:gap-4 mb-4">
             <label className="label col-span-12 md:col-span-2">
-              <span className="label-text">Nominal Promo (Rp / %)</span>
+              <span className="label-text">Nominal Promo (Rp)</span>
             </label>
             <div className="relative col-span-12 md:col-span-4">
               <InputCurrency

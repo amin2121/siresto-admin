@@ -65,6 +65,7 @@ export default function Login() {
                   level: res.level,
                   lisence: res.lisence,
                   name: res.name,
+                  gambar: res.gambar,
                   tanggal: res.created_at,
                 })
               );

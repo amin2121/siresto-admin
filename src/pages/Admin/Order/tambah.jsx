@@ -50,7 +50,9 @@ const Tambah = () => {
       : 0;
   let pajak =
     settingPembayaran?.status_pajak === 1
-      ? (settingPembayaran?.pajak * subtotal) / 100
+      ? (settingPembayaran?.pajak *
+          (subtotal - discount - (promo ? parseInt(promo.promo) : 0))) /
+        100
       : 0;
   let pajakPersen =
     settingPembayaran?.status_pajak === 1 ? settingPembayaran?.pajak : 0;

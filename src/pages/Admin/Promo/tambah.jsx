@@ -93,7 +93,7 @@ const Tambah = () => {
       formData.append("tanggal_awal_promo", data.tanggal_awal_promo);
       formData.append("periode_promo", data.periode_promo);
       formData.append("deskripsi_promo", data.deskripsi_promo);
-      formData.append("status_promo", data.status_promo);
+      formData.append("status_promo", "nominal");
       formData.append("promo", data.nominal_promo);
 
       const config = {
@@ -299,7 +299,7 @@ const Tambah = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-8 gap-1 md:gap-4 mb-4">
+          {/* <div className="grid grid-cols-8 gap-1 md:gap-4 mb-4">
             <label className="label col-span-12 md:col-span-2">
               <span className="label-text">Status Promo</span>
             </label>
@@ -331,11 +331,11 @@ const Tambah = () => {
                 </label>
               </div>
             </div>
-          </div>
+          </div> */}
 
           <div className="grid grid-cols-8 gap-1 md:gap-4 mb-4">
             <label className="label col-span-12 md:col-span-2">
-              <span className="label-text">Nominal Promo (Rp / %)</span>
+              <span className="label-text">Nominal Promo (Rp)</span>
             </label>
             <div className="relative col-span-12 md:col-span-4">
               <InputCurrency

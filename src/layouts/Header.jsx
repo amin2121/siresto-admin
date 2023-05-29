@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { BiMenuAltLeft } from "react-icons/bi";
 import { IoNotificationsOutline } from "react-icons/io5";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useQuery, QueryClient } from "react-query";
 import { openSidebar } from "../features/sidebarSlice";
+import { setProfile } from "../features/profileSlice";
 import DropdownHeader from "../components/DropdownHeader";
 import Logo from "../assets/images/logo/SiResto.png";
 import axios from "../utils/axios";
@@ -16,6 +17,28 @@ const Header = ({}) => {
   const [sisaHari, setSisaHari] = useState(0);
   const [showBanner, setShowbanner] = useState(false);
   const location = useLocation();
+
+  const {
+    isLoading,
+    isError,
+    error,
+    data,
+    isSuccess,
+    isFetching,
+    refetch,
+    isPreviousData,
+  } = useQuery(["profile-user"], () => fetchData(), {
+    refetchOnWindowFocus: true,
+  });
+
+  const fetchData = async () => {
+    axios.defaults.headers.common["Authorization"] = `Bearer ${user.token}`;
+    const response = await axios.get(`setting/profile-user`);
+    const res = await response.data.data;
+    const data = res;
+
+    return data;
+  };
 
   useEffect(() => {
     const pathname = location.pathname;
@@ -53,14 +76,14 @@ const Header = ({}) => {
             className="text-2xl cursor-pointer"
             onClick={() => dispatch(openSidebar())}
           />
-          <img src={Logo} alt={Logo} className="w-24 block block lg:hidden" />
+          <img src={Logo} alt={Logo} className="w-24 block lg:hidden" />
         </div>
         <div className="flex items-center space-x-6">
           <div className="relative">
             <IoNotificationsOutline className="text-2xl" />
             <span className="animate-ping block absolute top-0 right-1 w-2 h-2 bg-red-600 rounded-full"></span>
           </div>
-          <DropdownHeader name={user?.name} image={user?.gambar} />
+          <DropdownHeader name={data?.name} gambar={data?.gambar} />
         </div>
       </div>
       {showBanner == true ? (

@@ -23,9 +23,13 @@ import { baseUrl } from "../../../utils/strings";
 import { swNormal } from "../../../utils/sw";
 import { useForm, Controller } from "react-hook-form";
 import { useNavigate, useLocation } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { useMutation, QueryClient, useQuery } from "react-query";
 import { toastSuccess, toastError } from "../../../utils/toast";
 import { getBase64 } from "../../../utils/image";
+
+// userSlice
+import { setProfile } from "../../../features/profileSlice";
 
 export default function UbahProfile() {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -34,6 +38,7 @@ export default function UbahProfile() {
   const [imageBase64, setImageBase64] = useState("");
   const [gambar, setGambar] = useState("");
   const inputFileRef = useRef(null);
+  const dispatch = useDispatch();
   const breadcrumbs = [
     { link: "/#", menu: "Home" },
     { link: "/#", menu: "Setting" },
@@ -100,6 +105,7 @@ export default function UbahProfile() {
       },
       onSuccess: async () => {
         toastSuccess("Profile Berhasil Diubah");
+        refetch();
       },
       onError: async () => {
         toastError("Profile Gagal Diubah");
@@ -107,8 +113,22 @@ export default function UbahProfile() {
     }
   );
 
+  // function generateFileName(imageBase64) {
+  //   const mimeType = imageBase64.match(/data:(.*);base64,/)[1];
+  //   const extension = mimeType.split("/")[1];
+  //   const timestamp = new Date().getTime();
+
+  //   return `images/user/${timestamp}.${extension}`;
+  // }
+
   const ubahProfile = async (data) => {
+    // const { nama_lengkap } = data;
+    // const dataUser = {
+    //   nama: nama_lengkap,
+    //   image: generateFileName(),
+    // };
     await mutation.mutate(data);
+    // dispatch(setProfile(dataUser));
   };
 
   const convertImageToBase64 = (e) => {
@@ -162,7 +182,7 @@ export default function UbahProfile() {
     const response = await axios.get(`setting/profile-user`);
     const res = await response.data.data;
 
-    if (res.gambar != "" && res.gambar != null) {
+    if ((res.gambar != "" || res.gambar != null) && gambar == "") {
       await setGambar(baseUrl + res.gambar);
     }
 
@@ -197,7 +217,7 @@ export default function UbahProfile() {
             </span>
             {tampilGambar()}
             <span
-              className="inline-block absolute bottom-1 cursor-pointer right-4 w-8 h-8 rounded-full bg-blue-500 flex justify-center items-center text-white"
+              className="absolute bottom-1 cursor-pointer right-4 w-8 h-8 rounded-full bg-blue-500 flex justify-center items-center text-white"
               onClick={klikGambar}
             >
               <HiPencil />

@@ -218,7 +218,12 @@ export default function Pembayaran() {
     let pajak =
       settingPembayaran?.status_pajak === 1
         ? (settingPembayaran?.pajak *
-            produk.reduce((n, { harga_total }) => n + harga_total, 0)) /
+            (produk.reduce(
+              (n, { harga_total, harga_total_diskon }) =>
+                n + (harga_total - harga_total_diskon),
+              0
+            ) -
+              (promo ? parseFloat(promo.promo) : 0))) /
           100
         : 0;
     let total =
