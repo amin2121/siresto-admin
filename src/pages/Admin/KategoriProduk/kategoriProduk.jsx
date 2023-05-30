@@ -90,7 +90,7 @@ const KategoriProduk = () => {
         toastSuccess("Kategori Produk Berhasil Dihapus");
       },
       onError: async () => {
-        toastError("Kategori Produk Gagal Dihapus");
+        toastError("Kategori Produk ini telah digunakan");
       },
     }
   );

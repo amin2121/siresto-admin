@@ -102,34 +102,6 @@ export default function Login() {
       });
   }
 
-  // async function submitLoginUser(data) {
-  //   const response = await axios.post("auth/login", data);
-  //   const res = response.data.data;
-  //   localStorage.setItem(
-  //     "user",
-  //     JSON.stringify({
-  //       token: res.token,
-  //       level: res.level,
-  //       lisence: res.lisence,
-  //       name: res.name,
-  //       tanggal: res.created_at,
-  //     })
-  //   );
-  //   JwtService.saveToken(res.token);
-
-  //   if (res.level === "Superadmin") {
-  //     navigate("/dashboard/superadmin");
-  //   } else if (res.level === "Owner") {
-  //     navigate("/dashboard/owner");
-  //   } else if (res.level === "Staff") {
-  //     navigate("/order");
-  //   }
-
-  //   if (res.meta.code != 200) {
-  //     throw new Error("Gagal Login");
-  //   }
-  // }
-
   useEffect(() => {
     if (isLoaded === false) {
       setIsLoaded(true);

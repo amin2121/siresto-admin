@@ -299,40 +299,6 @@ const Tambah = () => {
             </div>
           </div>
 
-          {/* <div className="grid grid-cols-8 gap-1 md:gap-4 mb-4">
-            <label className="label col-span-12 md:col-span-2">
-              <span className="label-text">Status Promo</span>
-            </label>
-            <div className="relative col-span-12 md:col-span-4 flex">
-              <div className="form-control flex-1 mr-4">
-                <label className="label cursor-pointer">
-                  <span className="label-text">Nominal</span>
-                  <input
-                    type="radio"
-                    name="status_promo"
-                    {...register("status_promo")}
-                    value="nominal"
-                    className="radio checked:bg-custom-blue"
-                    checked
-                  />
-                </label>
-              </div>
-
-              <div className="form-control flex-1">
-                <label className="label cursor-pointer">
-                  <span className="label-text">Persentase</span>
-                  <input
-                    type="radio"
-                    name="status_promo"
-                    {...register("status_promo")}
-                    value="persentase"
-                    className="radio checked:bg-custom-blue"
-                  />
-                </label>
-              </div>
-            </div>
-          </div> */}
-
           <div className="grid grid-cols-8 gap-1 md:gap-4 mb-4">
             <label className="label col-span-12 md:col-span-2">
               <span className="label-text">Nominal Promo (Rp)</span>
