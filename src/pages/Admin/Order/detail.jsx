@@ -46,6 +46,8 @@ export default function Detail() {
   const [diskon, setDiskon] = useState(state.diskon);
   const [subtotal, setSubtotal] = useState(state.nilai_transaksi);
   const [errMessage, setErrMessage] = useState("");
+  const [showModal, setShowModal] = useState(false);
+  const [orderStatus, setOrderStatus] = useState("");
   const navigate = useNavigate();
 
   const breadcrumbs = [
@@ -187,28 +189,28 @@ export default function Detail() {
       if (status == "closed") {
         toastError("Silahkan Membayar Dahulu Sebelum Menyelesaikan Pesanan");
       } else {
-        const confirm = swConfirm(
-          "Apakah Anda Yakin",
-          "Ingin Mengubah Status Order",
-          "Iya, Saya Ubah"
-        );
-        confirm.then((result) => {
-          if (result.isConfirmed) {
-            mutationUbahStatusOrder.mutate({ status: status });
-          }
-        });
+        // const confirm = swConfirm(
+        //   "Apakah Anda Yakin",
+        //   "Ingin Mengubah Status Order",
+        //   "Iya, Saya Ubah"
+        // );
+        // confirm.then((result) => {
+        //   if (result.isConfirmed) {
+        mutationUbahStatusOrder.mutate({ status: status });
+        //   }
+        // });
       }
     } else {
-      const confirm = swConfirm(
-        "Apakah Anda Yakin",
-        "Ingin Mengubah Status Order",
-        "Iya, Saya Ubah"
-      );
-      confirm.then((result) => {
-        if (result.isConfirmed) {
-          mutationUbahStatusOrder.mutate({ status: status });
-        }
-      });
+      // const confirm = swConfirm(
+      //   "Apakah Anda Yakin",
+      //   "Ingin Mengubah Status Order",
+      //   "Iya, Saya Ubah"
+      // );
+      // confirm.then((result) => {
+      //   if (result.isConfirmed) {
+      mutationUbahStatusOrder.mutate({ status: status });
+      // }
+      // });
     }
   };
 
@@ -345,7 +347,10 @@ export default function Detail() {
                         className={`order__status-item ${
                           statusOrder == "open" && "active"
                         }`}
-                        onClick={() => ubahStatusOrder("open")}
+                        onClick={() => {
+                          setOrderStatus("open");
+                          setShowModal(true);
+                        }}
                       >
                         Open
                       </span>
@@ -353,7 +358,10 @@ export default function Detail() {
                         className={`order__status-item ${
                           statusOrder == "in_progress" && "active"
                         }`}
-                        onClick={() => ubahStatusOrder("in_progress")}
+                        onClick={() => {
+                          setOrderStatus("in_progress");
+                          setShowModal(true);
+                        }}
                       >
                         In Progress
                       </span>
@@ -361,7 +369,10 @@ export default function Detail() {
                         className={`order__status-item ${
                           statusOrder == "closed" && "active"
                         }`}
-                        onClick={() => ubahStatusOrder("closed")}
+                        onClick={() => {
+                          setOrderStatus("closed");
+                          setShowModal(true);
+                        }}
                       >
                         Closed
                       </span>
@@ -503,6 +514,59 @@ export default function Detail() {
           </div>
         </div>
       </form>
+
+      {showModal ? (
+        <>
+          <div className="fixed inset-0 z-30 overflow-y-auto">
+            <div className="fixed inset-0 w-full h-full bg-black opacity-20"></div>
+            <div className="flex items-center min-h-screen px-4 py-8">
+              <div className="relative w-90 max-w-lg p-4 mx-auto bg-white rounded-xl shadow-lg">
+                <div className="mt-3 sm:flex">
+                  <div className="flex items-center justify-center flex-none w-5 h-5 mx-auto mt-2 mr-3 bg-red-100 rounded-full">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="w-6 h-6 text-red-600"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                  <div className="mt-1 mx-auto">
+                    <h4 className="text-lg text-left font-medium text-gray-800">
+                      Apakah Anda Yakin?
+                    </h4>
+                    <p className="mt-2 text-left text-[15px] leading-relaxed text-gray-500">
+                      Ingin Mengubah Status Order
+                    </p>
+                    <div className="items-center gap-2 mt-4 sm:flex">
+                      <button
+                        className="w-full h-10 px-12 py-1 mt-2 p-2.5 flex-1 text-white bg-green-500 rounded-md outline-none ring-offset-2 ring-green-500 focus:ring-2"
+                        onClick={() => {
+                          ubahStatusOrder(orderStatus);
+                          setShowModal(false);
+                        }}
+                      >
+                        Ubah
+                      </button>
+                      <button
+                        className="w-full h-10 px-12 py-1 mt-2 mr-6 p-2.5 flex-1 text-gray-800 rounded-md outline-none border ring-offset-2 ring-indigo-600 focus:ring-2"
+                        onClick={() => setShowModal(false)}
+                      >
+                        Batal
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
+      ) : null}
     </div>
   );
 }

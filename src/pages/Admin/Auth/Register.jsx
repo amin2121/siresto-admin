@@ -39,8 +39,6 @@ export default function Register() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [products, setProducts] = useState([]);
 
-  console.log(tnc);
-
   useEffect(() => {
     if (isLoaded === false) {
       ApiService.init();

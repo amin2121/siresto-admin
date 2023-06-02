@@ -19,7 +19,7 @@ import {
 } from "react-icons/fi";
 
 // libraries
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useQuery } from "react-query";
 import axios from "../../../utils/axios";
 import { useForm } from "react-hook-form";
@@ -28,6 +28,9 @@ import { rupiah, timestampToDate, capitalize } from "../../../utils/strings";
 import { useMutation, QueryClient, useQueryClient } from "react-query";
 import moment from "moment";
 import { toastSuccess, toastError } from "../../../utils/toast";
+import { useReactToPrint } from "react-to-print";
+import { FiPrinter } from "react-icons/fi";
+import { Struk } from "./Cetak/struk";
 
 const Order = () => {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -38,6 +41,7 @@ const Order = () => {
     { link: "/", menu: "Home" },
     { link: "/order", menu: "Order" },
   ];
+  const navigate = useNavigate();
 
   moment.locale("id");
   const [showDropdownAksi, setShowDropdownAksi] = useState({
@@ -93,6 +97,32 @@ const Order = () => {
     return data;
   };
 
+  const selectedOrder =
+    selectedId != "" ? data.find((item) => item.id === selectedId) : null;
+  const produk = selectedOrder?.order_detail.map((detail) => detail?.produk);
+  const subtotal =
+    parseInt(selectedOrder?.nilai_transaksi) +
+    parseInt(selectedOrder?.diskon) -
+    (parseInt(selectedOrder?.pajak) + parseInt(selectedOrder?.service_charge));
+  const bayar = selectedOrder?.bayar;
+  const kembalian = selectedOrder?.kembali;
+  const resto = selectedOrder?.meja?.resto;
+  const chargeService = selectedOrder?.service_charge;
+  const diskon = selectedOrder?.diskon;
+  const totalSemua = selectedOrder?.nilai_transaksi;
+  const pajak = selectedOrder?.pajak;
+  const statusChargeService = chargeService == 0 ? 0 : 1;
+  const statusPajak = pajak == 0 ? 0 : 1;
+
+  const componentRef = useRef();
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+    onAfterPrint: () => {
+      queryClient.invalidateQueries("data-order");
+      navigate("/order");
+    },
+  });
+
   // refetch after searching
   useEffect(() => {
     refetch();
@@ -131,6 +161,12 @@ const Order = () => {
       },
     }
   );
+
+  useEffect(() => {
+    if (selectedId != "") {
+      handlePrint();
+    }
+  }, [selectedId]);
 
   const confirmDeleteData = async (id) => {
     mutation.mutate(id);
@@ -231,11 +267,24 @@ const Order = () => {
                           <FiTrash2 size="16" />
                         </ButtonIconOutline>
                       </div>
+                      <div
+                        className="tooltip tooltip-bottom"
+                        data-tip="Cetak Data Order"
+                      >
+                        <ButtonIconOutline
+                          type="button"
+                          onClick={() => {
+                            setSelectedId(obj.id);
+                          }}
+                        >
+                          <FiPrinter size="16" />
+                        </ButtonIconOutline>
+                      </div>
 
                       {isShowModal ? (
                         <>
                           <div className="fixed inset-0 z-30 overflow-y-auto">
-                            <div className="fixed inset-0 w-full h-full bg-black opacity-20"></div>
+                            <div className="fixed inset-0 w-full h-full bg-black opacity-10"></div>
                             <div className="flex items-center min-h-screen px-4 py-8">
                               <div className="relative w-90 max-w-lg p-4 mx-auto bg-white rounded-xl shadow-lg">
                                 <div className="mt-3 sm:flex">
@@ -310,6 +359,24 @@ const Order = () => {
             )}
           </tbody>
         </TableContent>
+
+        <div className="hidden">
+          <Struk
+            ref={componentRef}
+            data={produk}
+            subtotal={subtotal}
+            bayar={bayar}
+            kembali={kembalian}
+            resto={resto}
+            serviceCharge={chargeService}
+            diskon={diskon}
+            totalSemua={totalSemua}
+            pajak={pajak}
+            statusChargeService={statusChargeService}
+            statusPajak={statusPajak}
+          />
+        </div>
+
         <PaginationTable
           setLimit={setLimit}
           fromRow={fromRow}

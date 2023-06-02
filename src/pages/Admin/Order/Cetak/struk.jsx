@@ -24,12 +24,12 @@ export const Struk = React.forwardRef(
 
     return (
       <div className="text-black mt-5 px-4" ref={ref}>
-        <h1 className="text-md text-center font-bold">{resto.nama_resto}</h1>
+        <h1 className="text-md text-center font-bold">{resto?.nama_resto}</h1>
         <h2 className="text-center font-semibold text-[10px]">
-          {resto.alamat_lengkap}
+          {resto?.alamat_lengkap}
         </h2>
         <h2 className="text-center font-semibold text-[10px]">
-          {resto.nomor_telepon}
+          {resto?.nomor_telepon}
         </h2>
 
         <div className="flex justify-between">

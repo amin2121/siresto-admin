@@ -62,7 +62,7 @@ export default function Login() {
                 "user",
                 JSON.stringify({
                   token: res.token,
-                  level: res.level,
+                  level: "Owner",
                   lisence: res.lisence,
                   name: res.name,
                   gambar: res.gambar,
