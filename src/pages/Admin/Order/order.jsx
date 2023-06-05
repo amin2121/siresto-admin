@@ -31,12 +31,15 @@ import { toastSuccess, toastError } from "../../../utils/toast";
 import { useReactToPrint } from "react-to-print";
 import { FiPrinter } from "react-icons/fi";
 import { Struk } from "./Cetak/struk";
+import { format, parseISO } from "date-fns";
+import idLocale from "date-fns/locale/id";
 
 const Order = () => {
   const user = JSON.parse(localStorage.getItem("user"));
   const [isShowModal, setIsShowModal] = useState(false);
   const [errMessage, setErrMessage] = useState("");
   const [selectedId, setSelectedId] = useState("");
+  const [printId, setPrintId] = useState("");
   const breadcrumbs = [
     { link: "/", menu: "Home" },
     { link: "/order", menu: "Order" },
@@ -98,7 +101,7 @@ const Order = () => {
   };
 
   const selectedOrder =
-    selectedId != "" ? data.find((item) => item.id === selectedId) : null;
+    printId != "" ? data.find((item) => item.id === printId) : null;
   const produk = selectedOrder?.order_detail.map((detail) => detail?.produk);
   const subtotal =
     parseInt(selectedOrder?.nilai_transaksi) +
@@ -163,10 +166,10 @@ const Order = () => {
   );
 
   useEffect(() => {
-    if (selectedId != "") {
+    if (printId != "") {
       handlePrint();
     }
-  }, [selectedId]);
+  }, [printId]);
 
   const confirmDeleteData = async (id) => {
     mutation.mutate(id);
@@ -228,115 +231,122 @@ const Order = () => {
             {isLoading ? (
               <LoadingTable colSpan="5" />
             ) : data.length > 0 ? (
-              data?.map((obj, key) => (
-                <tr className="bg-white border-b border-blue-200" key={key}>
-                  <td className="py-4 px-6 text-sm">{obj.no_transaksi}</td>
-                  <td className="py-4 px-6 text-sm">{obj.nama_pelanggan}</td>
-                  <td className="py-4 px-6 text-sm">
-                    Rp. {rupiah(obj.nilai_transaksi)}
-                  </td>
-                  <td className="py-4 px-6 text-sm">
-                    {obj.metode_pembayaran == ""
-                      ? "Belum Membayar"
-                      : capitalize(obj.metode_pembayaran)}
-                  </td>
-                  <td className="py-4 px-6 text-sm">15-10-2022</td>
-                  <td className="py-4 px-6">
-                    <div className="md:space-x-3 space-x-1 text-center">
-                      <div
-                        className="tooltip tooltip-bottom"
-                        data-tip="Detail Order"
-                      >
-                        <Link to="/order/detail" state={obj}>
-                          <ButtonIconOutline>
-                            <FiFileText size="16" />
+              data?.map((obj, key) => {
+                const tanggalAkhir = format(
+                  parseISO(obj.created_at),
+                  "dd-MMMM-yyyy",
+                  { locale: idLocale }
+                );
+                return (
+                  <tr className="bg-white border-b border-blue-200" key={key}>
+                    <td className="py-4 px-6 text-sm">{obj.no_transaksi}</td>
+                    <td className="py-4 px-6 text-sm">{obj.nama_pelanggan}</td>
+                    <td className="py-4 px-6 text-sm">
+                      Rp. {rupiah(obj.nilai_transaksi)}
+                    </td>
+                    <td className="py-4 px-6 text-sm">
+                      {obj.metode_pembayaran == ""
+                        ? "Belum Membayar"
+                        : capitalize(obj.metode_pembayaran)}
+                    </td>
+                    <td className="py-4 px-6 text-sm">{tanggalAkhir}</td>
+                    <td className="py-4 px-6">
+                      <div className="md:space-x-3 space-x-1 text-center">
+                        <div
+                          className="tooltip tooltip-bottom"
+                          data-tip="Detail Order"
+                        >
+                          <Link to="/order/detail" state={obj}>
+                            <ButtonIconOutline>
+                              <FiFileText size="16" />
+                            </ButtonIconOutline>
+                          </Link>
+                        </div>
+                        <div
+                          className="tooltip tooltip-bottom"
+                          data-tip="Cetak Data Order"
+                        >
+                          <ButtonIconOutline
+                            type="button"
+                            onClick={() => {
+                              setPrintId(obj.id);
+                            }}
+                          >
+                            <FiPrinter size="16" />
                           </ButtonIconOutline>
-                        </Link>
-                      </div>
-                      <div
-                        className="tooltip tooltip-bottom"
-                        data-tip="Hapus Order"
-                      >
-                        <ButtonIconOutline
-                          type="button"
-                          onClick={() => {
-                            setSelectedId(obj.id);
-                            setIsShowModal(true);
-                          }}
+                        </div>
+                        <div
+                          className="tooltip tooltip-bottom"
+                          data-tip="Hapus Order"
                         >
-                          <FiTrash2 size="16" />
-                        </ButtonIconOutline>
-                      </div>
-                      <div
-                        className="tooltip tooltip-bottom"
-                        data-tip="Cetak Data Order"
-                      >
-                        <ButtonIconOutline
-                          type="button"
-                          onClick={() => {
-                            setSelectedId(obj.id);
-                          }}
-                        >
-                          <FiPrinter size="16" />
-                        </ButtonIconOutline>
-                      </div>
+                          <ButtonIconOutline
+                            type="button"
+                            onClick={() => {
+                              setSelectedId(obj.id);
+                              setIsShowModal(true);
+                            }}
+                          >
+                            <FiTrash2 size="16" />
+                          </ButtonIconOutline>
+                        </div>
 
-                      {isShowModal ? (
-                        <>
-                          <div className="fixed inset-0 z-30 overflow-y-auto">
-                            <div className="fixed inset-0 w-full h-full bg-black opacity-10"></div>
-                            <div className="flex items-center min-h-screen px-4 py-8">
-                              <div className="relative w-90 max-w-lg p-4 mx-auto bg-white rounded-xl shadow-lg">
-                                <div className="mt-3 sm:flex">
-                                  <div className="flex items-center justify-center flex-none w-5 h-5 mx-auto mt-2 mr-3 bg-red-100 rounded-full">
-                                    <svg
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      className="w-6 h-6 text-red-600"
-                                      viewBox="0 0 20 20"
-                                      fill="currentColor"
-                                    >
-                                      <path
-                                        fillRule="evenodd"
-                                        d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
-                                        clipRule="evenodd"
-                                      />
-                                    </svg>
-                                  </div>
-                                  <div className="mt-1 mx-auto">
-                                    <h4 className="text-lg text-left font-medium text-gray-800">
-                                      Apakah Anda Yakin?
-                                    </h4>
-                                    <p className="mt-2 text-left text-[15px] leading-relaxed text-gray-500">
-                                      Ingin Menghapus Data Ini
-                                    </p>
-                                    <div className="items-center gap-2 mt-4 sm:flex">
-                                      <button
-                                        className="w-full h-10 px-12 py-1 mt-2 p-2.5 flex-1 text-white bg-red-600 rounded-md outline-none ring-offset-2 ring-red-600 focus:ring-2"
-                                        onClick={() => {
-                                          confirmDeleteData(selectedId);
-                                          setIsShowModal(false);
-                                        }}
+                        {isShowModal ? (
+                          <>
+                            <div className="fixed inset-0 z-30 overflow-y-auto">
+                              <div className="fixed inset-0 w-full h-full bg-black opacity-10"></div>
+                              <div className="flex items-center min-h-screen px-4 py-8">
+                                <div className="relative w-90 max-w-lg p-4 mx-auto bg-white rounded-xl shadow-lg">
+                                  <div className="mt-3 sm:flex">
+                                    <div className="flex items-center justify-center flex-none w-5 h-5 mx-auto mt-2 mr-3 bg-red-100 rounded-full">
+                                      <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        className="w-6 h-6 text-red-600"
+                                        viewBox="0 0 20 20"
+                                        fill="currentColor"
                                       >
-                                        Hapus
-                                      </button>
-                                      <button
-                                        className="w-full h-10 px-12 py-1 mt-2 mr-6 p-2.5 flex-1 text-gray-800 rounded-md outline-none border ring-offset-2 ring-indigo-600 focus:ring-2"
-                                        onClick={() => setIsShowModal(false)}
-                                      >
-                                        Batal
-                                      </button>
+                                        <path
+                                          fillRule="evenodd"
+                                          d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
+                                          clipRule="evenodd"
+                                        />
+                                      </svg>
+                                    </div>
+                                    <div className="mt-1 mx-auto">
+                                      <h4 className="text-lg text-left font-medium text-gray-800">
+                                        Apakah Anda Yakin?
+                                      </h4>
+                                      <p className="mt-2 text-left text-[15px] leading-relaxed text-gray-500">
+                                        Ingin Menghapus Data Ini
+                                      </p>
+                                      <div className="items-center gap-2 mt-4 sm:flex">
+                                        <button
+                                          className="w-full h-10 px-12 py-1 mt-2 p-2.5 flex-1 text-white bg-red-600 rounded-md outline-none ring-offset-2 ring-red-600 focus:ring-2"
+                                          onClick={() => {
+                                            confirmDeleteData(selectedId);
+                                            setIsShowModal(false);
+                                          }}
+                                        >
+                                          Hapus
+                                        </button>
+                                        <button
+                                          className="w-full h-10 px-12 py-1 mt-2 mr-6 p-2.5 flex-1 text-gray-800 rounded-md outline-none border ring-offset-2 ring-indigo-600 focus:ring-2"
+                                          onClick={() => setIsShowModal(false)}
+                                        >
+                                          Batal
+                                        </button>
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
                               </div>
                             </div>
-                          </div>
-                        </>
-                      ) : null}
-                    </div>
-                  </td>
-                </tr>
-              ))
+                          </>
+                        ) : null}
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })
             ) : (
               <tr>
                 <td
