@@ -81,6 +81,7 @@ import {
   LaporanPendapatan,
 } from "../pages/Admin/Laporan";
 import ForgotPassword from "../pages/Admin/Auth/ForgotPassword";
+import ResetPasswordLink from "../pages/Admin/Auth/ResetPassword";
 
 const RouteManager = () => {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -253,6 +254,7 @@ const RouteManager = () => {
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
         <Route path="forgot-password" element={<ForgotPassword />} />
+        <Route path="password-reset/:token" element={<ResetPasswordLink />} />
       </Route>
     </Routes>
   );

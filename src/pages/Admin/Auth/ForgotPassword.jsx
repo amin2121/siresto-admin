@@ -15,45 +15,59 @@ export default function ForgotPassword() {
   const [message, setMessage] = useState("Periksa kembali data anda.");
   const [type, setType] = useState("error");
   const [email, setEmail] = useState("");
+  const [isEnableButton, setIsEnableButton] = useState(false);
+
+  function setBannerNotification(type, message) {
+    setType(type);
+    setMessage(message);
+
+    var alert = document.getElementById("alert");
+    alert.classList.toggle("hidden");
+    alert.classList.toggle("opacity-[0]");
+
+    setTimeout(() => {
+      alert.classList.toggle("opacity-[0]");
+    }, 2000);
+
+    setTimeout(() => {
+      alert.classList.toggle("hidden");
+    }, 2500);
+  }
+
   function reset() {
-    ApiService.post(
-      process.env.REACT_APP_BACKEND_DOMAIN + "/api/forgot-password",
-      {
-        email: email,
-      }
-    )
+    if (!validateEmail(email)) {
+      setBannerNotification("error", "Email anda tidak valid.");
+      return;
+    }
+
+    ApiService.post(process.env.REACT_APP_BACKEND_DOMAIN + "/api/forgot-password", {
+      email: email,
+    })
       .then((response) => {
-        setType("success");
-        setMessage("Silahkan cek email anda.");
-
-        var alert = document.getElementById("alert");
-        alert.classList.toggle("hidden");
-        alert.classList.toggle("opacity-[0]");
-
-        setTimeout(() => {
-          alert.classList.toggle("opacity-[0]");
-        }, 2000);
-
-        setTimeout(() => {
-          alert.classList.toggle("hidden");
-        }, 2500);
+        setBannerNotification("success", "Silahkan cek email anda.");
       })
       .catch((error) => {
-        setType("error");
-        setMessage("Periksa kembali data anda.");
-        var alert = document.getElementById("alert");
-        alert.classList.toggle("hidden");
-        alert.classList.toggle("opacity-[0]");
-
-        setTimeout(() => {
-          alert.classList.toggle("opacity-[0]");
-        }, 2000);
-
-        setTimeout(() => {
-          alert.classList.toggle("hidden");
-        }, 2500);
+        setBannerNotification("error", "Periksa kembali data anda.");
       });
   }
+
+  const validateEmail = (email) => {
+    return String(email)
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      );
+  };
+
+  const handleInputEmail = (event) => {
+    setEmail(event.target.value);
+
+    if (event.target.value.trim().length > 0) {
+      setIsEnableButton(true);
+    } else {
+      setIsEnableButton(false);
+    }
+  };
 
   return (
     <div className="w-screen flex h-screen forgot-password">
@@ -106,13 +120,17 @@ export default function ForgotPassword() {
                   type="email"
                   placeholder="mail@website.com"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={handleInputEmail}
                   className="input input-bordered w-full pl-[50px]"
                 />
               </div>
             </div>
             <div className="action">
-              <button className="btn w-full" onClick={reset.bind(this)}>
+              <button
+                className="btn w-full"
+                onClick={reset.bind(this)}
+                disabled={!isEnableButton}
+              >
                 Kirim Email Pemulihan
               </button>
 

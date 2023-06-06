@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import DatePicker from "react-date-picker";
 import "react-date-picker/dist/DatePicker.css";
 import "react-calendar/dist/Calendar.css";
-import './laporan.css'
+import "./laporan.css";
 
 // components
 import { Button } from "../../../components/Button";
@@ -54,7 +54,7 @@ const Penjualan = () => {
     { link: "/penjualan", menu: "Laporan Penjualan" },
   ];
 
-  const fetchOrder = async () => {
+  const fetchOrder = useCallback(async () => {
     let tanggalAwalFormat = moment(tanggalAwal).format("DD-MM-YYYY [00:00:00]");
     let tanggalAkhirFormat = moment(tanggalAkhir).format(
       "DD-MM-YYYY [00:00:00]"
@@ -67,15 +67,19 @@ const Penjualan = () => {
     const res = await response.data.data;
 
     setData(res);
-  };
+  }, [tanggalAwal, tanggalAkhir, user.token]);
 
   console.log(data);
 
+  // useEffect(() => {
+  //   if (data.length > 0) {
+  //     handlePrint();
+  //   }
+  // }, [data]);
+
   useEffect(() => {
-    if (data.length > 0) {
-      handlePrint();
-    }
-  }, [data]);
+    fetchOrder();
+  }, [fetchOrder]);
 
   return (
     <>
@@ -103,7 +107,7 @@ const Penjualan = () => {
             startIcon={<BsFillPrinterFill size={16} />}
             loading={false}
             title="Cetak Laporan"
-            onClick={fetchOrder}
+            onClick={handlePrint}
           />
         </div>
       </div>

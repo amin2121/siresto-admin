@@ -63,7 +63,7 @@ const Pendapatan = () => {
     { link: "/pendapatan", menu: "Laporan Pendapatan" },
   ];
 
-  const fetchOrder = async () => {
+  const fetchOrder = useCallback(async () => {
     let tanggalAwalFormat = moment(tanggalAwal).format("DD-MM-YYYY [00:00:00]");
     let tanggalAkhirFormat = moment(tanggalAkhir).format(
       "DD-MM-YYYY [00:00:00]"
@@ -80,13 +80,17 @@ const Pendapatan = () => {
       hpp: res.hpp,
       labaBersih: res.laba_bersih,
     });
-  };
+  }, [tanggalAwal, tanggalAkhir, user.token]);
+
+  // useEffect(() => {
+  //   if (data.penjualanBersih != 0) {
+  //     handlePrint();
+  //   }
+  // }, [data]);
 
   useEffect(() => {
-    if (data.penjualanBersih != 0) {
-      handlePrint();
-    }
-  }, [data]);
+    fetchOrder();
+  }, [fetchOrder]);
 
   return (
     <>
@@ -114,7 +118,7 @@ const Pendapatan = () => {
             startIcon={<BsFillPrinterFill size={16} />}
             loading={false}
             title="Cetak Laporan"
-            onClick={fetchOrder}
+            onClick={handlePrint}
           />
         </div>
       </div>
