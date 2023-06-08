@@ -124,6 +124,10 @@ export default function Register() {
     }
   }
 
+  const selectStyle = {
+    border: "1px solid #d2d4d7",
+  };
+
   function generateProductTagLine(value) {
     if (value === "Sikasir") {
       return <p className="!text-left">Aplikasi Kasir</p>;
@@ -400,6 +404,7 @@ export default function Register() {
               <div className="relative">
                 <div className="svg-business"></div>
                 <select
+                  style={selectStyle}
                   className="select w-full pl-[50px]"
                   id="businessCategory"
                   value={businessCategory}
@@ -461,6 +466,7 @@ export default function Register() {
                 <div className="relative">
                   <div className="svg-home"></div>
                   <select
+                    style={selectStyle}
                     className="select w-full pl-[50px]"
                     id="province"
                     value={province}
@@ -478,6 +484,7 @@ export default function Register() {
                 <div className="relative">
                   <div className="svg-pin"></div>
                   <select
+                    style={selectStyle}
                     className="select w-full pl-[50px]"
                     id="city"
                     value={city}
@@ -527,7 +534,7 @@ export default function Register() {
             >
               <input
                 type="checkbox"
-                className="checkbox checkbox-custom border-4"
+                className="checkbox checkbox-custom border-2"
                 checked={tnc}
                 value={tnc}
                 onChange={(e) => {}}
@@ -563,26 +570,6 @@ export default function Register() {
               </p>
             </div>
           </div>
-          {/* <div className="form-product hidden">
-            <div className="title">
-              <h3>Register</h3>
-              <p>Lengkapi form untuk membuat akun</p>
-
-              <div className="product-list">
-                <ProductList />
-              </div>
-              <div>
-                <button
-                  className="btn w-full"
-                  disabled={activeProduct === -1}
-                  onClick={startNow.bind(this)}
-                >
-                  {" "}
-                  Mulai Sekarang{" "}
-                </button>
-              </div>
-            </div>
-          </div> */}
         </div>
       </div>
     </div>

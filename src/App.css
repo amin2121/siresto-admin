@@ -7,9 +7,9 @@
   pointer-events: none;
 }
 
-input{
+/* input {
   border: none;
-}
+} */
 
 .alert {
   height: fit-content !important;

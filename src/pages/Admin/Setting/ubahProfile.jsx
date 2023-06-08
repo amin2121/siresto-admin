@@ -149,6 +149,8 @@ export default function UbahProfile() {
     inputFileRef.current.click();
   };
 
+  console.log(gambar);
+
   const tampilGambar = () => {
     if (gambar == "") {
       return (
@@ -182,7 +184,7 @@ export default function UbahProfile() {
     const response = await axios.get(`setting/profile-user`);
     const res = await response.data.data;
 
-    if ((res.gambar != "" || res.gambar != null) && gambar == "") {
+    if (res.gambar != null && gambar == "") {
       await setGambar(baseUrl + res.gambar);
     }
 

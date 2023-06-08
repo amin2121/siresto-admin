@@ -388,7 +388,7 @@ const Edit = () => {
               <label class="label cursor-pointer">
                 <input
                   type="checkbox"
-                  className="checkbox checkbox-secondary focus:outline-custom-blue"
+                  className="checkbox checkbox-primary focus:outline-custom-blue"
                   {...register("status_diskon")}
                   value={statusDiskon}
                   onChange={(e) => showHargaDiskon(e)}
