@@ -159,9 +159,9 @@ const Meja = () => {
   return (
     <>
       <HeaderContent title="Meja" breadcrumbs={breadcrumbs}>
-        <div class="md:flex mt-4 md:mt-0 flex-1 md:space-x-3 block space-y-3 md:space-y-0">
+        <div className="md:flex mt-4 md:mt-0 flex-1 md:space-x-3 block space-y-3 md:space-y-0">
           <div className="relative flex-1 w-full">
-            <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+            <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
               <FiSearch size={20} />
             </div>
             <input

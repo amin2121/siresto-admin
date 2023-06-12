@@ -14,6 +14,7 @@ import {
   ContainerResto,
   TambahResto,
   EditResto,
+  EditLisensi,
 } from "../pages/Admin/Resto";
 import {
   KategoriBisnis,
@@ -124,6 +125,7 @@ const RouteManager = () => {
             <Route index element={<Resto />} />
             <Route path="tambah" element={<TambahResto />} />
             <Route path="edit" element={<EditResto />} />
+            <Route path="edit/lisensi" element={<EditLisensi />} />
           </Route>
           <Route
             path="kategori-bisnis"

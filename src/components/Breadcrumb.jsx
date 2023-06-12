@@ -2,7 +2,7 @@ import React from 'react';
 
 const Breadcrumb = ({ children }) => {
     return (
-        <div class="text-xs breadcrumbs !pt-0">
+        <div className="text-xs breadcrumbs !pt-0">
           {children}
         </div>
     );

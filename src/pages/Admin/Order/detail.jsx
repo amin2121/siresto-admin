@@ -222,7 +222,7 @@ export default function Detail() {
             <div className="md:col-span-7 col-span-12">
               <div className="w-full pl-3 pr-1 mt-3 order-list__container">
                 <div className="flex justify-between items-center order-list__title border-b border-zinc-200 pb-4 mx-4 flex-wrap">
-                  <div class="space-x-2 flex justify-start items-center">
+                  <div className="space-x-2 flex justify-start items-center">
                     <Link to="/order">
                       <BiArrowBack size="20" className="text-blue-500" />
                     </Link>
@@ -425,9 +425,9 @@ export default function Detail() {
                     <MetodePembayaran />
                   </div>
 
-                  <div class="w-full">
-                    <label class="label">
-                      <span class="label-text text-xs">Pembayaran</span>
+                  <div className="w-full">
+                    <label className="label">
+                      <span className="label-text text-xs">Pembayaran</span>
                     </label>
                     <InputGroupCurrency
                       type="text"
@@ -442,9 +442,9 @@ export default function Detail() {
                     />
                   </div>
 
-                  <div class="w-full">
-                    <label class="label">
-                      <span class="label-text text-xs">Kembalian</span>
+                  <div className="w-full">
+                    <label className="label">
+                      <span className="label-text text-xs">Kembalian</span>
                     </label>
                     <InputGroupCurrency
                       type="text"

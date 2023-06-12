@@ -410,7 +410,7 @@ export default function Register() {
                   value={businessCategory}
                   onChange={(e) => setBusinessCategory(e.target.value)}
                 >
-                  <option disabled>Pilih Kategori</option>
+                  {/* <option disabled>Pilih Kategori</option>
                   <option value="">Pilih Kategori</option>
                   <option value="Health">Health</option>
                   <option value="Beauty and Treatment">
@@ -426,7 +426,7 @@ export default function Register() {
                   <option value="Entertainment">Entertainment</option>
                   <option value="Event and Exhibition">
                     Event and Exhibition
-                  </option>
+                  </option> */}
                 </select>
               </div>
             </div>

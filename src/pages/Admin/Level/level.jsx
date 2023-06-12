@@ -144,9 +144,9 @@ const Produk = () => {
     return (
         <React.Fragment>
         	<HeaderContent title="Level" breadcrumbs={breadcrumbs}>
-	        	<div class="grid grid-cols-12 gap-4">
+	        	<div className="grid grid-cols-12 gap-4">
 	        		<div className="relative col-span-7 col-start-3">
-		      			<div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+		      			<div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
 					    	<BiSearch/>
 					  	</div>
 	        			<input type="text" placeholder="Cari Level" onChange={(e) => setKeyword(e.target.value)} className="input input-bordered w-full pl-10 p-2.5 col-span-2" />

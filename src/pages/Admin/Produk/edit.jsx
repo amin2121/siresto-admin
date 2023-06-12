@@ -385,7 +385,7 @@ const Edit = () => {
               <span className="label-text">Tambah Diskon</span>
             </label>
             <div className="relative col-span-12 md:col-span-4">
-              <label class="label cursor-pointer">
+              <label className="label cursor-pointer">
                 <input
                   type="checkbox"
                   className="checkbox checkbox-primary focus:outline-custom-blue"

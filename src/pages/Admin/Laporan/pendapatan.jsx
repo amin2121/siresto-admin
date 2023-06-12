@@ -10,37 +10,38 @@ import HeaderContent from "../../../layouts/HeaderContent";
 import { LaporanPendapatan } from "./Cetak/pendapatan";
 
 // icons
-import { HiPencil } from "react-icons/hi";
+// import { HiPencil } from "react-icons/hi";
 import {
-  BsFillTrash2Fill,
-  BsFillPlusCircleFill,
+  // BsFillTrash2Fill,
+  // BsFillPlusCircleFill,
   BsFillPrinterFill,
 } from "react-icons/bs";
-import { MdPublishedWithChanges } from "react-icons/md";
-import { FiPrinter } from "react-icons/fi";
-import { BiSearch, BiPlus, BiDotsHorizontalRounded } from "react-icons/bi";
-import { RiArrowLeftSFill, RiArrowRightSFill } from "react-icons/ri";
+// import { MdPublishedWithChanges } from "react-icons/md";
+// import { FiPrinter } from "react-icons/fi";
+// import { BiSearch, BiPlus, BiDotsHorizontalRounded } from "react-icons/bi";
+// import { RiArrowLeftSFill, RiArrowRightSFill } from "react-icons/ri";
 
 // libraries
-import { Link } from "react-router-dom";
-import { useQuery } from "react-query";
+// import { Link } from "react-router-dom";
+// import { useQuery } from "react-query";
 import axios from "../../../utils/axios";
-import { swNormal, swConfirm } from "../../../utils/sw";
-import { useMutation, QueryClient } from "react-query";
-import { useNavigate } from "react-router-dom";
-import { useForm, Controller } from "react-hook-form";
-import QRCode from "react-qr-code";
-import { baseUrlFrontEnd } from "../../../utils/strings";
-import ReactToPrint, { useReactToPrint } from "react-to-print";
+// import { swNormal, swConfirm } from "../../../utils/sw";
+// import { useMutation, QueryClient } from "react-query";
+// import { useNavigate } from "react-router-dom";
+// import { useForm, Controller } from "react-hook-form";
+// import QRCode from "react-qr-code";
+// import { baseUrlFrontEnd } from "../../../utils/strings";
+// ReactToPrint,
+import { useReactToPrint } from "react-to-print";
 import moment from "moment";
 
 const Pendapatan = () => {
   moment.locale("id");
   const user = JSON.parse(localStorage.getItem("user"));
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [tanggalAwal, setTanggalAwal] = useState(new Date());
   const [tanggalAkhir, setTanggalAkhir] = useState(new Date());
-  const [isAction, setIsAction] = useState(false);
+  // const [isAction, setIsAction] = useState(false);
   const [data, setData] = useState({
     penjualanBersih: 0,
     hpp: 0,
@@ -66,7 +67,7 @@ const Pendapatan = () => {
   const fetchOrder = useCallback(async () => {
     let tanggalAwalFormat = moment(tanggalAwal).format("DD-MM-YYYY [00:00:00]");
     let tanggalAkhirFormat = moment(tanggalAkhir).format(
-      "DD-MM-YYYY [00:00:00]"
+      "DD-MM-YYYY [23:59:59]"
     );
 
     axios.defaults.headers.common["Authorization"] = `Bearer ${user.token}`;

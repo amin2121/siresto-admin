@@ -44,6 +44,7 @@ export default function Login() {
                   level: res.level,
                   lisence: res.lisence,
                   name: res.name,
+                  tambahanMasaTrial: res.masa_trial,
                   tanggal: res.created_at,
                 })
               );
@@ -66,6 +67,7 @@ export default function Login() {
                   lisence: res.lisence,
                   name: res.name,
                   gambar: res.gambar,
+                  tambahanMasaTrial: res.masa_trial,
                   tanggal: res.created_at,
                 })
               );

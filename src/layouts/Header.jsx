@@ -59,7 +59,7 @@ const Header = ({}) => {
       let startDate = moment(user.tanggal);
       let now = new Date();
       let differenceDay = Math.round((now - startDate) / day);
-      let rentangHari = 30 - differenceDay;
+      let rentangHari = 30 + user.tambahanMasaTrial - differenceDay;
 
       setSisaHari(rentangHari);
       setShowbanner(true);
@@ -88,7 +88,7 @@ const Header = ({}) => {
       </div>
       {showBanner == true ? (
         <div className="w-full px-6 mt-2 mb-4">
-          <div class="alert bg-yellow-500 text-white shadow-sm !rounded-md !w-full py-2">
+          <div className="alert bg-yellow-500 text-white shadow-sm !rounded-md !w-full py-2">
             <div className="w-full flex justify-between flex-wrap">
               <span>
                 Masa percobaan Anda akan berakhir dalam {sisaHari} hari. Upgrade
