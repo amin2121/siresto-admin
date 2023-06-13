@@ -310,7 +310,6 @@ export default function Register() {
       })
 
       .catch((error) => {
-        // console.log(error);
         setType("error");
         setMessage("Periksa kembali data anda.");
         var alert = document.getElementById("alert");

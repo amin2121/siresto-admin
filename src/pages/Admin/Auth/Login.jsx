@@ -35,8 +35,6 @@ export default function Login() {
         })
           .then((response) => {
             if (response.status === 200) {
-              // JwtService.saveToken(response.data.accessToken)
-              // console.log(response.data, 'login berhasil')
               localStorage.setItem(
                 "user",
                 JSON.stringify({
@@ -111,7 +109,6 @@ export default function Login() {
       ApiService.get(process.env.REACT_APP_BACKEND_DOMAIN + "/api/get-my-data")
         .then((response) => {
           let data = response.data.data;
-          // console.log("ada loginannya");
         })
         .catch((error) => {});
     }

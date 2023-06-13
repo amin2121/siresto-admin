@@ -149,8 +149,6 @@ export default function UbahProfile() {
     inputFileRef.current.click();
   };
 
-  console.log(gambar);
-
   const tampilGambar = () => {
     if (gambar == "") {
       return (

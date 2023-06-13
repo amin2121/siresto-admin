@@ -222,6 +222,7 @@ const Tambah = () => {
           nama_produk: item.nama_produk,
           harga_jual: item.harga_jual,
           jumlah_produk: 1,
+          kategori_produk: item.kategori_produk.kategori_produk,
           harga_total: (+item.harga_jual - +item.diskon) * 1,
           pakai_diskon: true,
           diskon: item.diskon,

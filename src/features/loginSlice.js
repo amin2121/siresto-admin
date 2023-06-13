@@ -8,7 +8,6 @@ export const loginSlice = createSlice({
   },
   reducers: {
     setDataLogin: (state, action) => {
-      // console.log(action.payload)
       state.token = action.payload.token;
       state.level = action.payload.level;
     },

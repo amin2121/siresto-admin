@@ -272,7 +272,7 @@ export default function Detail() {
                                     {obj.produk.nama_produk}
                                   </h5>
                                   <span className="text-xs text-blue-400">
-                                    Makanan Pedas
+                                    {obj.produk.kategori_produk.kategori_produk}
                                   </span>
                                 </div>
                               </div>

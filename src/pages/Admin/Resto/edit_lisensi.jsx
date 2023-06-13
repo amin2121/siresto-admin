@@ -51,9 +51,6 @@ const EditLisensi = () => {
     value: data.users[0].id_lisence,
   });
 
-  console.log(selectedLisence?.label);
-  console.log(selectedLisence?.value);
-
   const breadcrumbs = [
     { link: "/", menu: "Home" },
     { link: "/resto", menu: "Resto" },

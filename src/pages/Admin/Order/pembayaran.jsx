@@ -365,7 +365,7 @@ export default function Pembayaran() {
                                     {obj.nama_produk}
                                   </h5>
                                   <span className="text-xs text-blue-400">
-                                    Makanan Pedas
+                                    {obj.kategori_produk}
                                   </span>
                                 </div>
                               </div>

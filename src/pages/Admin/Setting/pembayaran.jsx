@@ -65,10 +65,6 @@ const Pembayaran = () => {
     refetchOnWindowFocus: false,
   });
 
-  // useEffect(() => {
-  // console.log(dataInput)
-  // }, [dataInput])
-
   // fetch data
   const fetchData = async () => {
     axios.defaults.headers.common["Authorization"] = `Bearer ${user.token}`;

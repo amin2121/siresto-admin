@@ -99,7 +99,6 @@ export default function Tambah() {
 
     if (e.target.files && e.target.files[0]) {
       setGambar(URL.createObjectURL(e.target.files[0]));
-      // console.log(e.target.files[0]);
     }
 
     getBase64(file)

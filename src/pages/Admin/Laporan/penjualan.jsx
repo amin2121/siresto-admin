@@ -70,8 +70,6 @@ const Penjualan = () => {
     setData(res);
   }, [tanggalAwal, tanggalAkhir, user.token]);
 
-  console.log(data);
-
   // useEffect(() => {
   //   if (data.length > 0) {
   //     handlePrint();
