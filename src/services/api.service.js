@@ -10,7 +10,8 @@ const ApiService = {
       "Authorization"
     ] = `Bearer ${JwtService.getToken()}`;
     axios.defaults.headers.post["Content-Type"] = "application/json";
-    axios.defaults.headers.common["Source"] = "https://siresto.awandigital.id";
+    axios.defaults.headers.common["Source"] =
+      "https://dev.siresto.awandigital.id";
   },
 
   reInitAuthorization() {
