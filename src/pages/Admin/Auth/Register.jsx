@@ -16,6 +16,7 @@ import Skrin from "../../../assets/images/logo/skrin.png";
 import Kyoo from "../../../assets/images/logo/kyoo.png";
 import axios from "../../../utils/axios";
 import { findRenderedComponentWithType } from "react-dom/test-utils";
+import { useQuery } from "react-query";
 
 export default function Register() {
   const navigate = useNavigate();
@@ -73,6 +74,27 @@ export default function Register() {
         });
     }
   }, [isLoaded]);
+
+  const { isLoading, data: dataKategori } = useQuery(
+    ["data-kategori-bisnis"],
+    () => fetchData(),
+    {
+      staleTime: 10000,
+      refetchInterval: 10000,
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
+    }
+  );
+
+  const fetchData = async () => {
+    const response = await axios.get("kategori-bisnis/register");
+    const res = await response.data.data;
+    const data = res;
+
+    return data;
+  };
+
+  console.log(dataKategori);
 
   const [activeProduct, setActiveProduct] = useState(-1);
 
@@ -409,23 +431,11 @@ export default function Register() {
                   value={businessCategory}
                   onChange={(e) => setBusinessCategory(e.target.value)}
                 >
-                  {/* <option disabled>Pilih Kategori</option>
+                  <option disabled>Pilih Kategori</option>
                   <option value="">Pilih Kategori</option>
-                  <option value="Health">Health</option>
-                  <option value="Beauty and Treatment">
-                    Beauty and Treatment
-                  </option>
-                  <option value="Public Service">Public Service</option>
-                  <option value="Automotive">Automotive</option>
-                  <option value="Education">Education</option>
-                  <option value="Financial">Financial</option>
-                  <option value="FnB">FnB</option>
-                  <option value="Print and Design">Print and Design</option>
-                  <option value="Telecom">Telecom</option>
-                  <option value="Entertainment">Entertainment</option>
-                  <option value="Event and Exhibition">
-                    Event and Exhibition
-                  </option> */}
+                  {dataKategori?.map((item) => (
+                    <option value={item.id}>{item.kategori_bisnis}</option>
+                  ))}
                 </select>
               </div>
             </div>
