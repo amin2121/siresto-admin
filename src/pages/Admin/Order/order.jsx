@@ -254,13 +254,13 @@ const Order = () => {
                         : capitalize(obj.metode_pembayaran)}
                     </td>
                     <td className="py-4 px-6 text-sm">{tanggalAkhir}</td>
-                    <td className="py-4 px-6 text-sm">
+                    <td className="py-4 ps-6 text-sm">
                       {obj.status_order == "in_progress" ? (
-                        <div className="py-0.5 px-2 font-semibold rounded-md text-xs inline-block w-fit bg-yellow-200 text-yellow-500">
+                        <div className="py-0.5 px-2 font-semibold rounded-md text-xs inline w-fit bg-yellow-200 text-yellow-500">
                           Dalam Proses
                         </div>
                       ) : (
-                        <div className="py-0.5 px-2 font-semibold rounded-md text-xs inline-block w-fit bg-blue-200">
+                        <div className="py-0.5 px-2 font-semibold rounded-md text-xs inline w-fit bg-blue-200">
                           Buka
                         </div>
                       )}
