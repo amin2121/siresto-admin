@@ -33,6 +33,7 @@ import { FiPrinter } from "react-icons/fi";
 import { Struk } from "./Cetak/struk";
 import { format, parseISO } from "date-fns";
 import idLocale from "date-fns/locale/id";
+import Badge from "../../../components/Badge";
 
 const Order = () => {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -222,6 +223,9 @@ const Order = () => {
               <th scope="col" className="py-3 px-6">
                 Tanggal Transaksi
               </th>
+              <th scope="col" className="py-3 px-6">
+                Status Order
+              </th>
               <th scope="col" className="py-3 px-6 rounded-tr-md">
                 Aksi
               </th>
@@ -250,8 +254,19 @@ const Order = () => {
                         : capitalize(obj.metode_pembayaran)}
                     </td>
                     <td className="py-4 px-6 text-sm">{tanggalAkhir}</td>
+                    <td className="py-4 px-6 text-sm">
+                      {obj.status_order == "in_progress" ? (
+                        <div className="py-0.5 px-2 font-semibold rounded-md text-xs inline-block w-fit bg-yellow-200 text-yellow-500">
+                          Dalam Proses
+                        </div>
+                      ) : (
+                        <div className="py-0.5 px-2 font-semibold rounded-md text-xs inline-block w-fit bg-blue-200">
+                          Buka
+                        </div>
+                      )}
+                    </td>
                     <td className="py-4 px-6">
-                      <div className="md:space-x-3 space-x-1 text-center">
+                      <div className="md:flex md:space-x-3 space-x-1 justify-center">
                         <div
                           className="tooltip tooltip-bottom"
                           data-tip="Detail Order"
@@ -275,25 +290,27 @@ const Order = () => {
                             <FiPrinter size="16" />
                           </ButtonIconOutline>
                         </div>
-                        <div
-                          className="tooltip tooltip-bottom"
-                          data-tip="Hapus Order"
-                        >
-                          <ButtonIconOutline
-                            type="button"
-                            onClick={() => {
-                              setSelectedId(obj.id);
-                              setIsShowModal(true);
-                            }}
+                        {user.level !== "Staff" ? (
+                          <div
+                            className="tooltip tooltip-bottom"
+                            data-tip="Hapus Order"
                           >
-                            <FiTrash2 size="16" />
-                          </ButtonIconOutline>
-                        </div>
+                            <ButtonIconOutline
+                              type="button"
+                              onClick={() => {
+                                setSelectedId(obj.id);
+                                setIsShowModal(true);
+                              }}
+                            >
+                              <FiTrash2 size="16" />
+                            </ButtonIconOutline>
+                          </div>
+                        ) : null}
 
                         {isShowModal ? (
                           <>
                             <div className="fixed inset-0 z-30 overflow-y-auto">
-                              <div className="fixed inset-0 w-full h-full bg-black opacity-10"></div>
+                              <div className="fixed inset-0 w-full h-full bg-black opacity-50"></div>
                               <div className="flex items-center min-h-screen px-4 py-8">
                                 <div className="relative w-90 max-w-lg p-4 mx-auto bg-white rounded-xl shadow-lg">
                                   <div className="mt-3 sm:flex">

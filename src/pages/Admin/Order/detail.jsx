@@ -518,14 +518,14 @@ export default function Detail() {
       {showModal ? (
         <>
           <div className="fixed inset-0 z-30 overflow-y-auto">
-            <div className="fixed inset-0 w-full h-full bg-black opacity-20"></div>
+            <div className="fixed inset-0 w-full h-full bg-black opacity-50"></div>
             <div className="flex items-center min-h-screen px-4 py-8">
               <div className="relative w-90 max-w-lg p-4 mx-auto bg-white rounded-xl shadow-lg">
                 <div className="mt-3 sm:flex">
                   <div className="flex items-center justify-center flex-none w-5 h-5 mx-auto mt-2 mr-3 bg-red-100 rounded-full">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="w-6 h-6 text-red-600"
+                      className="w-6 h-6 text-yellow-500"
                       viewBox="0 0 20 20"
                       fill="currentColor"
                     >

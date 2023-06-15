@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 import {
   Chart as ChartJS,
@@ -8,8 +8,8 @@ import {
   Title,
   Tooltip,
   Legend,
-} from 'chart.js';
-import { Bar } from 'react-chartjs-2';
+} from "chart.js";
+import { Bar } from "react-chartjs-2";
 
 ChartJS.register(
   CategoryScale,
@@ -17,35 +17,33 @@ ChartJS.register(
   BarElement,
   Title,
   Tooltip,
-  Legend,
+  Legend
 );
 
 export const options = {
   responsive: true,
   plugins: {
     legend: {
-      position: 'top',
+      position: "top",
     },
   },
 };
 
-
 const ChartBar = ({ data, title }) => {
-    const labels = data.map((value) => value.label);
+  const labels = data.map((value) => value.label.slice(0, 3));
 
-    const dataChart = {
-      labels,
-      datasets: [
-        {
-          label: title,
-          data: data.map((value) => value.value),
-          backgroundColor: '#3B82F6',
-        },
-      ],
-    };
+  const dataChart = {
+    labels,
+    datasets: [
+      {
+        label: title,
+        data: data.map((value) => value.value),
+        backgroundColor: "#3B82F6",
+      },
+    ],
+  };
 
-
-    return <Bar options={options} data={dataChart}/>;
+  return <Bar options={options} data={dataChart} />;
 };
 
 export default ChartBar;

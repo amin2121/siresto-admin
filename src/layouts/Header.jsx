@@ -81,7 +81,7 @@ const Header = ({}) => {
         <div className="flex items-center space-x-6">
           <div className="relative">
             <IoNotificationsOutline className="text-2xl" />
-            <span className="animate-ping block absolute top-0 right-1 w-2 h-2 bg-red-600 rounded-full"></span>
+            {/* <span className="animate-ping block absolute top-0 right-1 w-2 h-2 bg-red-600 rounded-full"></span> */}
           </div>
           <DropdownHeader name={data?.name} gambar={data?.gambar} />
         </div>

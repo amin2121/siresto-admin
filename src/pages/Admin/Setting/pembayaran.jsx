@@ -254,8 +254,8 @@ const Pembayaran = () => {
                       Alur Pembayaran Konsumen
                     </h3>
                     <p className="text-xs text-slate-400">
-                      Alur pembayaran konsumen bisa diubah dari langsung bayar
-                      atau bayar nanti{" "}
+                      Alur pembayaran konsumen bisa diubah dari langsung bayar,
+                      bayar nanti atau pilihan pelanggan{" "}
                     </p>
                     <div className="form-group flex items-center mt-2 space-x-4">
                       <div className="form-control">
@@ -265,7 +265,7 @@ const Pembayaran = () => {
                             type="radio"
                             name="alur_pembayaran_konsumen"
                             value="bayar_langsung"
-                            className="radio radio-secondary"
+                            className="radio border-blue-500 checked:bg-blue-500 focus:outline-blue-500"
                             {...register("alur_pembayaran_konsumen")}
                           />
                         </label>
@@ -278,7 +278,20 @@ const Pembayaran = () => {
                             type="radio"
                             name="alur_pembayaran_konsumen"
                             value="bayar_nanti"
-                            className="radio radio-secondary"
+                            className="radio border-blue-500 checked:bg-blue-500 focus:outline-blue-500"
+                            {...register("alur_pembayaran_konsumen")}
+                          />
+                        </label>
+                      </div>
+
+                      <div className="form-control">
+                        <label className="label cursor-pointer space-x-4">
+                          <span className="label-text">Pilihan Pelanggan</span>
+                          <input
+                            type="radio"
+                            name="alur_pembayaran_konsumen"
+                            value="pilihan_pelanggan"
+                            className="radio border-blue-500 checked:bg-blue-500 focus:outline-blue-500"
                             {...register("alur_pembayaran_konsumen")}
                           />
                         </label>
@@ -290,7 +303,7 @@ const Pembayaran = () => {
             </div>
 
             <Button
-              className="text-xs mr-2 mt-10 bg-custom-blue border-custom-blue"
+              className="text-xs mr-2 mt-10 bg-custom-blue border-custom-blue focus:outline-blue-500"
               color="secondary"
               type="submit"
               startIcon={<FiSave size={16} />}

@@ -6,6 +6,7 @@ import User from "../assets/images/user/user-1.jpg";
 import { useNavigate } from "react-router-dom";
 import JwtService from "../services/jwt.service";
 import { swConfirm } from "../utils/sw";
+import Avatar from "react-avatar";
 
 const links = [
   { href: "/account-settings", label: "Account settings" },
@@ -34,10 +35,20 @@ const DropdownHeader = ({ name, gambar }) => {
         <Menu.Button className="inline-flex w-full justify-center text-sm font-medium text-gray-700">
           <div className="flex items-center space-x-3">
             <h5 className="text-xs font-semibold">{name}</h5>
-            <img
+            {/* <img
               src={gambar != undefined ? baseUrl + gambar : User}
               alt="user"
               className="w-8 h-8 rounded-full"
+            /> */}
+            <Avatar
+              color={Avatar.getRandomColor("sitebase", [
+                "red",
+                "green",
+                "blue",
+              ])}
+              name={name}
+              className="w-8 h-8 rounded-full"
+              size="30"
             />
           </div>
         </Menu.Button>
@@ -74,7 +85,7 @@ const DropdownHeader = ({ name, gambar }) => {
         {isShowModal ? (
           <>
             <div className="fixed inset-0 z-30 overflow-y-auto">
-              <div className="fixed inset-0 w-full h-full bg-black opacity-30"></div>
+              <div className="fixed inset-0 w-full h-full bg-black opacity-50"></div>
               <div className="flex items-center min-h-screen px-4 py-8">
                 <div className="relative w-90 max-w-lg p-4 mx-auto bg-white rounded-xl shadow-lg">
                   <div className="mt-3 sm:flex">

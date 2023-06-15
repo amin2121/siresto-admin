@@ -268,7 +268,7 @@ const Meja = () => {
                       {isShowModal ? (
                         <>
                           <div className="fixed inset-0 z-30 overflow-y-auto">
-                            <div className="fixed inset-0 w-full h-full bg-black opacity-30"></div>
+                            <div className="fixed inset-0 w-full h-full bg-black opacity-20"></div>
                             <div className="flex items-center min-h-screen px-4 py-8">
                               <div className="relative w-90 max-w-lg p-4 mx-auto bg-white rounded-xl shadow-lg">
                                 <div className="mt-3 sm:flex">
