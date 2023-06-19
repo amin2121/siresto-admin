@@ -94,8 +94,6 @@ export default function Register() {
     return data;
   };
 
-  console.log(dataKategori);
-
   const [activeProduct, setActiveProduct] = useState(-1);
 
   function setSelectedProduct(index) {
