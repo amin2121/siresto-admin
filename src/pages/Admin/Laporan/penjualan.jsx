@@ -41,6 +41,7 @@ const Penjualan = () => {
   const user = JSON.parse(localStorage.getItem("user"));
   const [tanggalAwal, setTanggalAwal] = useState(new Date());
   const [tanggalAkhir, setTanggalAkhir] = useState(new Date());
+  const [statusOrder, setStatusOrder] = useState("");
   // const [isAction, setIsAction] = useState(false);
   const [data, setData] = useState([]);
 
@@ -63,18 +64,16 @@ const Penjualan = () => {
 
     axios.defaults.headers.common["Authorization"] = `Bearer ${user.token}`;
     const response = await axios.get(
-      `laporan/laporan-penjualan?tanggal-awal=${tanggalAwalFormat}&tanggal-akhir=${tanggalAkhirFormat}`
+      `laporan/laporan-penjualan?tanggal-awal=${tanggalAwalFormat}&tanggal-akhir=${tanggalAkhirFormat}&status-order=${statusOrder}`
     );
     const res = await response.data.data;
 
     setData(res);
-  }, [tanggalAwal, tanggalAkhir, user.token]);
+  }, [tanggalAwal, tanggalAkhir, statusOrder, user.token]);
 
-  // useEffect(() => {
-  //   if (data.length > 0) {
-  //     handlePrint();
-  //   }
-  // }, [data]);
+  const handleStatusOrderChange = (e) => {
+    setStatusOrder(e.target.value);
+  };
 
   useEffect(() => {
     fetchOrder();
@@ -83,7 +82,7 @@ const Penjualan = () => {
   return (
     <>
       <HeaderContent title="Laporan Penjualan" breadcrumbs={breadcrumbs} />
-      <div className="bg-white h-max px-6 rounded-lg mt-4 grid grid-cols-8 gap-x-3.5">
+      <div className="bg-white h-max px-6 rounded-lg mt-4 grid grid-cols-12 gap-x-3.5">
         <div className="col-span-2">
           <DatePicker
             onChange={setTanggalAwal}
@@ -97,6 +96,17 @@ const Penjualan = () => {
             value={tanggalAkhir}
             className="input input-bordered outline-0 border-blue-500 text-gray-900 text-sm focus:ring-blue-500 block w-full"
           />
+        </div>
+        <div className="col-span-2">
+          <select
+            onChange={handleStatusOrderChange}
+            className="input input-bordered outline-0 border-blue-500 text-gray-900 text-sm focus:ring-blue-500 block w-full focus:outline-none"
+          >
+            <option value="">Semua</option>
+            <option value="open">Buka</option>
+            <option value="in_progress">Dalam Proses</option>
+            <option value="closed">Tutup</option>
+          </select>
         </div>
         <div className="col-span-3">
           <Button
