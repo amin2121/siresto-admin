@@ -19,14 +19,14 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-const DropdownHeader = ({ name, gambar }) => {
+const DropdownHeader = ({ nama, gambar }) => {
   const navigate = useNavigate();
   const [isShowModal, setIsShowModal] = useState(false);
   const logout = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("image");
     JwtService.destroyToken();
-    navigate("/login");
+    window.location.replace("/login");
   };
 
   return (
@@ -34,22 +34,25 @@ const DropdownHeader = ({ name, gambar }) => {
       <div>
         <Menu.Button className="inline-flex w-full justify-center text-sm font-medium text-gray-700">
           <div className="flex items-center space-x-3">
-            <h5 className="text-xs font-semibold">{name}</h5>
-            {/* <img
-              src={gambar != undefined ? baseUrl + gambar : User}
-              alt="user"
-              className="w-8 h-8 rounded-full"
-            /> */}
-            <Avatar
-              color={Avatar.getRandomColor("sitebase", [
-                "red",
-                "green",
-                "blue",
-              ])}
-              name={name}
-              className="w-8 h-8 rounded-full"
-              size="30"
-            />
+            <h5 className="text-xs font-semibold">{nama}</h5>
+            {gambar !== null ? (
+              <img
+                src={baseUrl + gambar}
+                alt="user"
+                className="w-8 h-8 rounded-full"
+              />
+            ) : (
+              <Avatar
+                color={Avatar.getRandomColor("sitebase", [
+                  "red",
+                  "green",
+                  "blue",
+                ])}
+                name={nama}
+                className="w-8 h-8 rounded-full"
+                size="30"
+              />
+            )}
           </div>
         </Menu.Button>
       </div>

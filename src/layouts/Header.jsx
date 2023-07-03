@@ -4,7 +4,6 @@ import { IoNotificationsOutline } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { useQuery, QueryClient } from "react-query";
 import { openSidebar } from "../features/sidebarSlice";
-import { setProfile } from "../features/profileSlice";
 import DropdownHeader from "../components/DropdownHeader";
 import Logo from "../assets/images/logo/SiResto.png";
 import axios from "../utils/axios";
@@ -17,6 +16,8 @@ const Header = ({}) => {
   const [sisaHari, setSisaHari] = useState(0);
   const [showBanner, setShowbanner] = useState(false);
   const location = useLocation();
+  const nama = useSelector((state) => state.profile.nama);
+  const gambar = useSelector((state) => state.profile.gambar);
 
   const {
     isLoading,
@@ -83,7 +84,7 @@ const Header = ({}) => {
             <IoNotificationsOutline className="text-2xl" />
             {/* <span className="animate-ping block absolute top-0 right-1 w-2 h-2 bg-red-600 rounded-full"></span> */}
           </div>
-          <DropdownHeader name={data?.name} gambar={data?.gambar} />
+          <DropdownHeader nama={nama} gambar={gambar} />
         </div>
       </div>
       {showBanner == true ? (

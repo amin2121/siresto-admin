@@ -33,6 +33,7 @@ import { setProfile } from "../../../features/profileSlice";
 
 export default function UbahProfile() {
   const user = JSON.parse(localStorage.getItem("user"));
+  const navigate = useNavigate();
 
   const [isAction, setIsAction] = useState(false);
   const [imageBase64, setImageBase64] = useState("");
@@ -71,8 +72,6 @@ export default function UbahProfile() {
     setFocus,
   } = useForm();
 
-  const navigate = useNavigate();
-
   const mutation = useMutation(
     async (data) => {
       const config = {
@@ -80,6 +79,7 @@ export default function UbahProfile() {
       };
 
       data.gambar = imageBase64;
+      console.log(gambar);
 
       const response = await axios.patch("setting/ubah-profile", data, config);
       const res = response.data;
@@ -113,23 +113,15 @@ export default function UbahProfile() {
     }
   );
 
-  // function generateFileName(imageBase64) {
-  //   const mimeType = imageBase64.match(/data:(.*);base64,/)[1];
-  //   const extension = mimeType.split("/")[1];
-  //   const timestamp = new Date().getTime();
-
-  //   return `images/user/${timestamp}.${extension}`;
-  // }
-
   const ubahProfile = async (data) => {
-    // const { nama_lengkap } = data;
-    // const dataUser = {
-    //   nama: nama_lengkap,
-    //   image: generateFileName(),
-    // };
     await mutation.mutate(data);
-    // dispatch(setProfile(dataUser));
   };
+
+  useEffect(() => {
+    if (data) {
+      dispatch(setProfile({ nama: data.name, gambar: data.gambar }));
+    }
+  }, [data]);
 
   const convertImageToBase64 = (e) => {
     let file = e.target.files[0];

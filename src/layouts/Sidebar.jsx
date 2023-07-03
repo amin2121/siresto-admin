@@ -295,7 +295,7 @@ const Sidebar = () => {
         <div className="hidden lg:flex px-4 items-center justify-center items-center border-b border-border-light h-16">
           <img src={Logo} alt={Logo} className="w-24" />
         </div>
-        <div className="overflow-y-auto h-screen pb-16">
+        <div className="overflow-y-hidden hover:overflow-y-auto h-screen pb-16">
           <ul className="pt-4">{menusLayout}</ul>
         </div>
       </div>

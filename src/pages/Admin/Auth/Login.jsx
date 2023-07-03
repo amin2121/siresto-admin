@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import SiResto from "../../../assets/images/logo/SiResto.png";
 import Instagram from "../../../assets/images/login/Instagram.svg";
 import Twitter from "../../../assets/images/login/Twitter.svg";
@@ -12,8 +13,10 @@ import JwtService from "../../../services/jwt.service";
 import Alert from "../../../components/auth/Alert";
 import { useEffect } from "react";
 import axios from "../../../utils/axios";
+import { setProfile } from "../../../features/profileSlice";
 
 export default function Login() {
+  const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoaded, setIsLoaded] = useState(false);
@@ -35,6 +38,7 @@ export default function Login() {
         })
           .then((response) => {
             if (response.status === 200) {
+              dispatch(setProfile({ nama: res.name, gambar: res.gambar }));
               localStorage.setItem(
                 "user",
                 JSON.stringify({
@@ -64,7 +68,6 @@ export default function Login() {
                   level: res.level,
                   lisence: res.lisence,
                   name: res.name,
-                  gambar: res.gambar,
                   tambahanMasaTrial: res.masa_trial,
                   tanggal: res.created_at,
                 })
@@ -100,6 +103,10 @@ export default function Login() {
           alert.classList.toggle("hidden");
         }, 2500);
       });
+  }
+
+  function setProfileState() {
+    setProfile();
   }
 
   useEffect(() => {

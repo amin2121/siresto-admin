@@ -6,6 +6,7 @@ import nomejaReducer from "../features/nomejaSlice";
 import warnaKeranjangReducer from "../features/warnaKeranjangSlice";
 import loginReducer from "../features/loginSlice";
 import notifTrialReducer from "../features/notifTrialSlice";
+import profileReducer from "../features/profileSlice";
 
 export const store = configureStore({
   reducer: {
@@ -16,5 +17,6 @@ export const store = configureStore({
     warnaKeranjang: warnaKeranjangReducer,
     login: loginReducer,
     notifTrial: notifTrialReducer,
+    profile: profileReducer,
   },
 });
