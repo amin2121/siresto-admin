@@ -77,8 +77,8 @@ const Order = () => {
     refetch,
     isPreviousData,
   } = useQuery(["data-order", page], () => fetchData(), {
-    staleTime: 15000,
-    refetchInterval: 15000,
+    staleTime: 5000,
+    refetchInterval: 5000,
     keepPreviousData: true,
     refetchOnWindowFocus: false,
   });

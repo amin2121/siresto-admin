@@ -61,6 +61,7 @@ export default function Login() {
           })
           .catch((error) => {
             if (res.level === "Staff") {
+              dispatch(setProfile({ nama: res.name, gambar: res.gambar }));
               localStorage.setItem(
                 "user",
                 JSON.stringify({
