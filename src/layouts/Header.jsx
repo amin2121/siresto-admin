@@ -54,7 +54,6 @@ const Header = ({}) => {
   }, [location]);
 
   const cek_lisence = () => {
-    // cek jika lisence trial lebih dari 30 hari
     if (user.lisence == "Trial") {
       let day = 24 * 60 * 60 * 1000;
       let startDate = moment(user.tanggal);

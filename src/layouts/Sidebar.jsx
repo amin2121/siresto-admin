@@ -14,7 +14,7 @@ import { AiFillSetting, AiOutlineFileDone } from "react-icons/ai";
 import { FaTimes } from "react-icons/fa";
 import { GiTable } from "react-icons/gi";
 import { TbBrandAirtable, TbDiscount } from "react-icons/tb";
-import { FiCoffee } from "react-icons/fi";
+import { FiCoffee, FiLink } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { slugify } from "../utils/strings";
 import { useSelector, useDispatch } from "react-redux";
@@ -132,6 +132,12 @@ const Sidebar = () => {
       src: <BsFillPersonLinesFill className={`duration-200`} size="20" />,
       type: "link",
       link: "staff",
+    },
+    {
+      title: "Link Pesan Online",
+      src: <FiLink className={`duration-200`} size="20" />,
+      type: "link",
+      link: "setting/pesan-online",
     },
     {
       title: "Setting",

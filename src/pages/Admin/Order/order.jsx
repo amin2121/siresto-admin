@@ -224,6 +224,9 @@ const Order = () => {
                 Tanggal Transaksi
               </th>
               <th scope="col" className="py-3 px-6">
+                Jenis Order
+              </th>
+              <th scope="col" className="py-3 px-6">
                 Status Order
               </th>
               <th scope="col" className="py-3 px-6 rounded-tr-md">
@@ -254,10 +257,15 @@ const Order = () => {
                         : capitalize(obj.metode_pembayaran)}
                     </td>
                     <td className="py-4 px-6 text-sm">{tanggalAkhir}</td>
+                    <td className="py-4 ps-6 text-sm text-center">
+                      {obj.meja !== null
+                        ? "Meja " + obj.meja?.no_meja
+                        : obj.source}
+                    </td>
                     <td className="py-4 ps-6 text-sm">
                       {obj.status_order == "in_progress" ? (
                         <div className="py-0.5 px-2 font-semibold rounded-md text-xs inline w-fit bg-yellow-200 text-yellow-500">
-                          Dalam Proses
+                          Proses
                         </div>
                       ) : (
                         <div className="py-0.5 px-2 font-semibold rounded-md text-xs inline w-fit bg-blue-200">
@@ -310,7 +318,7 @@ const Order = () => {
                         {isShowModal ? (
                           <>
                             <div className="fixed inset-0 z-30 overflow-y-auto">
-                              <div className="fixed inset-0 w-full h-full bg-black opacity-50"></div>
+                              <div className="fixed inset-0 w-full h-full bg-black opacity-10"></div>
                               <div className="flex items-center min-h-screen px-4 py-8">
                                 <div className="relative w-90 max-w-lg p-4 mx-auto bg-white rounded-xl shadow-lg">
                                   <div className="mt-3 sm:flex">

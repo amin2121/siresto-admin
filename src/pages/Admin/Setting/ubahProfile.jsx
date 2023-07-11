@@ -120,6 +120,18 @@ export default function UbahProfile() {
   useEffect(() => {
     if (data) {
       dispatch(setProfile({ nama: data.name, gambar: data.gambar }));
+      localStorage.setItem(
+        "user",
+        JSON.stringify({
+          token: user.token,
+          level: user.level,
+          lisence: user.lisence,
+          name: data.name,
+          gambar: data.gambar,
+          tambahanMasaTrial: user.tambahanMasaTrial,
+          tanggal: user.tanggal,
+        })
+      );
     }
   }, [data]);
 

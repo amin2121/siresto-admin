@@ -74,6 +74,7 @@ import {
   ResetPassword as ResetPasswordSetting,
   UbahProfile as UbahProfileSetting,
   KonfigurasiResto as KonfigurasiRestoSetting,
+  LinkMenu as LinkMenuSetting,
   ContainerSetting,
 } from "../pages/Admin/Setting";
 import {
@@ -251,6 +252,7 @@ const RouteManager = () => {
             />
             <Route path="reset-password" element={<ResetPasswordSetting />} />
             <Route path="ubah-profile" element={<UbahProfileSetting />} />
+            <Route path="pesan-online" element={<LinkMenuSetting />} />
           </Route>
         </Route>
         <Route path="login" element={<Login />} />

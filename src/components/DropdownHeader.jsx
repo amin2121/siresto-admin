@@ -21,6 +21,7 @@ function classNames(...classes) {
 
 const DropdownHeader = ({ nama, gambar }) => {
   const navigate = useNavigate();
+  const user = JSON.parse(localStorage.getItem("user"));
   const [isShowModal, setIsShowModal] = useState(false);
   const logout = () => {
     localStorage.removeItem("user");
@@ -29,15 +30,18 @@ const DropdownHeader = ({ nama, gambar }) => {
     window.location.replace("/login");
   };
 
+  const name = user.name;
+  const img = user.gambar;
+
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
         <Menu.Button className="inline-flex w-full justify-center text-sm font-medium text-gray-700">
           <div className="flex items-center space-x-3">
-            <h5 className="text-xs font-semibold">{nama}</h5>
-            {gambar !== null ? (
+            <h5 className="text-xs font-semibold">{!nama ? name : nama}</h5>
+            {(!gambar ? img : gambar) !== null ? (
               <img
-                src={baseUrl + gambar}
+                src={baseUrl + (!gambar ? img : gambar)}
                 alt="user"
                 className="w-8 h-8 rounded-full"
               />
@@ -48,7 +52,7 @@ const DropdownHeader = ({ nama, gambar }) => {
                   "green",
                   "blue",
                 ])}
-                name={nama}
+                name={!nama ? name : nama}
                 className="w-8 h-8 rounded-full"
                 size="30"
               />

@@ -39,6 +39,8 @@ export default function Login() {
           .then((response) => {
             if (response.status === 200) {
               dispatch(setProfile({ nama: res.name, gambar: res.gambar }));
+              console.log(res);
+              console.log(res.gambar);
               localStorage.setItem(
                 "user",
                 JSON.stringify({
@@ -46,6 +48,7 @@ export default function Login() {
                   level: res.level,
                   lisence: res.lisence,
                   name: res.name,
+                  gambar: res.gambar,
                   tambahanMasaTrial: res.masa_trial,
                   tanggal: res.created_at,
                 })
@@ -69,6 +72,7 @@ export default function Login() {
                   level: res.level,
                   lisence: res.lisence,
                   name: res.name,
+                  gambar: res.gambar,
                   tambahanMasaTrial: res.masa_trial,
                   tanggal: res.created_at,
                 })
