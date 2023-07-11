@@ -392,10 +392,19 @@ export default function Detail() {
                     {state.nama_pelanggan}
                   </p>
                 </div>
-                <div className="flex justify-between text-xs text-slate-500 mb-2">
-                  <h1>No Meja</h1>
-                  <p className="font-semibold text-sm">{state.meja.no_meja}</p>
-                </div>
+                {state.meja === null ? (
+                  <div className="flex justify-between text-xs text-slate-500 mb-2">
+                    <h1>Jenis Order</h1>
+                    <p className="font-semibold text-sm">{state.source}</p>
+                  </div>
+                ) : (
+                  <div className="flex justify-between text-xs text-slate-500 mb-2">
+                    <h1>No Meja</h1>
+                    <p className="font-semibold text-sm">
+                      {state.meja.no_meja}
+                    </p>
+                  </div>
+                )}
                 <div className="flex justify-between text-xs text-slate-500">
                   <h1>Status Bayar</h1>
                   <p className="font-semibold text-sm">
