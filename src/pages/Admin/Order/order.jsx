@@ -267,9 +267,13 @@ const Order = () => {
                         <div className="py-0.5 px-2 font-semibold rounded-md text-xs inline w-fit bg-yellow-200 text-yellow-500">
                           Proses
                         </div>
-                      ) : (
+                      ) : obj.status_order == "open" ? (
                         <div className="py-0.5 px-2 font-semibold rounded-md text-xs inline w-fit bg-blue-200">
                           Buka
+                        </div>
+                      ) : (
+                        <div className="py-0.5 px-2 font-semibold rounded-md text-xs inline w-fit bg-gray-200">
+                          Draft
                         </div>
                       )}
                     </td>

@@ -79,7 +79,6 @@ export default function UbahProfile() {
       };
 
       data.gambar = imageBase64;
-      console.log(gambar);
 
       const response = await axios.patch("setting/ubah-profile", data, config);
       const res = response.data;

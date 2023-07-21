@@ -45,8 +45,6 @@ const LinkMenu = () => {
     return res;
   };
 
-  console.log(data?.slug);
-
   return (
     <>
       <HeaderContent title="Setting" breadcrumbs={breadcrumbs} />

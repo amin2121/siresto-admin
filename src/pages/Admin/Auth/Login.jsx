@@ -39,8 +39,6 @@ export default function Login() {
           .then((response) => {
             if (response.status === 200) {
               dispatch(setProfile({ nama: res.name, gambar: res.gambar }));
-              console.log(res);
-              console.log(res.gambar);
               localStorage.setItem(
                 "user",
                 JSON.stringify({

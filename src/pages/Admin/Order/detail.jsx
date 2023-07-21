@@ -343,6 +343,19 @@ export default function Detail() {
                   <div className="flex justify-between items-center col-span-full pt-5 pb-5 border-b border-slate-200 flex-wrap space-y-2">
                     <h1 className="text-sm">Status Order : </h1>
                     <div className="space-x-2 order__status-container text-sm flex overflow-x-auto overflow-y-hidden">
+                      {state.source !== null && state.source !== "qrcode" && (
+                        <span
+                          className={`order__status-item ${
+                            statusOrder === "draft" && "active"
+                          }`}
+                          onClick={() => {
+                            setOrderStatus("draft");
+                            setShowModal(true);
+                          }}
+                        >
+                          Draft
+                        </span>
+                      )}
                       <span
                         className={`order__status-item ${
                           statusOrder == "open" && "active"
@@ -393,10 +406,12 @@ export default function Detail() {
                   </p>
                 </div>
                 {state.meja === null ? (
-                  <div className="flex justify-between text-xs text-slate-500 mb-2">
-                    <h1>Jenis Order</h1>
-                    <p className="font-semibold text-sm">{state.source}</p>
-                  </div>
+                  <>
+                    <div className="flex justify-between text-xs text-slate-500 mb-2">
+                      <h1>Jenis Order</h1>
+                      <p className="font-semibold text-sm">{state.source}</p>
+                    </div>
+                  </>
                 ) : (
                   <div className="flex justify-between text-xs text-slate-500 mb-2">
                     <h1>No Meja</h1>
@@ -405,7 +420,7 @@ export default function Detail() {
                     </p>
                   </div>
                 )}
-                <div className="flex justify-between text-xs text-slate-500">
+                <div className="flex justify-between text-xs text-slate-500 mb-2">
                   <h1>Status Bayar</h1>
                   <p className="font-semibold text-sm">
                     {statusBayar == "already_paid" ? (
@@ -415,6 +430,12 @@ export default function Detail() {
                     )}
                   </p>
                 </div>
+                {state.meja === null && (
+                  <div className="flex justify-between text-xs text-slate-500 mb-2">
+                    <h1>Alamat</h1>
+                    <p className="font-semibold text-sm w-52">{state.alamat}</p>
+                  </div>
+                )}
               </div>
               <div
                 className={`border border-slate-200 rounded p-4 pb-6 mt-4 ${
