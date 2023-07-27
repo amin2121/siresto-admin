@@ -40,9 +40,12 @@ export default function ForgotPassword() {
       return;
     }
 
-    ApiService.post(process.env.REACT_APP_BACKEND_DOMAIN + "/api/forgot-password", {
-      email: email,
-    })
+    ApiService.post(
+      process.env.REACT_APP_BACKEND_DOMAIN + "/api/forgot-password",
+      {
+        email: email,
+      }
+    )
       .then((response) => {
         setBannerNotification("success", "Silahkan cek email anda.");
       })
