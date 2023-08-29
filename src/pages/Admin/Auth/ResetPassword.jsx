@@ -32,40 +32,21 @@ export default function ResetPassword() {
       }
     )
       .then((response) => {
-        axios
-          .post("auth/reset_password", { email, password })
-          .then((response) => {
-            setType("success");
-            setMessage("Berhasil mengganti password anda");
+        setType("success");
+        setMessage("Berhasil mengganti password anda");
 
-            var alert = document.getElementById("alert");
-            alert.classList.toggle("hidden");
-            alert.classList.toggle("opacity-[0]");
+        var alert = document.getElementById("alert");
+        alert.classList.toggle("hidden");
+        alert.classList.toggle("opacity-[0]");
 
-            setTimeout(() => {
-              alert.classList.toggle("opacity-[0]");
-            }, 2000);
+        setTimeout(() => {
+          alert.classList.toggle("opacity-[0]");
+        }, 2000);
 
-            setTimeout(() => {
-              alert.classList.toggle("hidden");
-              window.location = "/login";
-            }, 2500);
-          })
-          .catch((error) => {
-            setType("error");
-            setMessage("Silahkan periksa kembali password anda");
-            var alert = document.getElementById("alert");
-            alert.classList.toggle("hidden");
-            alert.classList.toggle("opacity-[0]");
-
-            setTimeout(() => {
-              alert.classList.toggle("opacity-[0]");
-            }, 2000);
-
-            setTimeout(() => {
-              alert.classList.toggle("hidden");
-            }, 2500);
-          });
+        setTimeout(() => {
+          alert.classList.toggle("hidden");
+          window.location = "/login";
+        }, 2500);
       })
       .catch((error) => {
         setType("error");
