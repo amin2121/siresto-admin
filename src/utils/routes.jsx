@@ -250,7 +250,7 @@ const RouteManager = () => {
               path="konfigurasi-resto"
               element={<KonfigurasiRestoSetting />}
             />
-            <Route path="reset-password" element={<ResetPasswordSetting />} />
+            <Route path="update-password" element={<ResetPasswordSetting />} />
             <Route path="ubah-profile" element={<UbahProfileSetting />} />
             <Route path="pesan-online" element={<LinkMenuSetting />} />
           </Route>

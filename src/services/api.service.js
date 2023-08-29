@@ -10,7 +10,11 @@ const ApiService = {
       "Authorization"
     ] = `Bearer ${JwtService.getToken()}`;
     axios.defaults.headers.post["Content-Type"] = "application/json";
-    axios.defaults.headers.common["Source"] = "https://siresto.awandigital.id";
+    axios.defaults.headers.common["Name"] = "SiResto";
+    const Source = process.env.REACT_APP_SIRESTO_DOMAIN;
+    axios.defaults.headers.common["Source"] = Source.endsWith("/") ? Source.slice(0, -1) : Source;
+    const ApiSource = process.env.REACT_APP_API_DOMAIN;
+    axios.defaults.headers.common["ApiSource"] = ApiSource.endsWith("/") ? ApiSource.slice(0, -1) : ApiSource;
   },
 
   reInitAuthorization() {

@@ -43,6 +43,7 @@ export default function Login() {
                 "user",
                 JSON.stringify({
                   token: res.token,
+                  token_awd: response.data.accessToken,
                   level: res.level,
                   lisence: res.lisence,
                   name: res.name,

@@ -30,8 +30,8 @@ const DropdownHeader = ({ nama, gambar }) => {
     window.location.replace("/login");
   };
 
-  const name = user.name;
-  const img = user.gambar;
+  const name = user?.name;
+  const img = user?.gambar;
 
   return (
     <Menu as="div" className="relative inline-block text-left">

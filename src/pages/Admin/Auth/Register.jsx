@@ -252,34 +252,7 @@ export default function Register() {
           alert.classList.toggle("hidden");
         }, 2500);
       } else {
-        ApiService.post("/api/user-available", {
-          email: email,
-        })
-          .then((response) => {
-            setType("error");
-            setMessage("Email sudah terdaftar");
-            var alert = document.getElementById("alert");
-            alert.classList.toggle("hidden");
-            alert.classList.toggle("opacity-[0]");
-
-            setTimeout(() => {
-              alert.classList.toggle("opacity-[0]");
-            }, 2000);
-
-            setTimeout(() => {
-              alert.classList.toggle("hidden");
-            }, 2500);
-          })
-          .catch((error) => {
-            // var formRegister =
-            //   document.getElementsByClassName("form-register")[0];
-            // formRegister.classList.toggle("hidden");
-
-            // var formProduct =
-            //   document.getElementsByClassName("form-product")[0];
-            // formProduct.classList.toggle("hidden");
-            startNow();
-          });
+        startNow();
       }
     }
   }
@@ -308,12 +281,10 @@ export default function Register() {
     };
 
     // axios
-    ApiService.post("/api/register", params)
+    ApiService.post("/api/register_sso", params)
       .then((response) => {
         setType("success");
         setMessage("Berhasil mendaftarkan akun anda.");
-
-        submitRegisterUser(params);
 
         var alert = document.getElementById("alert");
         alert.classList.toggle("hidden");
@@ -432,7 +403,7 @@ export default function Register() {
                   <option disabled>Pilih Kategori</option>
                   <option value="">Pilih Kategori</option>
                   {dataKategori?.map((item) => (
-                    <option value={item.id}>{item.kategori_bisnis}</option>
+                    <option value={item.kategori_bisnis}>{item.kategori_bisnis}</option>
                   ))}
                 </select>
               </div>

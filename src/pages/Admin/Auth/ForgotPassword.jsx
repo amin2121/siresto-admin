@@ -10,6 +10,7 @@ import Slider from "../../../components/auth/Slider";
 import { Link } from "react-router-dom";
 import ApiService from "../../../services/api.service";
 import Alert from "../../../components/auth/Alert";
+import axios from "axios";
 
 export default function ForgotPassword() {
   const [message, setMessage] = useState("Periksa kembali data anda.");
@@ -40,8 +41,7 @@ export default function ForgotPassword() {
       return;
     }
 
-    ApiService.post(
-      process.env.REACT_APP_BACKEND_DOMAIN + "/api/forgot-password",
+    ApiService.post("/api/forgot-password",
       {
         email: email,
       }
