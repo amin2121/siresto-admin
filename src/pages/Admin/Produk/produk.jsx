@@ -304,9 +304,16 @@ const Produk = () => {
                         className="w-14 h-14 object-cover rounded-md"
                       />
                       <div className="flex flex-col">
-                        <p className="font-semibold py-1 mb-1">
+                        <p className="font-semibold">
                           {obj.nama_produk}
                         </p>
+                        <span className={
+                          obj.stok == null || obj.stok == 0
+                              ? "text-red-700"
+                              : "text-slate-900"
+                        }>
+                          Stok : {obj.stok ?? 0}
+                        </span>
                         <span className="text-slate-400">
                           {obj.kategori_produk.kategori_produk}
                         </span>

@@ -8,7 +8,7 @@ import {
   MdLoyalty,
   MdOutlineCategory,
 } from "react-icons/md";
-import { BsFillCartPlusFill, BsFillPersonLinesFill } from "react-icons/bs";
+import { BsFillCartPlusFill, BsFillPersonLinesFill, BsBoxArrowInDown } from "react-icons/bs";
 import { BiChevronDown, BiReceipt } from "react-icons/bi";
 import { AiFillSetting, AiOutlineFileDone } from "react-icons/ai";
 import { FaTimes } from "react-icons/fa";
@@ -120,12 +120,27 @@ const Sidebar = () => {
       //   lisence: "premium",
       submenu: [
         { title: "Penjualan", link: "laporan/penjualan" },
+        { title: "Stok", link: "laporan/stok" },
+        { title: "Mutasi Stok", link: "laporan/mutasi-stok" },
         { title: "Pendapatan", link: "laporan/pendapatan" },
       ],
       //   submenu: [
       //     { title: "Penjualan", lisence: "premium", link: "laporan/penjualan" },
       //     { title: "Pendapatan", lisence: "premium", link: "laporan/pendapatan" },
       //   ],
+    },
+    {
+      title: "Supplier",
+      src: <BsFillPersonLinesFill className={`duration-200`} size="20" />,
+      type: "link",
+      lisence: "trial",
+      link: "supplier",
+    },
+    {
+      title: "Stok Masuk",
+      src: <BsBoxArrowInDown className={`duration-200`} size="20" />,
+      type: "link",
+      link: "stok/stok-masuk",
     },
     {
       title: "Staff",

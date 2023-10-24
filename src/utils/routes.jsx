@@ -51,6 +51,12 @@ import {
   DetailOrder,
 } from "../pages/Admin/Order";
 import {
+  Supplier,
+  ContainerSupplier,
+  TambahSupplier,
+  EditSupplier,
+} from "../pages/Admin/Supplier";
+import {
   Promo,
   ContainerPromo,
   TambahPromo,
@@ -81,7 +87,15 @@ import {
   ContainerLaporan,
   LaporanPenjualan,
   LaporanPendapatan,
+  LaporanStok,
+  LaporanMutasiStok,
+  StokOpname,
+  TambahStokOpname,
 } from "../pages/Admin/Laporan";
+import {
+  StokMasuk,
+  ContainerStok,
+} from "../pages/Admin/Stok";
 import ForgotPassword from "../pages/Admin/Auth/ForgotPassword";
 import ResetPasswordLink from "../pages/Admin/Auth/ResetPassword";
 
@@ -211,6 +225,41 @@ const RouteManager = () => {
           >
             <Route path="penjualan" element={<LaporanPenjualan />} />
             <Route path="pendapatan" element={<LaporanPendapatan />} />
+            <Route path="stok" element={<LaporanStok />} />
+            <Route path="mutasi-stok" element={<LaporanMutasiStok />} />
+          </Route>
+          <Route
+            path="supplier"
+            element={
+              <ProtectedRoute>
+                <ContainerSupplier />
+              </ProtectedRoute>
+            }
+          >
+            <Route index element={<Supplier />} />
+            <Route path="tambah" element={<TambahSupplier />} />
+            <Route path="edit" element={<EditSupplier />} />
+          </Route>
+          <Route
+            path="stok"
+            element={
+              <ProtectedRoute>
+                <ContainerStok />
+              </ProtectedRoute>
+            }
+          >
+            <Route path="stok-masuk" element={<StokMasuk />} />
+          </Route>
+          <Route
+            path="stok-opname"
+            element={
+              <ProtectedRoute>
+                <ContainerLaporan />
+              </ProtectedRoute>
+            }
+          >
+            <Route index element={<StokOpname />} />
+            <Route path="tambah" element={<TambahStokOpname />} />
           </Route>
           <Route
             path="staff"

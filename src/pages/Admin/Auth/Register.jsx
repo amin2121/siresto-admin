@@ -62,7 +62,7 @@ export default function Register() {
           )
             .then((response) => response.json())
             .then((city) => {
-              setCity(city[0].name);
+              setCity("");
               setListCity([...city]);
             });
 
@@ -186,7 +186,7 @@ export default function Register() {
     )
       .then((response) => response.json())
       .then((city) => {
-        setCity(city[0].name);
+        setCity("");
         setListCity([...city]);
       });
 
@@ -370,7 +370,7 @@ export default function Register() {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   className="input input-bordered w-full pl-[50px]"
-                  placeholder="Nama Bisnis"
+                  placeholder="Nama Lengkap"
                 />
               </div>
             </div>
@@ -400,7 +400,6 @@ export default function Register() {
                   value={businessCategory}
                   onChange={(e) => setBusinessCategory(e.target.value)}
                 >
-                  <option disabled>Pilih Kategori</option>
                   <option value="">Pilih Kategori</option>
                   {dataKategori?.map((item) => (
                     <option value={item.kategori_bisnis}>{item.kategori_bisnis}</option>
