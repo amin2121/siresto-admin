@@ -62,10 +62,7 @@ const KategoriProduk = () => {
     refetch,
     isPreviousData,
   } = useQuery(["data-kategori-produk", page], () => fetchData(), {
-    staleTime: 15000,
-    refetchInterval: 15000,
     keepPreviousData: true,
-    refetchOnWindowFocus: false,
   });
 
   const mutation = useMutation(

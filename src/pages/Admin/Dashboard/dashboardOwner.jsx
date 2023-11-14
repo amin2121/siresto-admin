@@ -60,10 +60,7 @@ const DashboardOwner = () => {
     refetch,
     isPreviousData,
   } = useQuery(["data-dashboard"], () => fetchData(), {
-    staleTime: 15000,
-    refetchInterval: 15000,
     keepPreviousData: true,
-    refetchOnWindowFocus: false,
   });
 
   // fetch data

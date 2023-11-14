@@ -57,10 +57,7 @@ const Staff = () => {
     refetch,
     isPreviousData,
   } = useQuery(["data-staff", page], () => fetchData(), {
-    staleTime: 150000,
-    refetchInterval: 150000,
     keepPreviousData: true,
-    refetchOnWindowFocus: false,
   });
 
   const fetchData = async () => {

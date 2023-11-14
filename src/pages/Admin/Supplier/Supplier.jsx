@@ -62,10 +62,7 @@ const Supplier = () => {
     refetch,
     isPreviousData,
   } = useQuery(["data-supplier", page], () => fetchData(), {
-    staleTime: 15000,
-    refetchInterval: 15000,
     keepPreviousData: true,
-    refetchOnWindowFocus: false,
   });
 
   const deleteDataMutation = useMutation(

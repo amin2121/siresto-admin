@@ -76,10 +76,7 @@ const Produk = () => {
     refetch,
     isPreviousData,
   } = useQuery(["data-produk", page], () => fetchData(), {
-    staleTime: 15000,
-    refetchInterval: 15000,
     keepPreviousData: true,
-    refetchOnWindowFocus: false,
   });
 
   const {
@@ -213,10 +210,9 @@ const Produk = () => {
     if (lisence == "Trial") {
       let endDate = moment(user.tanggal);
       let startDate = moment();
-      let _30hari = moment(endDate).add(30, "days");
 
       let diff = moment.duration(endDate.diff(startDate)).asDays();
-      let rentangHari = Math.abs(Math.round(diff));
+      let rentangHari = Math.abs(Math.round(diff)) - user?.tambahanMasaTrial;
 
       if (rentangHari < 30) {
         if (totalProduk > 10) {

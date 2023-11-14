@@ -16,7 +16,7 @@ const ProtectedRoute = ({ redirectPath = "/login", children }) => {
   }
 
   // cek jika lisence trial lebih dari 30 hari
-  if (user.level !== "Superadmin" || user.lisence === "Trial") {
+  if (user.level !== "Superadmin" && user.lisence === "Trial") {
     let endDate = moment(user.tanggal);
     let startDate = moment();
     let _30hari = moment(endDate).add(30, "days");

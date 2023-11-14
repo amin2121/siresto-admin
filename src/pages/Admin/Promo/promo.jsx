@@ -57,10 +57,7 @@ const Promo = () => {
     refetch,
     isPreviousData,
   } = useQuery(["data-promo", page], () => fetchData(), {
-    staleTime: 15000,
-    refetchInterval: 15000,
     keepPreviousData: true,
-    refetchOnWindowFocus: false,
   });
 
   const mutation = useMutation(
