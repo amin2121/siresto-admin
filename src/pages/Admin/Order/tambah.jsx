@@ -176,7 +176,7 @@ const Tambah = () => {
 
     inputHargaDiskon.classList.add("hidden");
     rowCartBaru[index]["harga_total"] =
-      (+item.harga_jual - +item.diskon) * +item.jumlah_produk;
+      +item.harga_jual * +item.jumlah_produk;
 
     setRowCart(rowCartBaru);
   };
@@ -188,7 +188,7 @@ const Tambah = () => {
 
     rowCartBaru[index][e.target.name] = e.target.value;
     rowCartBaru[index]["harga_total"] =
-      (rowCartBaru[index]["harga_jual"] - rowCartBaru[index]["diskon"]) *
+      (rowCartBaru[index]["harga_jual"]) *
       jumlahProdukBaru;
     rowCartBaru[index]["harga_total_diskon"] =
       rowCartBaru[index]["diskon"] * jumlahProdukBaru;
@@ -208,7 +208,7 @@ const Tambah = () => {
       let index = rowCart.indexOf(cart);
       rowCartBaru[index]["jumlah_produk"] += 1;
       rowCartBaru[index]["harga_total"] =
-        (rowCartBaru[index]["harga_jual"] - rowCartBaru[index]["diskon"]) *
+        (rowCartBaru[index]["harga_jual"]) *
         rowCartBaru[index]["jumlah_produk"];
 
       rowCartBaru[index]["harga_total_diskon"] =
@@ -223,7 +223,7 @@ const Tambah = () => {
           harga_jual: item.harga_jual,
           jumlah_produk: 1,
           kategori_produk: item.kategori_produk.kategori_produk,
-          harga_total: (+item.harga_jual - +item.diskon) * 1,
+          harga_total: (+item.harga_jual) * 1,
           pakai_diskon: true,
           diskon: item.diskon,
           catatan: "",

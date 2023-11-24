@@ -37,7 +37,7 @@ export const LaporanPenjualan = React.forwardRef((props, ref) => {
 							<tr key={key}>
 								<td className="text-center px-4 py-3 border border-slate-400">{moment(item.created_at).format('DD-MM-YYYY')}</td>
 								<td className="text-center px-4 py-3 border border-slate-400">{item.no_transaksi}</td>
-								<td className="text-center px-4 py-3 border border-slate-400">Kasir</td>
+								<td className="text-center px-4 py-3 border border-slate-400">{item.staff ? item.staff.name : props?.name}</td>
 								<td className="text-right px-4 py-3 border border-slate-400">Rp. {rupiah(item.nilai_transaksi)}</td>
 								<td className="text-right px-4 py-3 border border-slate-400">Rp. {rupiah(item.nilai_laba)}</td>
 							</tr>

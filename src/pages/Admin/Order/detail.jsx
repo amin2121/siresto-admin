@@ -129,11 +129,9 @@ export default function Detail() {
   const pembayaran = async (data) => {
     if (
       data.pembayaran === null ||
-      data.kembalian === null ||
       data.pembayaran == "" ||
-      data.kembalian == "" ||
-      data.pembayaran == 0 ||
-      data.kembalian == 0
+      data.kembalian < 0 ||
+      data.pembayaran == 0
     ) {
       toastError("Silahkan Isi Pembayaran Pelanggan Terlebih Dahulu");
     } else {

@@ -81,8 +81,8 @@ const StokMasuk = () => {
     const response = await axios.get(
       `produk?s=${keyword}&limit=${limit}&sort=DESC&page=${page}`
     );
-    const res = await response.data.data;
-    const data = res.data.data;
+    const res = await response.data.data.data;
+    const data = res.data;
 
     setTotalRows(res.total);
     setFromRow(res.from);

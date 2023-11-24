@@ -236,7 +236,7 @@ const Order = () => {
           </thead>
           <tbody>
             {isLoading ? (
-              <LoadingTable colSpan="5" />
+              <LoadingTable colSpan="7" />
             ) : data.length > 0 ? (
               data?.map((obj, key) => {
                 const tanggalAkhir = format(
@@ -380,7 +380,7 @@ const Order = () => {
               <tr>
                 <td
                   className="py-4 px-6 text-center font-medium w-max"
-                  colSpan="5"
+                  colSpan="7"
                 >
                   Data Order Kosong
                 </td>

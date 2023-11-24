@@ -127,6 +127,7 @@ const Penjualan = () => {
           tanggalAwal={tanggalAwal}
           tanggalAkhir={tanggalAkhir}
           data={data}
+          name={user?.name}
         />
       </div>
     </>
